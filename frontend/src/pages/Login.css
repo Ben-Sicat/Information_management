@@ -13,4 +13,11 @@
     gap: 20px;
 
   }
+  .header {
+    font-size: 10030px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    background-color: blue;
+  }
   

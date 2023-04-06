@@ -1,12 +1,20 @@
 import React from 'react';
 import './App.css';
-import {Login, Dashboard}  from './pages'
-import { Route, Routes } from "react-router";
-import { BrowserRouter } from "react-router-dom";
+import { Login, Dashboard , CreateUser } from './pages';
+import { Route, Routes, redirect } from 'react-router-dom';
 
 function App() {
   return (
-    <Login />
+    <>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/create-user" element={<CreateUser />} />
+
+      </Routes>
+    
+    </>
   );
 }
 

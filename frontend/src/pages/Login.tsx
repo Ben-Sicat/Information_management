@@ -1,28 +1,23 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Box, Typography, TextField, Button, Paper } from '@mui/material';
-import './Login.css';
+
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    axios
-      .post('/Login', { username, password }) // change endpoint to the endpoint of the REST API
-      .then((response) => {
+    axios.post<{ token: string }>('http://localhost:3001/login', { username, password })
+      .then(response => {
         const token = response.data.token;
         localStorage.setItem('token', token);
-        window.location.href = '/Dashboard';
+        window.location.href = '/dashboard'; // Redirect to dashboard route
       })
-      .catch((err) => {
-        setError(err.response.data.msg);
-        setTimeout(() => {
-          setError('');
-        }, 5000);
+      .catch(err => {
+        setError(err.response.data.message);
       });
   };
 
@@ -39,15 +34,27 @@ const Login = () => {
 
       }}
     >
-      <Typography variant="h4" gutterBottom>
-        Login
+      <Typography variant="h4" gutterBottom 
+      sx={{
+          color: 'grey',
+          fontSize: '100px',
+          fontWeight: 'bold',
+        }}>
+         Brgy.607
       </Typography>
       {error && (
         <Typography sx={{ color: 'red', mb: 2 }} align="center">
           {error}
         </Typography>
       )}
-      <Paper elevation={5} className="glassmorphism">
+      <Paper elevation={5} className="glassmorphism" 
+      sx={{
+        borderRadius: '20px',
+        boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
+        padding: '40px',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
         <Box
           component="form"
           onSubmit={handleSubmit}

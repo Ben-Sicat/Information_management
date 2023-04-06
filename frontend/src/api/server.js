@@ -6,23 +6,24 @@ const cors = require('cors');
 
 const app = express();
 
+
+
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'http://localhost:3000' // Replace with your website's domain
-  }));
-  
+  origin: 'http://localhost:3001/' // Replace with your website's domain
+}));
+
 const users = [
   {
     id: 1,
     username: 'admin',
-    password: 'brgy.607' // password: password1
-  },
- 
+    password: 'admin'
+  }
 ];
 
 const JWT_SECRET = 'kingJay';
 
-app.post('/Login', (req, res) => {
+app.post('/login', (req, res) => {
   const { username, password } = req.body;
   const user = users.find(u => u.username === username);
 
@@ -45,4 +46,4 @@ app.post('/Login', (req, res) => {
   });
 });
 
-app.listen(3000, () => console.log('Server listening on port 3000'));
+app.listen(3001, () => console.log('Server listening on port 3001'));
