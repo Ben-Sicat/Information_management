@@ -1,9 +1,9 @@
 CREATE TABLE senior_citizens_info(id integer PRIMARY KEY AUTOINCREMENT,
-                                Last_Name VARCHAR(255) NOT NULL, 
-                                First_Name VARCHAR(255) NOT NULL,
-                                Age int NOT NULL,
-                                Birth_month DATE NOT NULL,
-                                Address VARCHAR(255) NOT NULL,
-                                ContactNo int NOT NULL,
-                                senior_citizen_number VARCHAR(255)
+                                Last_Name TEXT NOT NULL, 
+                                First_Name TEXT NOT NULL,
+                                Age integer NOT NULL,
+                                Birth_month NUMERIC NOT NULL,
+                                Address TEXT NOT NULL,
+                                ContactNo integer NOT NULL,
+                                senior_citizen_number TEXT
                                 );
