@@ -8,7 +8,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'https://local-host:3000' // Replace with your website's domain
+    origin: 'http://localhost:3000' // Replace with your website's domain
   }));
   
 const users = [

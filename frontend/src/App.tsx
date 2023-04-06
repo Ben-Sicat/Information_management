@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import Login  from './pages/index'
+import {Login, Dashboard}  from './pages'
+import { Route, Routes } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
-    <div className="app">
-      
-    </div>
+    <Login />
   );
 }
 
