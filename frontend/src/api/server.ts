@@ -40,36 +40,4 @@ export const handleLogin = async (req: Request, res: Response) => {
   }
 };
 
-// Register handler
-export const handleRegister = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
 
-  try {
-    const db = await dbPromise;
-
-    // Check if user already exists
-    const existingUser = await db.get(`SELECT * FROM users WHERE username = ?`, [username]);
-
-    if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
-    }
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Insert new user into database
-    const result = await db.run(`INSERT INTO users (username, password) VALUES (?, ?)`, [username, hashedPassword]);
-
-    const user: User = {
-      id: result.lastID,
-      username,
-      password: hashedPassword
-    };
-
-    // Return success response
-    return res.status(200).json({ message: 'Registration successful', user });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Internal server error' });
-  }
-};
