@@ -37,7 +37,7 @@ const CreateUser = () => {
       alignItems: 'center',
       height: '100vh',
     }}>
-    <Container maxWidth="sm"sx={{
+    <Container maxWidth="xl"sx={{
       borderRadius: '20px',
       boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
       padding: '40px',
@@ -71,7 +71,7 @@ const CreateUser = () => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Textfield
-              label="Birthday"
+              label="Birthday (MM/DD/YYYY)"
               name="birthday"
               value={user.birthday}
               onChange={handleInputChange}
@@ -94,9 +94,15 @@ const CreateUser = () => {
             />
           </Grid>
         </Grid>
-        <Button variant="contained" color="primary" type="submit" fullWidth>
+        <Container sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Button variant="contained" color="primary" type="submit" >
           Create
         </Button>
+        </Container>
       </form>
     </Container>
     </Container>
