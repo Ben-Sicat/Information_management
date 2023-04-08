@@ -1,11 +1,16 @@
 import React from 'react';
 import {Datagrid} from '../components/index';
+import {getAuth, signOut} from 'firebase/auth';
+import { Button } from '@mui/material';
 
-function Dashboard() {
+const Dashboard: React.FC = () => {
+  const auth = getAuth();
   return (
     <>
-      <div>Dashboard</div>
+      
       <Datagrid />
+      <Button onClick = {()=> signOut(auth)}> Sign Out</Button>
+      
     </>
   );
 }
