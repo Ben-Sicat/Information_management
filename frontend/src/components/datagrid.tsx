@@ -11,7 +11,7 @@ interface Citizen {
   name: string;
   age: number;
   birthday: string;
-  contact_num: string;
+  contactNumber: string;
   email: string;
   address: string;
   gender: string;
@@ -21,7 +21,7 @@ const columns: GridColDef[] = [
   { field: 'name', headerName: 'Name', width: 150 },
   { field: 'age', headerName: 'Age', width: 100 },
   { field: 'birthday', headerName: 'Birthday', width: 150 },
-  { field: 'contact_num', headerName: 'Contact Num', width: 150 },
+  { field: 'contactNumber', headerName: 'Contact Num.', width: 150 },
   { field: 'email', headerName: 'Email', width: 250 },
   { field: 'address', headerName: 'Address', width: 250 },
   { field: 'gender', headerName: 'Gender', width: 150 },
@@ -30,7 +30,7 @@ const columns: GridColDef[] = [
 const Dashboard: React.FC = () => {
   const [citizens, setCitizens] = useState<Citizen[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const citizenCollectionRef = collection(db, 'citizen');
+  const citizenCollectionRef = collection(db, 'citizens');
 
   useEffect(() => {
     const getCitizens = async () => {

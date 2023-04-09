@@ -7,7 +7,7 @@ import { config } from '../config/config';
 import { doc, setDoc, addDoc, collection } from 'firebase/firestore';
 import {db} from '../firebase-config'
 
-const userCollectionRef = collection(db, 'citizen');
+const userCollectionRef = collection(db, 'citizens');
 
 //https://www.youtube.com/watch?v=jCY6DH8F4oc&ab_channel=PedroTech big help
 
@@ -18,6 +18,7 @@ interface User {
   address: string;
   contactNumber: string;
   gender: string;
+  email:string;
 }
 
 const CreateUser = () => {
@@ -27,7 +28,8 @@ const CreateUser = () => {
     birthday: '',
     address: '',
     contactNumber: '',
-    gender: ''
+    gender: '',
+    email: ''
   });
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +47,8 @@ const CreateUser = () => {
         birthday: '',
         address: '',
         contactNumber: '',
-        gender: ''
+        gender: '',
+        email: ''
       });
       console.log('User added to Firestore database.');
     } catch (error) {
@@ -113,6 +116,14 @@ const CreateUser = () => {
               label="Gender"
               name="gender"
               value={user.gender}
+              onChange={handleInputChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Textfield
+              label="Email"
+              name="email"
+              value={user.email}
               onChange={handleInputChange}
             />
           </Grid>
