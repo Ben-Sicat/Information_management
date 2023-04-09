@@ -9,7 +9,7 @@ import {db} from '../firebase-config'
 
 const userCollectionRef = collection(db, 'citizen');
 
-
+//https://www.youtube.com/watch?v=jCY6DH8F4oc&ab_channel=PedroTech big help
 
 interface User {
   name: string;
