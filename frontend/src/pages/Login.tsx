@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+
 import { Box, Typography, TextField, Button, Paper } from '@mui/material';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 interface ILoginProps {}
-interface ISignUpProps {}
+
 
 const Login: React.FunctionComponent<ILoginProps> = () => {
   const auth = getAuth();

@@ -1,57 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { TextField, Container } from '@mui/material';
-import sqlite3 from 'sqlite3';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import {db}from '../firebase-config'
+import {collection, getDocs,} from 'firebase/firestore'
 
-interface Row {
-  id: number;
+interface Citizen {
+  id: string;
   name: string;
   age: number;
-  birthdate: string;
+  birthday: string;
   contact_num: string;
   email: string;
   address: string;
+  gender: string;
 }
 
 const columns: GridColDef[] = [
   { field: 'name', headerName: 'Name', width: 150 },
   { field: 'age', headerName: 'Age', width: 100 },
-  { field: 'birthdate', headerName: 'Birthdate', width: 150 },
+  { field: 'birthday', headerName: 'Birthday', width: 150 },
   { field: 'contact_num', headerName: 'Contact Num', width: 150 },
   { field: 'email', headerName: 'Email', width: 250 },
   { field: 'address', headerName: 'Address', width: 250 },
-  { field: 'gender', headerName: 'Gender', width: 100 },
+  { field: 'gender', headerName: 'Gender', width: 150 },
 ];
 
 const Dashboard: React.FC = () => {
-  const [rows, setRows] = useState<Row[]>([]);
+  const [citizens, setCitizens] = useState<Citizen[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const citizenCollectionRef = collection(db, 'citizen');
 
-  // useEffect(() => {
-  //   const db = new sqlite3.Database('./path/to/database.sqlite');
-  //   db.all('SELECT * FROM my_table', (err, rows) => {
-  //     if (err) {
-  //       console.error(err);
-  //     } else {
-  //       setRows(
-  //         rows.map((row: Row, index: number) => ({
-  //           ...row,
-  //           id: index + 1,
-  //         }))
-  //       );
-  //     }
-  //     db.close();
-  //   });
-  // }, []);
+  useEffect(() => {
+    const getCitizens = async () => {
+      const data = await getDocs(citizenCollectionRef)
+      setCitizens(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) as Citizen[]);
+    }
+    getCitizens();
+  }, []);
+    
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredRows = rows.filter(
-    (row) =>
-      row.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      row.age.toString().includes(searchTerm)
+  const filteredCitizens = citizens.filter(
+    (citizen) =>
+      citizen.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      citizen.age.toString().includes(searchTerm)
   );
 
   return (
@@ -80,7 +77,7 @@ const Dashboard: React.FC = () => {
       
       <div style={{ height: 400, width: '100%' }}>
         <DataGrid
-          rows={filteredRows}
+          rows={filteredCitizens}
           columns={columns}
           sx={{
             borderRadius: '20px',
