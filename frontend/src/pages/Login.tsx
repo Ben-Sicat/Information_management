@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { Box, Typography, TextField, Button, Paper } from '@mui/material';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Container, Typography, Grid } from '@mui/material';
 import { Textfield } from '../components/index';
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "@firebase/firestore";
-import { config } from '../config/config';
+
 import { doc, setDoc, addDoc, collection } from 'firebase/firestore';
 import {db} from '../firebase-config'
 
