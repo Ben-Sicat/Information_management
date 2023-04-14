@@ -5,6 +5,7 @@ import { TextField, Container } from '@mui/material';
 import 'firebase/firestore';
 import {db}from '../firebase-config'
 import {collection, getDocs,} from 'firebase/firestore'
+import { BlockList } from 'net';
 
 interface Citizen {
   id: string;
@@ -59,11 +60,12 @@ const Dashboard: React.FC = () => {
       alignItems: 'center',
       borderRadius: '20px',
       boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
+      width:'500px',
       padding: '10px',
       '& .MuiDataGrid-cell:hover': {
           color: 'dark blue',
         },
-        margin: '20px',
+        margin: '20px auto 20px',
       }}>
       <TextField
         label="Search"
@@ -75,23 +77,25 @@ const Dashboard: React.FC = () => {
       />
       </Container>
       
-      <div style={{ height: 400, width: '100%' }}>
-        <DataGrid
-          rows={filteredCitizens}
-          columns={columns}
-          sx={{
-            borderRadius: '20px',
-            boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
-            padding: '40px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            '& .MuiDataGrid-cell:hover': {
-              color: 'dark blue',
-            },
-            margin: '20px',
-          }}
-        />
-      </div>
+      <div style={{ height: '100%', width: '100%'}}>
+  <DataGrid
+    rows={filteredCitizens}
+    columns={columns}
+    sx={{
+      borderRadius: '20px',
+      boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
+      padding: '40px',
+      justifyContent: 'center',
+      alignItems: 'center',
+      '& .MuiDataGrid-cell:hover': {
+        color: 'dark blue',
+      },
+      margin: '20px',
+      overflow: 'auto',
+    }}
+  />
+</div>
+
     </>
   );
 };
