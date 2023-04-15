@@ -15,7 +15,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, handleSearch }) => {
       height:'50px',
       width:'400px',
       padding: '10px',
-      margin: '20px auto 20px'
+      margin: '30px auto 30px'
     }}>
       <TextField
         label="Search"

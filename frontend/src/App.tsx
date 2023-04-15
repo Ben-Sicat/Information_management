@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import './App.css';
-import { Login, Dashboard , CreateUser } from './pages';
-import { Route, Routes } from 'react-router-dom';
+import { Login, Dashboard , CreateUser, Registration } from './pages';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import {initializeApp} from 'firebase/app';
 import { config } from './config/config';
 import AuthRoute from './components/AuthRoute';
@@ -24,12 +24,18 @@ function App() {
       </Button>
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}> */}
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<AuthRoute><Dashboard /></AuthRoute>} />
         <Route path="/create-user" element={<CreateUser />} />
-      </Routes> 
-      {/* </ThemeProvider> */}
+
+        <Route path="*" element={<h1>404</h1>} />
+        <Route path = "/signup" element = {<Registration />} />
+        
+
+      </Routes>
+    
+
     </>
     
   );
