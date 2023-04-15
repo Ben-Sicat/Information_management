@@ -61,13 +61,13 @@ const Dashboard: React.FC = () => {
     columns={columns}
     sx={{
       boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
-      padding: '20px',
+      padding: '10px',
       justifyContent: 'center',
       alignItems: 'center',
       '& .MuiDataGrid-cell:hover': {
         color: 'dark blue',
       },
-      margin: '10px'
+      margin: '20px'
     }}
     checkboxSelection
   />

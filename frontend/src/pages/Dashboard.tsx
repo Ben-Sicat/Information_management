@@ -12,7 +12,7 @@ const BodyContainer = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px;
+  margin: 10px;
 `;
 const ButtonContainer = styled('div')`
   position: fixed;
