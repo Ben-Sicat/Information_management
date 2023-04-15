@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Login, Dashboard , CreateUser, Registration } from './pages';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import {initializeApp} from 'firebase/app';
 import { config } from './config/config';
 import AuthRoute from './components/AuthRoute';
@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<AuthRoute><Dashboard /></AuthRoute>} />
         <Route path="/create-user" element={<CreateUser />} />
