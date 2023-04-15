@@ -12,22 +12,25 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, handleSearch }) => {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      borderRadius: '20px',
-      boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
-      width:'500px',
+      height:'50px',
+      width:'400px',
       padding: '10px',
-      '& .MuiDataGrid-cell:hover': {
-          color: 'dark blue',
-      },
-      margin: '20px auto 20px',
+      margin: '20px auto 20px'
     }}>
       <TextField
         label="Search"
+        id="outlined-size-small"
         variant="outlined"
         fullWidth
         margin="normal"
         value={searchTerm}
         onChange={handleSearch}
+        size="small"
+        sx={{
+          "& fieldset": { border: 'none' },
+          borderRadius: 3,
+          boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )'
+        }}
       />
     </Container>
   );

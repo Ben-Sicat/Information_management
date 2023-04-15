@@ -53,15 +53,16 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
-      
-      <div style={{ height: '100vh', width: '100%'}}>
+
+
+  <div style={{ height: '100vh', width: '100%'}}>
   <DataGrid
     rows={filteredCitizens}
     columns={columns}
     sx={{
-      borderRadius: '20px',
-      boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
+
+      // borderRadius: '20px',
+      // boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
       padding: '40px',
       justifyContent: 'center',
       alignItems: 'center',
@@ -72,6 +73,7 @@ const Dashboard: React.FC = () => {
       overflow: 'auto',
     }}
   />
+
 </div>
 
     </>
