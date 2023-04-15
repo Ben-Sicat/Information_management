@@ -21,12 +21,10 @@ const ButtonContainer = styled('div')`
   z-index: 999;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-
   &.scrolled {
     background-color: #333;
     border-radius: 5px;
   }
-
   &.scrolled .MuiButton-root {
     background-color: #000;
     border-radius: 5px;
