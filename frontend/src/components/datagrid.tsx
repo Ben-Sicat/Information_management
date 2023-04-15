@@ -60,17 +60,16 @@ const Dashboard: React.FC = () => {
     rows={filteredCitizens}
     columns={columns}
     sx={{
-      borderRadius: '20px',
       boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
-      padding: '40px',
+      padding: '10px',
       justifyContent: 'center',
       alignItems: 'center',
       '& .MuiDataGrid-cell:hover': {
         color: 'dark blue',
       },
-      margin: '20px',
-      overflow: 'auto',
+      margin: '20px'
     }}
+    checkboxSelection
   />
   
 </div>
