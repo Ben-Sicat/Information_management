@@ -9,6 +9,7 @@ const Dashboard: React.FC = () => {
     <>
       
       <Datagrid />
+      {/* make this button into a component */}
       <Button onClick = {()=> signOut(auth)}> Sign Out</Button>
       
     </>

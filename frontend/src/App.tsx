@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Login, Dashboard , CreateUser } from './pages';
-import { Route, Routes, redirect } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import {initializeApp} from 'firebase/app';
 import { config } from './config/config';
 import AuthRoute from './components/AuthRoute';

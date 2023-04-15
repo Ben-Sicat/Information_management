@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { Button, Container, Typography, Grid } from '@mui/material';
-import {Textfield} from '../components/index';
+import { Textfield } from '../components/index';
+
+import { doc, setDoc, addDoc, collection } from 'firebase/firestore';
+import {db} from '../firebase-config'
+
+const userCollectionRef = collection(db, 'citizens');
+
+//https://www.youtube.com/watch?v=jCY6DH8F4oc&ab_channel=PedroTech big help
 
 interface User {
   name: string;
@@ -8,6 +15,8 @@ interface User {
   birthday: string;
   address: string;
   contactNumber: string;
+  gender: string;
+  email:string;
 }
 
 const CreateUser = () => {
@@ -16,18 +25,33 @@ const CreateUser = () => {
     age: 0,
     birthday: '',
     address: '',
-    contactNumber: ''
+    contactNumber: '',
+    gender: '',
+    email: ''
   });
-
+  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(user); // update function with our db
-
+    try {
+      await addDoc(userCollectionRef, user);
+      setUser({
+        name: '',
+        age: 0,
+        birthday: '',
+        address: '',
+        contactNumber: '',
+        gender: '',
+        email: ''
+      });
+      console.log('User added to Firestore database.');
+    } catch (error) {
+      console.error('Error adding user to Firestore database:', error);
+    }
   };
 
   return (
@@ -77,14 +101,31 @@ const CreateUser = () => {
               onChange={handleInputChange}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={6}>
             <Textfield
               label="Address"
               name="address"
               value={user.address}
               onChange={handleInputChange}
             />
+            </Grid>
+             <Grid item xs={12} sm={6}>
+            <Textfield
+              label="Gender"
+              name="gender"
+              value={user.gender}
+              onChange={handleInputChange}
+            />
           </Grid>
+          <Grid item xs={12}>
+            <Textfield
+              label="Email"
+              name="email"
+              value={user.email}
+              onChange={handleInputChange}
+            />
+          </Grid>
+          
           <Grid item xs={12}>
             <Textfield
               label="Contact Number"
