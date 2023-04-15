@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { TextField, Container } from '@mui/material';
 
 import 'firebase/firestore';
 import {db}from '../firebase-config'
 import {collection, getDocs,} from 'firebase/firestore'
-import { BlockList } from 'net';
+import SearchBar from './SearchBar';
 
 interface Citizen {
   id: string;
@@ -54,30 +53,9 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-       <Container sx={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: '20px',
-      boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
-      width:'500px',
-      padding: '10px',
-      '& .MuiDataGrid-cell:hover': {
-          color: 'dark blue',
-        },
-        margin: '20px auto 20px',
-      }}>
-      <TextField
-        label="Search"
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        value={searchTerm}
-        onChange={handleSearch}
-      />
-      </Container>
+      <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
       
-      <div style={{ height: '100%', width: '100%'}}>
+      <div style={{ height: '100vh', width: '100%'}}>
   <DataGrid
     rows={filteredCitizens}
     columns={columns}
