@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import './App.css';
-import { Login, Dashboard , CreateUser, ThemeCSS } from './pages';
+import { Login, Dashboard , CreateUser } from './pages';
 import { Route, Routes } from 'react-router-dom';
 import {initializeApp} from 'firebase/app';
 import { config } from './config/config';
@@ -28,7 +28,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<AuthRoute><Dashboard /></AuthRoute>} />
         <Route path="/create-user" element={<CreateUser />} />
-        <Route path="/ThemeCSS" element={<ThemeCSS />} />
       </Routes> 
       {/* </ThemeProvider> */}
     </>
