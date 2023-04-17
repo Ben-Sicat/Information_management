@@ -68,7 +68,7 @@ const Dashboard: React.FC = () => {
       </Button>
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
     <CssBaseline />
-      <GlobalStyles />
+      <GlobalStyles styles={undefined} />
       <BodyContainer>
         <Alert severity="info">
           <AlertTitle>Add new data</AlertTitle>

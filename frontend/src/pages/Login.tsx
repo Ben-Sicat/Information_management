@@ -85,17 +85,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
 
         </Typography>
   
-        <Paper
-          elevation={5}
-          className="glassmorphism"
-          sx={{
-            borderRadius: '20px',
-            boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
-            padding: '40px',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        
           <Typography variant="h2" align="center" gutterBottom>
             Sign In
           </Typography>
