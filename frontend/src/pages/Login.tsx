@@ -35,12 +35,17 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/dashboard');
+      if (email === 'user@gmail.com') {
+        navigate('/dashboard', { state: { isAdmin: true } });
+      } else {
+        navigate('/dashboard', { state: { isAdmin: false } });
+      }
     } catch (err: FirebaseError | any) {
       setError(err?.message ?? 'An error occurred while signing in');
       setAuthing(false);
     }
   }
+
 
   const handleSignUp: React.MouseEventHandler<HTMLButtonElement> = () => {
     navigate('/signup');

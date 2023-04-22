@@ -26,9 +26,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<AuthRoute><Dashboard /></AuthRoute>} />
+        
+        <Route path="/dashboard" element={<AuthRoute><Dashboard /> </AuthRoute>} />
         <Route path="/create-user" element={<CreateUser />} />
-
+       
         <Route path="*" element={<h1>404</h1>} />
         <Route path = "/signup" element = {<Registration />} />
         
