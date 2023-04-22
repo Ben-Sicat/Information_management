@@ -63,8 +63,8 @@ const Dashboard: React.FC = () => {
   };
   return (
     <>
-    <Navbar theme={theme} toggleTheme={toggleTheme} />
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+    <Navbar theme={theme} toggleTheme={toggleTheme} />
     <CssBaseline />
       <GlobalStyles styles={undefined} />
       <BodyContainer>
