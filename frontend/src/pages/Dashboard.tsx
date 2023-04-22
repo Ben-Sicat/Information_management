@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Datagrid, SearchBar } from '../components/index';
+import { Datagrid, Navbar } from '../components/index';
 import { getAuth, signOut } from 'firebase/auth';
 import CustomButton from '../components/Buttons';
 import { Alert, AlertTitle } from '@mui/material';
@@ -16,7 +16,7 @@ const BodyContainer = styled('div')`
 `;
 const ButtonContainer = styled('div')`
   position: fixed;
-  top: 20px;
+  bottom: 20px;
   right: 20px;
   z-index: 999;
   border-radius: 5px;
@@ -63,9 +63,7 @@ const Dashboard: React.FC = () => {
   };
   return (
     <>
-            <Button variant="contained" onClick={toggleTheme}>
-        Toggle Theme
-      </Button>
+    <Navbar theme={theme} toggleTheme={toggleTheme} />
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
     <CssBaseline />
       <GlobalStyles styles={undefined} />
