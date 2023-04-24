@@ -8,13 +8,17 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
 import { useNavigate } from 'react-router-dom';
 
-const navigate = useNavigate();
+
 
 interface NavbarProps {
+  
   toggleTheme: () => void;
   theme: 'light' | 'dark';
 }
+const Navbar: React.FC<NavbarProps> = ({ toggleTheme, theme }) => {
+
 const handleAbout: React.MouseEventHandler<HTMLButtonElement> = () => {
+  
   navigate('/about');
 }
 const handleDashboard: React.MouseEventHandler<HTMLButtonElement> = () => {
@@ -26,7 +30,8 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
 
 
 
-const Navbar: React.FC<NavbarProps> = ({ toggleTheme, theme }) => {
+
+  const navigate = useNavigate();
   return (
     <AppBar position="static">
       <Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center'}}>

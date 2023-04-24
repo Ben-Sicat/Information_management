@@ -15,6 +15,7 @@ interface Citizen {
   email: string;
   address: string;
   gender: string;
+  actions: any;
 }
 
 const columns: GridColDef[] = [
@@ -25,12 +26,38 @@ const columns: GridColDef[] = [
   { field: 'email', headerName: 'Email', width: 250 },
   { field: 'address', headerName: 'Address', width: 250 },
   { field: 'gender', headerName: 'Gender', width: 150 },
+  { field: 'actions', headerName: 'Actions ', width: 300,
+  renderCell:(params) =>{
+    function onButtonClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, row: any): void {
+      throw new Error('Function not implemented.');
+    }
+
+    return(
+      <Button 
+      onClick={(e) => onButtonClick(e,params.row)}
+
+      >
+        Delete
+      </Button>
+    )
+
+  }
+}
 ];
+
 
 const Dashboard: React.FC = () => {
   const [citizens, setCitizens] = useState<Citizen[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const citizenCollectionRef = collection(db, 'citizens');
+
+
+  const handleDeleteUser = () => {
+
+  }
+  const handleEditUser = () => {
+
+  }
 
   useEffect(() => {
     const getCitizens = async () => {

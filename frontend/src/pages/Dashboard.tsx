@@ -31,6 +31,7 @@ const ButtonContainer = styled('div')`
   }
 `;
 
+
 const Dashboard: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const auth = getAuth();
@@ -46,6 +47,8 @@ const Dashboard: React.FC = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+ 
 
   const handleSignOut = () => {
     signOut(auth);
