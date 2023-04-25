@@ -51,15 +51,10 @@ const Dashboard: React.FC = () => {
     <CssBaseline />
       <GlobalStyles styles={undefined} />
       <BodyContainer>
-        <Alert severity="info">
-          <AlertTitle>Add new data</AlertTitle>
-          Insert new senior citizen person on the database —{' '}
-          <CustomButton label="Add now!" onClick={handleAddNowClick} />
-        </Alert>
-        <Datagrid />
+      <Datagrid />
       </BodyContainer>
       <ButtonContainer>
-        <CustomButton label="Sign Out" onClick={handleSignOut} sx={{ color: 'secondary'}}/>
+        <CustomButton label="+"  onClick={handleAddNowClick} sx={{ color: 'secondary'}}/>
       </ButtonContainer>
             </ThemeProvider>
     </>
