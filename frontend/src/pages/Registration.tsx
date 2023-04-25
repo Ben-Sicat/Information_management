@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
+
 const auth = getAuth();
 
 export const Registration: React.FC = () => {

@@ -23,9 +23,12 @@ const ButtonContainer = styled('div')`
   background-color: red;
 `;
 
+
 const Dashboard: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const auth = getAuth();
+
+ 
 
   const handleSignOut = () => {
     signOut(auth);

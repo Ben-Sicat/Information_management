@@ -6,19 +6,40 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
+import { useNavigate } from 'react-router-dom';
+
+
 
 interface NavbarProps {
+  
   toggleTheme: () => void;
   theme: 'light' | 'dark';
 }
-
 const Navbar: React.FC<NavbarProps> = ({ toggleTheme, theme }) => {
+
+const handleAbout: React.MouseEventHandler<HTMLButtonElement> = () => {
+  
+  navigate('/about');
+}
+const handleDashboard: React.MouseEventHandler<HTMLButtonElement> = () => {
+  navigate('/dashboard');
+}
+const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
+  navigate('/main-menu');
+}
+
+
+
+
+  const navigate = useNavigate();
   return (
     <AppBar position="static">
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
+      <Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center'}}>
         <div>
-          <Button color="inherit">Home</Button>
-          <Button color="inherit">About</Button>
+          <Button color="inherit" onClick={handleHome}>Home</Button>
+          <Button color="inherit" onClick = {handleDashboard}>Dashboard</Button>
+          <Button color="inherit" onClick = {handleAbout}>About</Button>
+         
         </div>
         <div>
           <IconButton

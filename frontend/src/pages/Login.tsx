@@ -35,12 +35,17 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/dashboard');
+      if (email === 'user@gmail.com') {
+        navigate('/dashboard', { state: { isAdmin: true } });
+      } else {
+        navigate('/dashboard', { state: { isAdmin: false } });
+      }
     } catch (err: FirebaseError | any) {
       setError(err?.message ?? 'An error occurred while signing in');
       setAuthing(false);
     }
   }
+
 
   const handleSignUp: React.MouseEventHandler<HTMLButtonElement> = () => {
     navigate('/signup');
@@ -80,10 +85,10 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-        <Typography variant="h2" align="center" gutterBottom>
+        {/* <Typography variant="h2" align="center" gutterBottom>
           Sign In With Google
 
-        </Typography>
+        </Typography> */}
   
         
           <Typography variant="h2" align="center" gutterBottom>
@@ -125,12 +130,12 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
             <Button type="submit" variant="contained">
               Login
             </Button>
-            <Button type="submit" variant="contained" onClick={() => signInWithGoogle()} disabled={authing}>
+            {/* <Button type="submit" variant="contained" onClick={() => signInWithGoogle()} disabled={authing}>
             Google
-          </Button>
-          <Button onClick={handleSignUp} variant="text" color="primary">
+          </Button> */}
+          {/* <Button onClick={handleSignUp} variant="text" color="primary">
           Sign Up
-        </Button>
+        </Button> */}
           </Box>
         </Paper>
       </Box>
