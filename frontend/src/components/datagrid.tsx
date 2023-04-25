@@ -15,15 +15,24 @@ import {collection, getDocs,} from 'firebase/firestore'
 import SearchBar from './SearchBar';
 
 interface Citizen {
-  id: string;
-  name: string;
+  lastName: string;
+  firstName: string;
+  middleName: string;
+  suffix: string;
+  birthMonth: string;
+  birthDay: string;
+  birthYear: string;
   age: number;
-  birthday: string;
-  contactNumber: string;
-  email: string;
-  address: string;
+  bldgNo: string;
+  streetName: string;
+  districtNo: string;
+  districtName: string;
+  zone: string;
   gender: string;
-  actions: any;
+  civilStatus: string;
+  voter: boolean;
+  status; string;
+  email: string;
 }
 
 const columns: GridColDef[] = [
