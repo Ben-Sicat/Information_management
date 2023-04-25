@@ -96,10 +96,22 @@ And that's it! You've successfully contributed code to the SeniorCitizen Databas
 1. THIS IS WHERE ALL WRITTEN CODE ARE
 
 ## src/components
-1. THIS IS WHERE ALL COMPONENTS ARE
-   a. AuthRoute.tsx - This is where the authentication is being checked
-   b. Buttons.tsx - This is where all the buttons are
-   c. datagrid.tsx - This is where the datagrid is being created
-   d. FilterFields.tsx - This is where we filter the data
-   e. #index.tsx = all index files are where we export files and what we call when we want to import them
-   #PUTA FUCK THIS SHIT BAHALA NA KAYO HAHAHAHAH
+1. THIS IS WHERE ALL COMPONENTS ARE.
+
+
+   a. AuthRoute.tsx - This is where the authentication is being checked.
+
+
+   b. Buttons.tsx - This is where all the buttons are.
+
+
+   c. datagrid.tsx - This is where the datagrid is being created.
+
+
+   d. FilterFields.tsx - This is where we filter the data.
+
+
+   e. #index.tsx = all index files are where we export files and what we call when we want to import them.
+
+   
+   #PUTA FUCK THIS SHIT BAHALA NA KAYO HAHAHAHAH.
