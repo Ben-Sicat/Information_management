@@ -44,20 +44,6 @@ That's it! You have now successfully cloned the repository and started the React
 
 Welcome to the SeniorCitizen Database Project! This document will guide you on how to contribute code to this project.
 
-## Setting Up Your Environment
-
-Before you start contributing code, make sure you have the following software installed on your machine:
-
-- Git: https://git-scm.com/downloads
-- Node.js: https://nodejs.org/en/download/
-
-You also need to clone the project's repository to your local machine. You can do this by running the following command in your terminal:
-
-```
-git clone https://github.com/<username>/<project-name>.git
-```
-
-Replace `<username>` and `<project-name>` with the actual GitHub username and project name, respectively.
 
 ## Contributing Code
 
