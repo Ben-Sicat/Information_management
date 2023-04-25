@@ -10,23 +10,45 @@ const userCollectionRef = collection(db, 'citizens');
 //https://www.youtube.com/watch?v=jCY6DH8F4oc&ab_channel=PedroTech big help
 
 interface User {
-  name: string;
+  lastName: string;
+  firstName: string;
+  middleName: string;
+  suffix: string;
   age: number;
-  birthday: string;
-  address: string;
-  contactNumber: string;
+  birthMonth: string;
+  birthDay: string;
+  birthYear: string;
+  bldgNo: string;
+  streetName: string;
+  districtNo: string;
+  districtName: string;
+  zone: string;
   gender: string;
+  civilstatus: string;
+  voter: string;
+  status: string;
   email:string;
 }
 
 const CreateUser = () => {
   const [user, setUser] = useState<User>({
-    name: '',
+    lastName: '',
+    firstName: '',
+    middleName: '',
+    suffix: '',
     age: 0,
-    birthday: '',
-    address: '',
-    contactNumber: '',
+    birthMonth: '',
+    birthDay: '',
+    birthYear: '',
+    bldgNo: '',
+    streetName: '',
+    districtNo: '',
+    districtName: '',
+    zone: '',
     gender: '',
+    civilstatus: '',
+    voter: '',
+    status: '',
     email: ''
   });
   
@@ -40,13 +62,24 @@ const CreateUser = () => {
     try {
       await addDoc(userCollectionRef, user);
       setUser({
-        name: '',
-        age: 0,
-        birthday: '',
-        address: '',
-        contactNumber: '',
-        gender: '',
-        email: ''
+        lastName: '',
+    firstName: '',
+    middleName: '',
+    suffix: '',
+    age: 0,
+    birthMonth: '',
+    birthDay: '',
+    birthYear: '',
+    bldgNo: '',
+    streetName: '',
+    districtNo: '',
+    districtName: '',
+    zone: '',
+    gender: '',
+    civilstatus: '',
+    voter: '',
+    status: '',
+    email: ''
       });
       console.log('User added to Firestore database.');
     } catch (error) {
