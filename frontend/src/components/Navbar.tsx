@@ -1,35 +1,19 @@
 import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
+import {AppBar, Toolbar, Button, IconButton, Drawer, Box, Divider} from '@mui/material/';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import Box from "@mui/material/Box";
+import {useState}  from 'react';
+import {ListItemButton, ListItemIcon, ListItemText, List, Collapse} from "@mui/material";
+import {ExpandLess, ExpandMore, Description, Menu, Close, LightMode,NightlightRound} from "@mui/icons-material";
 
-//drawer elements used
-import { DrawerProps as MuiDrawerProps } from "@mui/material/Drawer";
-import Drawer from "@mui/material/Drawer";
-import CloseIcon from "@mui/icons-material/Close";
-import Divider from "@mui/material/Divider";
-import MenuIcon from "@mui/icons-material/Menu";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import DescriptionIcon from "@mui/icons-material/Description";
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import List from '@mui/material/List';
-import Collapse from '@mui/material/Collapse';
+
 
 interface NavbarProps {
   
   toggleTheme: () => void;
   theme: 'light' | 'dark';
 }
+
+
 const Navbar: React.FC<NavbarProps> = ({ toggleTheme, theme }) => {
 
 const handleAbout: React.MouseEventHandler<HTMLButtonElement> = () => {
@@ -53,11 +37,28 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
     setState(open);
   };
 
-  const [drawerDropdown, setOpen] = React.useState(false);
+  const [genderDropdown, setGenderDropdown] = React.useState(false);
+  const [civilStatusDropdown, setCivilStatusDropdown] = React.useState(false);
+  const [voterDropdown, setVoterStatusDropdown] = React.useState(false);
+  const [statusDropdown, setStatusDropdown] = React.useState(false);
 
-  const handleClick = () => {
-    setOpen(!drawerDropdown);
+  const handleGenderClick = () => {
+    setGenderDropdown(!genderDropdown);
   };
+
+  const handleCivilStatusClick = () => {
+    setCivilStatusDropdown(!civilStatusDropdown);
+  };
+
+  const handleVoterClick = () => {
+    setVoterStatusDropdown(!voterDropdown);
+  };
+
+  const handleStatusClick = () => {
+    setStatusDropdown(!statusDropdown);
+  };
+
+
   const navigate = useNavigate();
   return (
     <AppBar position="static">
@@ -72,7 +73,7 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
               mr: 2,
             }}
           >
-            <MenuIcon />
+            <Menu />
           </IconButton>
           <Drawer
             //position of the drawer where to pop-out
@@ -93,7 +94,7 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
             >
               {/* when clicking the icon it will set the variable to false and closes the drawer */}
               <IconButton sx={{ mb: 2 }}>
-                <CloseIcon onClick={toggleDrawer(false)} />
+                <Close onClick={toggleDrawer(false)} />
               </IconButton>
 
               <Divider sx={{ mb: 2 }} />
@@ -101,55 +102,178 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
               <Box sx={{ mb: 2 }}>
                 <ListItemButton>
                   <ListItemIcon>
-                    <DescriptionIcon sx={{ color: "primary.main" }} />
+                    <Description sx={{ color: "primary.main" }} />
                   </ListItemIcon>
-                  <ListItemText primary="Filter 1" />
+                  <ListItemText primary="BLDG. NO." />
                 </ListItemButton>
 
                 <ListItemButton>
                   <ListItemIcon>
-                    <DescriptionIcon sx={{ color: "primary.main" }} />
+                    <Description sx={{ color: "primary.main" }} />
                   </ListItemIcon>
-                  <ListItemText primary="Filter 2" />
+                  <ListItemText primary="STREET NAME" />
                 </ListItemButton>
 
-                <ListItemButton onClick={handleClick}>
+                <ListItemButton>
                   <ListItemIcon>
-                    <DescriptionIcon sx={{ color: "primary.main" }} />
+                    <Description sx={{ color: "primary.main" }} />
                   </ListItemIcon>
-                  <ListItemText primary="Other Fields" />
-                  {drawerDropdown ? <ExpandLess /> : <ExpandMore />}
+                  <ListItemText primary="DISTRICT NO." />
                 </ListItemButton>
-                <Collapse in={drawerDropdown} timeout="auto" unmountOnExit>
+                
+                <ListItemButton>
+                  <ListItemIcon>
+                    <Description sx={{ color: "primary.main" }} />
+                  </ListItemIcon>
+                  <ListItemText primary="DISTRICT NAME" />
+                </ListItemButton>
+
+                <ListItemButton>
+                  <ListItemIcon>
+                    <Description sx={{ color: "primary.main" }} />
+                  </ListItemIcon>
+                  <ListItemText primary="ZONE" />
+                </ListItemButton>
+
+                <ListItemButton onClick={handleGenderClick}>
+                  <ListItemIcon>
+                    <Description sx={{ color: "primary.main" }} />
+                  </ListItemIcon>
+                  <ListItemText primary="GENDER" />
+                  {genderDropdown ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>               
+                <Collapse in={genderDropdown} timeout="auto" unmountOnExit> {/* DROPDOWN MENU OF GENDER */}
                   <List component="div" disablePadding>
                     <ListItemButton sx={{ pl: 4 }}>
                       <ListItemIcon>
-                        <DescriptionIcon />
+                        <Description />
                       </ListItemIcon>
-                      <ListItemText primary="Dropdown 1" />
+                      <ListItemText primary="MALE" />
                     </ListItemButton>
                     <ListItemButton sx={{ pl: 4 }}>
                       <ListItemIcon>
-                        <DescriptionIcon />
+                        <Description />
                       </ListItemIcon>
-                      <ListItemText primary="Dropdown 2" />
+                      <ListItemText primary="FEMALE" />
                     </ListItemButton>
                   </List>
                 </Collapse>
 
+
+                <ListItemButton onClick={handleCivilStatusClick}>
+                  <ListItemIcon>
+                    <Description sx={{ color: "primary.main" }} />
+                  </ListItemIcon>
+                  <ListItemText primary="CIVIL STATUS" />
+                  {civilStatusDropdown ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>               
+                <Collapse in={civilStatusDropdown} timeout="auto" unmountOnExit> {/* DROPDOWN MENU OF CIVIL STATUS */}
+                  <List component="div" disablePadding>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <Description />
+                      </ListItemIcon>
+                      <ListItemText primary="WIDOW" />
+                    </ListItemButton>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <Description />
+                      </ListItemIcon>
+                      <ListItemText primary="SINGLE" />
+                    </ListItemButton>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <Description />
+                      </ListItemIcon>
+                      <ListItemText primary="MARRIED" />
+                    </ListItemButton>
+                  </List>
+                  </Collapse>
+
+                  <ListItemButton onClick={handleVoterClick}>
+                  <ListItemIcon>
+                    <Description sx={{ color: "primary.main" }} />
+                  </ListItemIcon>
+                  <ListItemText primary="VOTER" />
+                  {voterDropdown ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>               
+                <Collapse in={voterDropdown} timeout="auto" unmountOnExit> {/* DROPDOWN MENU OF VOTER */}
+                  <List component="div" disablePadding>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <Description />
+                      </ListItemIcon>
+                      <ListItemText primary="YES" />
+                    </ListItemButton>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <Description />
+                      </ListItemIcon>
+                      <ListItemText primary="NO" />
+                    </ListItemButton>
+                  </List>
+                </Collapse>
+             
+                <ListItemButton onClick={handleStatusClick}>
+                  <ListItemIcon>
+                    <Description sx={{ color: "primary.main" }} />
+                  </ListItemIcon>
+                  <ListItemText primary="STATUS" />
+                  {statusDropdown ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>               
+                <Collapse in={statusDropdown} timeout="auto" unmountOnExit> {/* DROPDOWN MENU OF STATUS */}
+                  <List component="div" disablePadding>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <Description />
+                      </ListItemIcon>
+                      <ListItemText primary="ACTIVE" />
+                    </ListItemButton>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <Description />
+                      </ListItemIcon>
+                      <ListItemText primary="INACTIVE" />
+                    </ListItemButton>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <Description />
+                      </ListItemIcon>
+                      <ListItemText primary="BED RIDDEN" />
+                    </ListItemButton>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <Description />
+                      </ListItemIcon>
+                      <ListItemText primary="NEW" />
+                    </ListItemButton>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <Description />
+                      </ListItemIcon>
+                      <ListItemText primary="SENIOR" />
+                    </ListItemButton>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <Description />
+                      </ListItemIcon>
+                      <ListItemText primary="TRANSFEREE" />
+                    </ListItemButton>
+                  </List>
+                  </Collapse>
               </Box>
 
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "center",
-                  position: "absolute",
+                  position: "relative",
                   bottom: "0",
                   left: "50%",
                   transform: "translate(-50%, 0)",
                 }}
               >
-                <Button variant="outlined" sx={{ m: 1, width: 0.5 }}>
+                <Button variant="outlined" sx={{ m: '1 1 1 1', mt: 9, width: 250 }}>
                   Sign Out
                 </Button>
               </Box>
@@ -166,7 +290,7 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
             aria-label="theme"
             onClick={toggleTheme}
           >
-            {theme === 'light' ? <NightlightRoundIcon /> : <LightModeIcon />}
+            {theme === 'light' ? <NightlightRound /> : <LightMode />}
           </IconButton>
         </div>
       </Toolbar>
