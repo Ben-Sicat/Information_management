@@ -111,9 +111,27 @@ const CreateUser = () => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Textfield
-              label="Name"
-              name="name"
-              value={user.name}
+              label="Last Name"
+              name="lastName"
+              value={user.lastName}
+              onChange={handleInputChange}
+            />
+          </Grid>
+          <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Textfield
+              label="First Name"
+              name="firstName"
+              value={user.firstName}
+              onChange={handleInputChange}
+            />
+          </Grid>
+          <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Textfield
+              label="Middle Name"
+              name="middletName"
+              value={user.middleName}
               onChange={handleInputChange}
             />
           </Grid>
