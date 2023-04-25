@@ -7,7 +7,8 @@ import {
   CreateUser, 
   Registration,
   Main,
-  About
+  About,
+  UserProfile
 } from './pages';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import {initializeApp} from 'firebase/app';
@@ -34,13 +35,13 @@ function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         
-        <Route path="/dashboard" element={<AuthRoute><Dashboard /> </AuthRoute>} />
-        <Route path="/create-user" element={<AuthRoute><CreateUser /></AuthRoute>} />
-        <Route path='/main-menu' element={<AuthRoute><Main/></AuthRoute>}/>
-        <Route path='/about' element={<AuthRoute><About/></AuthRoute>}/>
-       
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/create-user" element={<CreateUser />} />
+        <Route path='/main-menu' element={<Main/>}/>
+        <Route path='/about' element={<About/>}/>
+        <Route path='/user-profile/:userId' element={<UserProfile/>}/>
         <Route path="*" element={<h1>404</h1>} />
-        <Route path = "/signup" element = {<Registration />} />
+        {/* <Route path = "/signup" element = {<Registration />} /> */}
         
 
       </Routes>

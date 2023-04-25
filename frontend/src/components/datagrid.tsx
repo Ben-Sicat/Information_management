@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react'; 
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Box, Typography, TextField, Button, Paper } from '@mui/material';
+import { 
+  Box, 
+  Typography, 
+  TextField, 
+  Button, 
+  Paper } 
+  from '@mui/material';
+
+import { useNavigate } from 'react-router-dom';
 import 'firebase/firestore';
 import {db}from '../firebase-config'
 import {collection, getDocs,} from 'firebase/firestore'
@@ -25,28 +33,12 @@ const columns: GridColDef[] = [
   { field: 'contactNumber', headerName: 'Contact Num.', width: 150 },
   { field: 'email', headerName: 'Email', width: 250 },
   { field: 'address', headerName: 'Address', width: 250 },
-  { field: 'gender', headerName: 'Gender', width: 150 },
-  { field: 'actions', headerName: 'Actions ', width: 300,
-  renderCell:(params) =>{
-    function onButtonClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, row: any): void {
-      throw new Error('Function not implemented.');
-    }
-
-    return(
-      <Button 
-      onClick={(e) => onButtonClick(e,params.row)}
-
-      >
-        Delete
-      </Button>
-    )
-
-  }
-}
+  { field: 'gender', headerName: 'Gender', width  : 150 },
 ];
 
 
 const Dashboard: React.FC = () => {
+  const navigate = useNavigate();
   const [citizens, setCitizens] = useState<Citizen[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const citizenCollectionRef = collection(db, 'citizens');
@@ -78,6 +70,12 @@ const Dashboard: React.FC = () => {
       citizen.age.toString().includes(searchTerm)
   );
 
+  const handleRowClick = (params: any) => {
+    const citizenId = params.row.id;
+    navigate(`/user-profile/${citizenId}`);
+  }
+
+
   return (
     <>
 
@@ -97,6 +95,7 @@ const Dashboard: React.FC = () => {
       margin: '20px'
     }}
     checkboxSelection
+    onRowClick={handleRowClick}
   />
   
 </div>

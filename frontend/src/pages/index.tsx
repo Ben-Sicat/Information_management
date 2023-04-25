@@ -4,6 +4,7 @@ import CreateUser from "./CreateUser"
 import Registration from "./Registration"
 import About from "./About";
 import Main from "./Main"
+import UserProfile from "./UserProfile";
 
 
-export {Login, Dashboard , CreateUser, Registration, About, Main}
+export {Login, Dashboard , CreateUser, Registration, About, Main, UserProfile}
