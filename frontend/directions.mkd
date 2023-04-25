@@ -49,10 +49,10 @@ Welcome to the SeniorCitizen Database Project! This document will guide you on h
 
 Here's the step-by-step process for contributing code to this project:
 
-1. Make sure you are on the `main` branch of the repository by running the following command:
+1. Make sure you are on the `master` branch of the repository by running the following command:
 
 ```
-git checkout main
+git checkout master
 ```
 
 2. Create a new branch for your feature by running the following command:
