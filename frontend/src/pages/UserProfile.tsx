@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Typography, Paper } from '@mui/material';
+import { Box, Typography, Paper, Grid } from '@mui/material';
 import { collection, doc, getDoc, getFirestore } from 'firebase/firestore';
 import { config } from '../config/config';
 import { initializeApp } from 'firebase/app';
@@ -21,7 +21,6 @@ interface User {
 
 const UserProfile: React.FC = () => {
   const { userId } = useParams<{ userId: string }>();
-  console.log(userId);
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -46,44 +45,34 @@ const UserProfile: React.FC = () => {
   }, [userId, db]);
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '20px',
-      }}
-    >
-      <Paper
-        sx={{
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          padding: '20px',
-        }}
-      >
-        <Typography variant="h4" sx={{ marginBottom: '20px' }}>
-          {user?.name || 'User Profile'}
-        </Typography>
-        <Typography variant="body1">
-          <strong>Age:</strong> {user?.age || '-'}
-        </Typography>
-        <Typography variant="body1">
-          <strong>Birthday:</strong> {user?.birthday || '-'}
-        </Typography>
-        <Typography variant="body1">
-          <strong>Contact Number:</strong> {user?.contactNumber || '-'}
-        </Typography>
-        <Typography variant="body1">
-          <strong>Email:</strong> {user?.email || '-'}
-        </Typography>
-        <Typography variant="body1">
-          <strong>Address:</strong> {user?.address || '-'}
-        </Typography>
-        <Typography variant="body1">
-          <strong>Gender:</strong> {user?.gender || '-'}
-        </Typography>
-      </Paper>
+    <Box sx={{ padding: { xs: '12px', sm: '24px' } }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Paper sx={{ padding: '16px' }}>
+            <Typography variant="h4" sx={{ marginBottom: '20px' }}>
+              {user?.name || 'User Profile'}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Age:</strong> {user?.age || '-'}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Birthday:</strong> {user?.birthday || '-'}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Contact Number:</strong> {user?.contactNumber || '-'}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Email:</strong> {user?.email || '-'}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Address:</strong> {user?.address || '-'}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Gender:</strong> {user?.gender || '-'}
+            </Typography>
+          </Paper>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
