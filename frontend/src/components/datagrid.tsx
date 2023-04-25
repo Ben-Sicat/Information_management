@@ -31,7 +31,7 @@ interface Citizen {
   gender: string;
   civilStatus: string;
   voter: boolean;
-  status; string;
+  statu: string;
   email: string;
 }
 
