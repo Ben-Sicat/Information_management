@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react'; 
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { 
-  Box, 
-  Typography, 
-  TextField, 
-  Button, 
-  Paper } 
-  from '@mui/material';
+// import { 
+//   Box, 
+//   Typography, 
+//   TextField, 
+//   Button, 
+//   Paper } 
+//   from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
 import 'firebase/firestore';
 import {db}from '../firebase-config'
 import {collection, getDocs,} from 'firebase/firestore'
-import SearchBar from './SearchBar';
+import {SearchBar, Navbar} from '../components/index';
+
 
 interface Citizen {
   id: string;
@@ -39,9 +40,11 @@ const columns: GridColDef[] = [
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
+  const [filterField, setFilterField] = useState('');
   const [citizens, setCitizens] = useState<Citizen[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const citizenCollectionRef = collection(db, 'citizens');
+
 
 
   const handleDeleteUser = () => {
@@ -64,6 +67,8 @@ const Dashboard: React.FC = () => {
     setSearchTerm(event.target.value);
   };
 
+  console.log(filterField)
+  
   const filteredCitizens = citizens.filter(
     (citizen) =>
       citizen.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -75,15 +80,25 @@ const Dashboard: React.FC = () => {
     navigate(`/user-profile/${citizenId}`);
   }
 
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
 
   return (
     <>
-
+ <Navbar theme={theme} toggleTheme={toggleTheme} filterData={setFilterField}/>
 <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
   <div style={{ height: '100vh', width: '100%'}}>
   <DataGrid
     rows={filteredCitizens}
     columns={columns}
+    // filterModel={{
+    //   items: [
+    //     { columnField: filterField, operatorValue: 'contains', value: searchTerm },
+    //   ],
+    // }}
     sx={{
       boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
       padding: '10px',

@@ -11,10 +11,11 @@ interface NavbarProps {
   
   toggleTheme: () => void;
   theme: 'light' | 'dark';
+  filterData: (field: string) => void;
 }
 
 
-const Navbar: React.FC<NavbarProps> = ({ toggleTheme, theme }) => {
+const Navbar: React.FC<NavbarProps> = ({ toggleTheme, theme, filterData }) => {
 
 const handleAbout: React.MouseEventHandler<HTMLButtonElement> = () => {
   
@@ -100,35 +101,35 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
               <Divider sx={{ mb: 2 }} />
 
               <Box sx={{ mb: 2 }}>
-                <ListItemButton>
+                <ListItemButton onClick={()=> filterData('bldg-no')}>
                   <ListItemIcon>
                     <Description sx={{ color: "primary.main" }} />
                   </ListItemIcon>
                   <ListItemText primary="BLDG. NO." />
                 </ListItemButton>
 
-                <ListItemButton>
+                <ListItemButton onClick={() => filterData('street-name')}>
                   <ListItemIcon>
                     <Description sx={{ color: "primary.main" }} />
                   </ListItemIcon>
                   <ListItemText primary="STREET NAME" />
                 </ListItemButton>
 
-                <ListItemButton>
+                <ListItemButton onClick={() => filterData('district-no')}>
                   <ListItemIcon>
                     <Description sx={{ color: "primary.main" }} />
                   </ListItemIcon>
                   <ListItemText primary="DISTRICT NO." />
                 </ListItemButton>
                 
-                <ListItemButton>
+                <ListItemButton onClick={()=> filterData('district-name')}>
                   <ListItemIcon>
                     <Description sx={{ color: "primary.main" }} />
                   </ListItemIcon>
                   <ListItemText primary="DISTRICT NAME" />
                 </ListItemButton>
 
-                <ListItemButton>
+                <ListItemButton onClick={() => filterData('zone')}>
                   <ListItemIcon>
                     <Description sx={{ color: "primary.main" }} />
                   </ListItemIcon>
@@ -144,13 +145,13 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
                 </ListItemButton>               
                 <Collapse in={genderDropdown} timeout="auto" unmountOnExit> {/* DROPDOWN MENU OF GENDER */}
                   <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('male')}>
                       <ListItemIcon>
                         <Description />
                       </ListItemIcon>
                       <ListItemText primary="MALE" />
                     </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={()=> filterData('female')}>
                       <ListItemIcon>
                         <Description />
                       </ListItemIcon>
@@ -169,19 +170,19 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
                 </ListItemButton>               
                 <Collapse in={civilStatusDropdown} timeout="auto" unmountOnExit> {/* DROPDOWN MENU OF CIVIL STATUS */}
                   <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('widow')}>
                       <ListItemIcon>
                         <Description />
                       </ListItemIcon>
                       <ListItemText primary="WIDOW" />
                     </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }}onClick={() => filterData('single')}>
                       <ListItemIcon>
                         <Description />
                       </ListItemIcon>
-                      <ListItemText primary="SINGLE" />
+                      <ListItemText primary="SINGLE"  />
                     </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('married')}>
                       <ListItemIcon>
                         <Description />
                       </ListItemIcon>
@@ -199,13 +200,13 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
                 </ListItemButton>               
                 <Collapse in={voterDropdown} timeout="auto" unmountOnExit> {/* DROPDOWN MENU OF VOTER */}
                   <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('voter-yes')}>
                       <ListItemIcon>
                         <Description />
                       </ListItemIcon>
                       <ListItemText primary="YES" />
                     </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('voter-no')}>
                       <ListItemIcon>
                         <Description />
                       </ListItemIcon>
@@ -223,37 +224,37 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
                 </ListItemButton>               
                 <Collapse in={statusDropdown} timeout="auto" unmountOnExit> {/* DROPDOWN MENU OF STATUS */}
                   <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('active')}>
                       <ListItemIcon>
                         <Description />
                       </ListItemIcon>
                       <ListItemText primary="ACTIVE" />
                     </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('inactive')}>
                       <ListItemIcon>
                         <Description />
                       </ListItemIcon>
                       <ListItemText primary="INACTIVE" />
                     </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('bedridden')}>
                       <ListItemIcon>
                         <Description />
                       </ListItemIcon>
                       <ListItemText primary="BED RIDDEN" />
                     </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('new')}>
                       <ListItemIcon>
                         <Description />
                       </ListItemIcon>
                       <ListItemText primary="NEW" />
                     </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('senior')}>
                       <ListItemIcon>
                         <Description />
                       </ListItemIcon>
                       <ListItemText primary="SENIOR" />
                     </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('widow')}>
                       <ListItemIcon>
                         <Description />
                       </ListItemIcon>

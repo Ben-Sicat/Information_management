@@ -39,15 +39,10 @@ const Dashboard: React.FC = () => {
     navigate('/create-user');
   };
 
-    const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
+    
   return (
     <>
-    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-    <Navbar theme={theme} toggleTheme={toggleTheme} />
+    {/* <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}> */}
     <CssBaseline />
       <GlobalStyles styles={undefined} />
       <BodyContainer>
@@ -56,7 +51,7 @@ const Dashboard: React.FC = () => {
       <ButtonContainer>
         <CustomButton label="+"  onClick={handleAddNowClick} sx={{ color: 'secondary'}}/>
       </ButtonContainer>
-            </ThemeProvider>
+            {/* </ThemeProvider> */}
     </>
   );
 };
