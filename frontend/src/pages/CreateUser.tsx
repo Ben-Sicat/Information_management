@@ -1,213 +1,136 @@
-import React, { useState } from 'react';
-import { Button, Container, Typography, Grid } from '@mui/material';
-import { Textfield } from '../components/index';
-
-import { doc, setDoc, addDoc, collection } from 'firebase/firestore';
-import {db} from '../firebase-config'
-
-const userCollectionRef = collection(db, 'citizens');
-
-//https://www.youtube.com/watch?v=jCY6DH8F4oc&ab_channel=PedroTech big help
+import React, { useState, ChangeEvent } from 'react';
+import { Container, Grid, MenuItem, TextField, Typography } from '@mui/material';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../firebase-config';
 
 interface User {
-  address: string;
-  contactNumber: string;
-  lastName: string;
-  firstName: string;
-  middleName: string;
-  suffix: string;
-  age: number;
-  birthMonth: string;
-  birthDay: string;
-  birthYear: string;
-  bldgNo: string;
-  streetName: string;
-  districtNo: string;
-  districtName: string;
-  zone: string;
-  gender: string;
-  civilstatus: string;
-  voter: string;
-  status: string;
-  email:string;
+  [key: string]: string;
 }
 
-const CreateUser = () => {
-  const [user, setUser] = useState<User>({
-    lastName: '',
-    firstName: '',
-    middleName: '',
-    suffix: '',
-    age: 0,
-    birthMonth: '',
-    birthDay: '',
-    birthYear: '',
-    bldgNo: '',
-    streetName: '',
-    districtNo: '',
-    districtName: '',
-    zone: '',
-    gender: '',
-    civilstatus: '',
-    voter: '',
-    status: '',
-    email: '',
-    contactNumber: '',
-    address: '',
-  });
-  
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+interface Field {
+  label: string;
+  name: string;
+  type?: string;
+  options?: string[];
+  defaultValue?: string;
+}
+
+const fields: Field[] = [
+  // field definitions...
+  { label: 'Last Name', name: 'lastName' },
+  { label: 'First Name', name: 'firstName' },
+  { label: 'Middle Name', name: 'middleName' },
+  { label: 'Suffix', name: 'suffix' },
+  { label: 'Age', name: 'age', type: 'number' },
+  { label: 'Birth Month', name: 'birthMonth' },
+  { label: 'Birth Day', name: 'birthDay' },
+  { label: 'Birth Year', name: 'birthYear' },
+  { label: 'Building Number', name: 'bldgNo' },
+  { label: 'Street Name', name: 'streetName',
+  options: [
+    'JORGE BOCOBO ST.',
+    'ARKANSAS ST.',
+    'MA. OROSA ST.',
+    'PADRE FAURA ST.',
+    '526 U. N. Ave. cor. A. Mabini St.',
+    'A. FLORES ST.',
+    'U.N. AVE.',
+    'A. MABINI ST.',
+    'A. FLORES ST.',
+    'PADRE FAURA ST.',
+    'GREY ST.',
+    'ARQUIZA ST.',
+    'A. MABINI ST. COR. UN. AVE.',
+    'NBI COMPOUND UN AVE.',
+  ],
+ },
+  { label: 'District Number', name: 'districtNo', defaultValue: '5' },
+  { label: 'District Name', name: 'districtName' },
+  { label: 'Zone', name: 'zone', defaultValue: '72' },
+  { label: 'Gender', name: 'gender', options: ['Male', 'Female', 'Other'] },
+  { label: 'Civil Status', name: 'civilstatus' ,options: ['Single', 'Married', 'Divorced', 'Widowed']},
+  { label: 'Voter', name: 'voter' ,options: ['Yes', 'No'],},
+  { label: 'Status', name: 'status', options: ['Active', 'Inactive', 'Deceased','Bedridden']},
+  { label: 'Email', name: 'email' },
+  { label: 'Contact Number', name: 'contactNumber' },
+];
+
+const userCollectionRef = collection(db, 'citizens'); // Replace 'users' with your desired collection name
+
+const AddProfile: React.FC = () => {
+  const [user, setUser] = useState<User>({});
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
       await addDoc(userCollectionRef, user);
-      setUser({
-    address: '',
-    lastName: '',
-    firstName: '',
-    middleName: '',
-    suffix: '',
-    age: 0,
-    birthMonth: '',
-    birthDay: '',
-    birthYear: '',
-    bldgNo: '',
-    streetName: '',
-    districtNo: '',
-    districtName: '',
-    zone: '',
-    gender: '',
-    civilstatus: '',
-    voter: '',
-    status: '',
-    email: '',
-    contactNumber: '',
-
-      });
-      console.log('User added to Firestore database.');
+      console.log('User added successfully!');
+      setUser({});
     } catch (error) {
-      console.error('Error adding user to Firestore database:', error);
+      console.error('Error adding user:', error);
     }
   };
 
+
   return (
-    <Container sx={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh',
+    <Container maxWidth="xl"
+    sx={{
+      marginTop: '20px',
+      marginBottom: '20px',
+      padding: '20px',
+      border: '1px solid #ccc',
+      borderRadius: '5px',
+      boxShadow: '0 2px 2px rgba(0, 0, 0, 0.3)',
+      width: '100%',
+      maxWidth: '600px',
+
     }}>
-    <Container maxWidth="xl"sx={{
-      borderRadius: '20px',
-      boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
-      padding: '40px',
-      justifyContent: 'center',
-      alignItems: 'center',
-      '& .MuiDataGrid-cell:hover': {
-          color: 'dark blue',
-        },
-    }}>
-      <Typography variant="h4" align="center" gutterBottom>
-        Create User
+      <Typography variant="h4" component="h1" gutterBottom>
+        Add Profile
       </Typography>
-      <form onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Textfield
-              label="Last Name"
-              name="lastName"
-              value={user.lastName}
+    <Grid container spacing={2}>
+      {fields.map((field) => (
+        <Grid item xs={10} md={3} key={field.name}>
+          {field.options ? (
+            <TextField
+              select
+              label={field.label}
+              name={field.name}
+              value={user[field.name] || ''}
               onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Textfield
-              label="First Name"
-              name="firstName"
-              value={user.firstName}
+              fullWidth
+            >
+              {field.options.map((option) => (
+                <MenuItem key={option} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
+            </TextField>
+          ) : (
+            <TextField
+              label={field.label}
+              name={field.name}
+              value={user[field.name] || ''}
               onChange={handleInputChange}
+              type={field.type || 'text'}
+              fullWidth
             />
-          </Grid>
-          <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Textfield
-              label="Middle Name"
-              name="middletName"
-              value={user.middleName}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Textfield
-              label="Age"
-              name="age"
-              type="number"
-              value={user.age}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Textfield
-              label="Birthday (MM/DD/YYYY)"
-              name="birthday"
-              value={user.birthDay}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Textfield
-              label="Address"
-              name="address"
-              value={user.address}
-              onChange={handleInputChange}
-            />
-            </Grid>
-             <Grid item xs={12} sm={6}>
-            <Textfield
-              label="Gender"
-              name="gender"
-              value={user.gender}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Textfield
-              label="Email"
-              name="email"
-              value={user.email}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          
-          <Grid item xs={12}>
-            <Textfield
-              label="Contact Number"
-              name="contactNumber"
-              value={user.contactNumber}
-              onChange={handleInputChange}
-            />
-          </Grid>
+          )}
         </Grid>
-        <Container sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Button variant="contained" color="primary" type="submit" >
-          Create
-        </Button>
-        </Container>
-        </Grid>
-        </Grid>
-      </form>
-    </Container>
+      ))}
+      <Grid item xs={12}>
+        <button onClick={handleSubmit}>Add User</button>
+      </Grid>
+    </Grid>
     </Container>
   );
 };
 
-export default CreateUser;
+export default AddProfile;

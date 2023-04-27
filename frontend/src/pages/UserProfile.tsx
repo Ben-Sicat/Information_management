@@ -8,20 +8,45 @@ import { initializeApp } from 'firebase/app';
 const app = initializeApp(config.firebaseConfig);
 const db = getFirestore(app);
 
-interface User {
-  id: string;
+interface Field {
+  label: string;
   name: string;
-  age: number;
-  birthday: string;
-  contactNumber: string;
-  email: string;
-  address: string;
-  gender: string;
+  type?: string;
+  options?: string[];
+  defaultValue?: string;
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
+  suffix?: string;
+
 }
+const fields: Field[] = [
+  // field definitions...
+  { label: 'Last Name', name: 'lastName' },
+  { label: 'First Name', name: 'firstName' },
+  { label: 'Middle Name', name: 'middleName' },
+  { label: 'Suffix', name: 'suffix' },
+  { label: 'Age', name: 'age', type: 'number' },
+  { label: 'Birth Month', name: 'birthMonth' },
+  { label: 'Birth Day', name: 'birthDay' },
+  { label: 'Birth Year', name: 'birthYear' },
+  { label: 'Building Number', name: 'bldgNo' },
+  { label: 'Street Name', name: 'streetName'
+ },
+  { label: 'District Number', name: 'districtNo', defaultValue: '5' },
+  { label: 'District Name', name: 'districtName' },
+  { label: 'Zone', name: 'zone', defaultValue: '72' },
+  { label: 'Gender', name: 'gender', options: ['Male', 'Female', 'Other'] },
+  { label: 'Civil Status', name: 'civilstatus' ,options: ['Single', 'Married', 'Divorced', 'Widowed']},
+  { label: 'Voter', name: 'voter' ,options: ['Yes', 'No'],},
+  { label: 'Status', name: 'status', options: ['Active', 'Inactive', 'Deceased','Bedridden']},
+  { label: 'Email', name: 'email' },
+  { label: 'Contact Number', name: 'contactNumber' },
+];
 
 const UserProfile: React.FC = () => {
   const { userId } = useParams<{ userId: string }>();
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<Field | null>(null);
 
   useEffect(() => {
     const getUser = async () => {
@@ -30,7 +55,7 @@ const UserProfile: React.FC = () => {
         const userDoc = await getDoc(userRef);
 
         if (userDoc.exists()) {
-          const userData = { ...userDoc.data(), id: userDoc.id } as User;
+          const userData = { ...userDoc.data(), id: userDoc.id };
           console.log('userData:', userData);
           setUser(userData);
         } else {
@@ -43,35 +68,34 @@ const UserProfile: React.FC = () => {
 
     getUser();
   }, [userId, db]);
+   
+  const getFullName = (): string => {
+    if (user) {
+      const { firstName, middleName, lastName, suffix } = user;
+      const fullName = [firstName, middleName, lastName, suffix].filter(Boolean).join(' ');
+      return fullName || 'User Profile';
+    }
+    return 'User Profile';
+  };
 
   return (
     <Box sx={{ padding: { xs: '12px', sm: '24px' } }}>
+      <Typography variant="h4" sx={{ marginBottom: '20px' }}>
+        {getFullName()}
+      </Typography>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Paper sx={{ padding: '16px' }}>
-            <Typography variant="h4" sx={{ marginBottom: '20px' }}>
-              {user?.name || 'User Profile'}
-            </Typography>
-            <Typography variant="body1">
-              <strong>Age:</strong> {user?.age || '-'}
-            </Typography>
-            <Typography variant="body1">
-              <strong>Birthday:</strong> {user?.birthday || '-'}
-            </Typography>
-            <Typography variant="body1">
-              <strong>Contact Number:</strong> {user?.contactNumber || '-'}
-            </Typography>
-            <Typography variant="body1">
-              <strong>Email:</strong> {user?.email || '-'}
-            </Typography>
-            <Typography variant="body1">
-              <strong>Address:</strong> {user?.address || '-'}
-            </Typography>
-            <Typography variant="body1">
-              <strong>Gender:</strong> {user?.gender || '-'}
-            </Typography>
-          </Paper>
-        </Grid>
+      
+        {fields.map((field) => (
+          <Grid item xs={12} sm={6} md={4} key={field.name}>
+            <Paper sx={{ padding: '16px' }}>
+              
+              <Typography variant="body1" sx={{ marginBottom: '8px' }}>
+                <strong>{field.label}:</strong> {user?.[field.name] || '-'}
+              </Typography>
+            </Paper>
+          </Grid>
+
+        ))}
       </Grid>
     </Box>
   );

@@ -11,11 +11,79 @@ interface NavbarProps {
   
   toggleTheme: () => void;
   theme: 'light' | 'dark';
-  filterData: (field: string) => void;
+  updateSearchTerm: (term: string) => void;
 }
+type Option = {
+  value: string;
+  label: string;
+};
+const genderOptions: Option[] = [
+  { value: 'male', label: 'MALE' },
+  { value: 'female', label: 'FEMALE' },
+];
+
+const civilStatusOptions: Option[] = [
+  { value: 'widow', label: 'WIDOW' },
+  { value: 'single', label: 'SINGLE' },
+  { value: 'married', label: 'MARRIED' },
+];
+
+const voterOptions: Option[] = [
+  { value: 'yes', label: 'YES' },
+  { value: 'no', label: 'NO' },
+];
+
+const statusOptions: Option[] = [
+  { value: 'active', label: 'ACTIVE' },
+  { value: 'inactive', label: 'INACTIVE' },
+  { value: 'bedridden', label: 'BED RIDDEN' },
+  { value: 'new', label: 'NEW' },
+  { value: 'senior', label: 'SENIOR' },
+  { value: 'transfer', label: 'TRANSFEREE' },
+];
+
+const DropdownMenu: React.FC<{
+  title: string;
+  options: Option[];
+  isOpen: boolean;
+  onClick: () => void;
+  updateSearchTerm: (value: string) => void;
+}> = ({ title, options, isOpen, onClick, updateSearchTerm }) => (
+  <>
+    <ListItemButton onClick={onClick}>
+      <ListItemIcon>
+        <Description sx={{ color: 'primary.main' }} />
+      </ListItemIcon>
+      <ListItemText primary={title} />
+      {isOpen ? <ExpandLess /> : <ExpandMore />}
+    </ListItemButton>
+    <Collapse in={isOpen} timeout="auto" unmountOnExit>
+      <List component="div" disablePadding>
+        {options.map(({ value, label }) => (
+          <ListItemButton sx={{ pl: 4 }} key={value} onClick={() => updateSearchTerm(value)}>
+            <ListItemIcon>
+              <Description />
+            </ListItemIcon>
+            <ListItemText primary={label} />
+          </ListItemButton>
+        ))}
+      </List>
+    </Collapse>
+  </>
+);
 
 
-const Navbar: React.FC<NavbarProps> = ({ toggleTheme, theme, filterData }) => {
+const Navbar: React.FC<NavbarProps> = ({ toggleTheme, theme, updateSearchTerm }) => {
+
+  const [genderDropdown, setGenderDropdown] = useState(false);
+  const [civilStatusDropdown, setCivilStatusDropdown] = useState(false);
+  const [voterDropdown, setVoterDropdown] = useState(false);
+  const [statusDropdown, setStatusDropdown] = useState(false);
+
+  const handleGenderClick = () => setGenderDropdown(!genderDropdown);
+  const handleCivilStatusClick = () => setCivilStatusDropdown(!civilStatusDropdown);
+  const handleVoterClick = () => setVoterDropdown(!voterDropdown);
+  const handleStatusClick = () => setStatusDropdown(!statusDropdown);
 
 const handleAbout: React.MouseEventHandler<HTMLButtonElement> = () => {
   
@@ -30,6 +98,8 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
 
 
   const [open, setState] = useState<boolean>(false);
+
+  
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if ('key' in event && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -37,27 +107,7 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
     //changes the function state according to the value of open
     setState(open);
   };
-
-  const [genderDropdown, setGenderDropdown] = React.useState(false);
-  const [civilStatusDropdown, setCivilStatusDropdown] = React.useState(false);
-  const [voterDropdown, setVoterStatusDropdown] = React.useState(false);
-  const [statusDropdown, setStatusDropdown] = React.useState(false);
-
-  const handleGenderClick = () => {
-    setGenderDropdown(!genderDropdown);
-  };
-
-  const handleCivilStatusClick = () => {
-    setCivilStatusDropdown(!civilStatusDropdown);
-  };
-
-  const handleVoterClick = () => {
-    setVoterStatusDropdown(!voterDropdown);
-  };
-
-  const handleStatusClick = () => {
-    setStatusDropdown(!statusDropdown);
-  };
+ 
 
 
   const navigate = useNavigate();
@@ -101,167 +151,35 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
               <Divider sx={{ mb: 2 }} />
 
               <Box sx={{ mb: 2 }}>
-                <ListItemButton onClick={()=> filterData('bldg-no')}>
-                  <ListItemIcon>
-                    <Description sx={{ color: "primary.main" }} />
-                  </ListItemIcon>
-                  <ListItemText primary="BLDG. NO." />
-                </ListItemButton>
-
-                <ListItemButton onClick={() => filterData('street-name')}>
-                  <ListItemIcon>
-                    <Description sx={{ color: "primary.main" }} />
-                  </ListItemIcon>
-                  <ListItemText primary="STREET NAME" />
-                </ListItemButton>
-
-                <ListItemButton onClick={() => filterData('district-no')}>
-                  <ListItemIcon>
-                    <Description sx={{ color: "primary.main" }} />
-                  </ListItemIcon>
-                  <ListItemText primary="DISTRICT NO." />
-                </ListItemButton>
+              <DropdownMenu
+              title="GENDER"
+              options={genderOptions}
+              isOpen={genderDropdown}
+              onClick={handleGenderClick}
+              updateSearchTerm={updateSearchTerm}
+            />
+            <DropdownMenu
+              title="CIVIL STATUS"
+              options={civilStatusOptions}
+              isOpen={civilStatusDropdown}
+              onClick={handleCivilStatusClick}
+              updateSearchTerm={updateSearchTerm}
+            />
+            <DropdownMenu
+              title="VOTER"
+              options={voterOptions}
+              isOpen={voterDropdown}
+              onClick={handleVoterClick}
+              updateSearchTerm={updateSearchTerm}
+            />
+            <DropdownMenu
+                title="STATUS"
+                options={statusOptions}
+                isOpen={statusDropdown}
+                onClick={handleStatusClick}
+                updateSearchTerm={updateSearchTerm}
+              />
                 
-                <ListItemButton onClick={()=> filterData('district-name')}>
-                  <ListItemIcon>
-                    <Description sx={{ color: "primary.main" }} />
-                  </ListItemIcon>
-                  <ListItemText primary="DISTRICT NAME" />
-                </ListItemButton>
-
-                <ListItemButton onClick={() => filterData('zone')}>
-                  <ListItemIcon>
-                    <Description sx={{ color: "primary.main" }} />
-                  </ListItemIcon>
-                  <ListItemText primary="ZONE" />
-                </ListItemButton>
-
-                <ListItemButton onClick={handleGenderClick}>
-                  <ListItemIcon>
-                    <Description sx={{ color: "primary.main" }} />
-                  </ListItemIcon>
-                  <ListItemText primary="GENDER" />
-                  {genderDropdown ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>               
-                <Collapse in={genderDropdown} timeout="auto" unmountOnExit> {/* DROPDOWN MENU OF GENDER */}
-                  <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('male')}>
-                      <ListItemIcon>
-                        <Description />
-                      </ListItemIcon>
-                      <ListItemText primary="MALE" />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }} onClick={()=> filterData('female')}>
-                      <ListItemIcon>
-                        <Description />
-                      </ListItemIcon>
-                      <ListItemText primary="FEMALE" />
-                    </ListItemButton>
-                  </List>
-                </Collapse>
-
-
-                <ListItemButton onClick={handleCivilStatusClick}>
-                  <ListItemIcon>
-                    <Description sx={{ color: "primary.main" }} />
-                  </ListItemIcon>
-                  <ListItemText primary="CIVIL STATUS" />
-                  {civilStatusDropdown ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>               
-                <Collapse in={civilStatusDropdown} timeout="auto" unmountOnExit> {/* DROPDOWN MENU OF CIVIL STATUS */}
-                  <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('widow')}>
-                      <ListItemIcon>
-                        <Description />
-                      </ListItemIcon>
-                      <ListItemText primary="WIDOW" />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}onClick={() => filterData('single')}>
-                      <ListItemIcon>
-                        <Description />
-                      </ListItemIcon>
-                      <ListItemText primary="SINGLE"  />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('married')}>
-                      <ListItemIcon>
-                        <Description />
-                      </ListItemIcon>
-                      <ListItemText primary="MARRIED" />
-                    </ListItemButton>
-                  </List>
-                  </Collapse>
-
-                  <ListItemButton onClick={handleVoterClick}>
-                  <ListItemIcon>
-                    <Description sx={{ color: "primary.main" }} />
-                  </ListItemIcon>
-                  <ListItemText primary="VOTER" />
-                  {voterDropdown ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>               
-                <Collapse in={voterDropdown} timeout="auto" unmountOnExit> {/* DROPDOWN MENU OF VOTER */}
-                  <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('voter-yes')}>
-                      <ListItemIcon>
-                        <Description />
-                      </ListItemIcon>
-                      <ListItemText primary="YES" />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('voter-no')}>
-                      <ListItemIcon>
-                        <Description />
-                      </ListItemIcon>
-                      <ListItemText primary="NO" />
-                    </ListItemButton>
-                  </List>
-                </Collapse>
-             
-                <ListItemButton onClick={handleStatusClick}>
-                  <ListItemIcon>
-                    <Description sx={{ color: "primary.main" }} />
-                  </ListItemIcon>
-                  <ListItemText primary="STATUS" />
-                  {statusDropdown ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>               
-                <Collapse in={statusDropdown} timeout="auto" unmountOnExit> {/* DROPDOWN MENU OF STATUS */}
-                  <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('active')}>
-                      <ListItemIcon>
-                        <Description />
-                      </ListItemIcon>
-                      <ListItemText primary="ACTIVE" />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('inactive')}>
-                      <ListItemIcon>
-                        <Description />
-                      </ListItemIcon>
-                      <ListItemText primary="INACTIVE" />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('bedridden')}>
-                      <ListItemIcon>
-                        <Description />
-                      </ListItemIcon>
-                      <ListItemText primary="BED RIDDEN" />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('new')}>
-                      <ListItemIcon>
-                        <Description />
-                      </ListItemIcon>
-                      <ListItemText primary="NEW" />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('senior')}>
-                      <ListItemIcon>
-                        <Description />
-                      </ListItemIcon>
-                      <ListItemText primary="SENIOR" />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }} onClick={() => filterData('widow')}>
-                      <ListItemIcon>
-                        <Description />
-                      </ListItemIcon>
-                      <ListItemText primary="TRANSFEREE" />
-                    </ListItemButton>
-                  </List>
-                  </Collapse>
               </Box>
 
               <Box
