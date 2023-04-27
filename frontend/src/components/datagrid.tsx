@@ -15,7 +15,9 @@ import {collection, getDocs,} from 'firebase/firestore'
 import {SearchBar, Navbar} from '../components/index';
 
 
+
 interface Citizen {
+  id: string;
   lastName: string;
   firstName: string;
   middleName: string;
@@ -23,6 +25,7 @@ interface Citizen {
   birthMonth: string;
   birthDay: string;
   birthYear: string;
+  contactNumber: string;
   age: number;
   bldgNo: string;
   streetName: string;
@@ -37,9 +40,9 @@ interface Citizen {
 }
 
 const columns: GridColDef[] = [
-  { field: 'name', headerName: 'Name', width: 150 },
+  { field: 'firstName', headerName: 'First Name', width: 150 },
   { field: 'age', headerName: 'Age', width: 100 },
-  { field: 'birthday', headerName: 'Birthday', width: 150 },
+  { field: 'birthDay', headerName: 'Birth Day', width: 150 },
   { field: 'contactNumber', headerName: 'Contact Num.', width: 150 },
   { field: 'email', headerName: 'Email', width: 250 },
   { field: 'address', headerName: 'Address', width: 250 },
@@ -56,12 +59,12 @@ const Dashboard: React.FC = () => {
 
 
 
-  const handleDeleteUser = () => {
+  // const handleDeleteUser = () => {
 
-  }
-  const handleEditUser = () => {
+  // }
+  // const handleEditUser = () => {
 
-  }
+  // }
 
   useEffect(() => {
     const getCitizens = async () => {
@@ -80,12 +83,12 @@ const Dashboard: React.FC = () => {
   
   const filteredCitizens = citizens.filter(
     (citizen) =>
-      citizen.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      citizen.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       citizen.age.toString().includes(searchTerm) ||
-      citizen.birthday.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      citizen.birthDay.toLowerCase().includes(searchTerm.toLowerCase()) ||
       citizen.contactNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      citizen.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      citizen.address.toLowerCase().includes(searchTerm.toLowerCase()) 
+      citizen.email.toLowerCase().includes(searchTerm.toLowerCase())
+      // citizen.address.toLowerCase().includes(searchTerm.toLowerCase()) 
 
   );
 
@@ -108,7 +111,7 @@ const Dashboard: React.FC = () => {
   <DataGrid
     rows={filteredCitizens}
     columns={columns}
-    // 35
+    // =
     sx={{
       boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
       padding: '10px',

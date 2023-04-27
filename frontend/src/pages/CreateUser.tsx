@@ -10,6 +10,8 @@ const userCollectionRef = collection(db, 'citizens');
 //https://www.youtube.com/watch?v=jCY6DH8F4oc&ab_channel=PedroTech big help
 
 interface User {
+  address: string;
+  contactNumber: string;
   lastName: string;
   firstName: string;
   middleName: string;
@@ -49,7 +51,9 @@ const CreateUser = () => {
     civilstatus: '',
     voter: '',
     status: '',
-    email: ''
+    email: '',
+    contactNumber: '',
+    address: '',
   });
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,7 +66,8 @@ const CreateUser = () => {
     try {
       await addDoc(userCollectionRef, user);
       setUser({
-        lastName: '',
+    address: '',
+    lastName: '',
     firstName: '',
     middleName: '',
     suffix: '',
@@ -79,7 +84,9 @@ const CreateUser = () => {
     civilstatus: '',
     voter: '',
     status: '',
-    email: ''
+    email: '',
+    contactNumber: '',
+
       });
       console.log('User added to Firestore database.');
     } catch (error) {
@@ -148,7 +155,7 @@ const CreateUser = () => {
             <Textfield
               label="Birthday (MM/DD/YYYY)"
               name="birthday"
-              value={user.birthday}
+              value={user.birthDay}
               onChange={handleInputChange}
             />
           </Grid>
@@ -195,6 +202,8 @@ const CreateUser = () => {
           Create
         </Button>
         </Container>
+        </Grid>
+        </Grid>
       </form>
     </Container>
     </Container>

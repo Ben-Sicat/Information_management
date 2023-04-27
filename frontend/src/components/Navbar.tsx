@@ -125,7 +125,7 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
                 <ListItemButton onClick={()=> filterData('district-name')}>
                   <ListItemIcon>
                     <Description sx={{ color: "primary.main" }} />
-                  </ListItemIcon>u
+                  </ListItemIcon>
                   <ListItemText primary="DISTRICT NAME" />
                 </ListItemButton>
 
