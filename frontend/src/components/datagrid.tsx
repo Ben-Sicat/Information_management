@@ -72,7 +72,12 @@ const Dashboard: React.FC = () => {
   const filteredCitizens = citizens.filter(
     (citizen) =>
       citizen.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      citizen.age.toString().includes(searchTerm)
+      citizen.age.toString().includes(searchTerm) ||
+      citizen.birthday.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      citizen.contactNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      citizen.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      citizen.address.toLowerCase().includes(searchTerm.toLowerCase()) 
+
   );
 
   const handleRowClick = (params: any) => {
@@ -94,11 +99,7 @@ const Dashboard: React.FC = () => {
   <DataGrid
     rows={filteredCitizens}
     columns={columns}
-    // filterModel={{
-    //   items: [
-    //     { columnField: filterField, operatorValue: 'contains', value: searchTerm },
-    //   ],
-    // }}
+    // 35
     sx={{
       boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
       padding: '10px',
@@ -109,7 +110,7 @@ const Dashboard: React.FC = () => {
       },
       margin: '20px'
     }}
-    checkboxSelection
+  
     onRowClick={handleRowClick}
   />
   

@@ -16,10 +16,10 @@ const BodyContainer = styled('div')`
 `;
 const ButtonContainer = styled('div')`
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 10rem;
+  right: 10rem;
   z-index: 999;
-  border-radius: 5px;
+  border-radius: 10rem;
   background-color: red;
 `;
 
