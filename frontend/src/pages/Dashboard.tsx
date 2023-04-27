@@ -20,33 +20,13 @@ const ButtonContainer = styled('div')`
   right: 20px;
   z-index: 999;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
-  &.scrolled {
-    background-color: #333;
-    border-radius: 5px;
-  }
-  &.scrolled .MuiButton-root {
-    background-color: #000;
-    border-radius: 5px;
-  }
+  background-color: red;
 `;
 
 
 const Dashboard: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const auth = getAuth();
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 0;
-      setScrolled(isScrolled);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
  
 
@@ -71,15 +51,10 @@ const Dashboard: React.FC = () => {
     <CssBaseline />
       <GlobalStyles styles={undefined} />
       <BodyContainer>
-        <Alert severity="info">
-          <AlertTitle>Add new data</AlertTitle>
-          Insert new senior citizen person on the database —{' '}
-          <CustomButton label="Add now!" onClick={handleAddNowClick} />
-        </Alert>
-        <Datagrid />
+      <Datagrid />
       </BodyContainer>
-      <ButtonContainer className={scrolled ? 'scrolled' : ''}>
-        <CustomButton label="Sign Out" onClick={handleSignOut} />
+      <ButtonContainer>
+        <CustomButton label="+"  onClick={handleAddNowClick} sx={{ color: 'secondary'}}/>
       </ButtonContainer>
             </ThemeProvider>
     </>
