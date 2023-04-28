@@ -146,7 +146,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
- <Navbar theme={theme} toggleTheme={toggleTheme} updateSearchTerm={updateSearchTerm}/>
+ <Navbar theme={theme} toggleTheme={toggleTheme} updateSearchTerm={updateSearchTerm} burger ={true}/>
 <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
 <div style={{ height: 'calc(100vh - 128px)', width: '100%' }}>
           <DataGrid

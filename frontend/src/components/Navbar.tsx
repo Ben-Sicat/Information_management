@@ -9,9 +9,10 @@ import {ExpandLess, ExpandMore, Description, Menu, Close, LightMode,NightlightRo
 
 interface NavbarProps {
   
-  toggleTheme: () => void;
-  theme: 'light' | 'dark';
+  toggleTheme?: () => void;
+  theme?: 'light' | 'dark';
   updateSearchTerm: (term: string) => void;
+  burger: boolean;
 }
 type Option = {
   value: string;
@@ -73,7 +74,7 @@ const DropdownMenu: React.FC<{
 );
 
 
-const Navbar: React.FC<NavbarProps> = ({ toggleTheme, theme, updateSearchTerm }) => {
+const Navbar: React.FC<NavbarProps> = ({ burger, toggleTheme, theme, updateSearchTerm }) => {
 
   const [genderDropdown, setGenderDropdown] = useState(false);
   const [civilStatusDropdown, setCivilStatusDropdown] = useState(false);
@@ -108,96 +109,95 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
     setState(open);
   };
  
-
+   
 
   const navigate = useNavigate();
   return (
     <AppBar position="static">
       <Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center'}}>
         <div>
+        {burger &&(
+          <>
           <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleDrawer(true)}
-            sx={{
-              mr: 2,
-            }}
-          >
-            <Menu />
-          </IconButton>
-          <Drawer
-            //position of the drawer where to pop-out
-            anchor="left"
-            //if open is true --> drawer is shown
-            open={open}
-            //function that is called when the drawer should close
-            onClose={toggleDrawer(false)}
-          >
-            {/* The inside of the drawer */}
-            <Box
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleDrawer(true)}
               sx={{
-                p: 2,
-                height: 1,
-                width: 300,
-                backgroundColor: "#FFFFFF",
+                mr: 2,
               }}
             >
-              {/* when clicking the icon it will set the variable to false and closes the drawer */}
-              <IconButton sx={{ mb: 2 }}>
-                <Close onClick={toggleDrawer(false)} />
-              </IconButton>
+              <Menu />
+            </IconButton><Drawer
+              //position of the drawer where to pop-out
+              anchor="left"
+              //if open is true --> drawer is shown
+              open={open}
+              //function that is called when the drawer should close
+              onClose={toggleDrawer(false)}
+            >
+                {/* The inside of the drawer */}
+                <Box
+                  sx={{
+                    p: 2,
+                    height: 1,
+                    width: 300,
+                    backgroundColor: "#FFFFFF",
+                  }}
+                >
+                  {/* when clicking the icon it will set the variable to false and closes the drawer */}
+                  <IconButton sx={{ mb: 2 }}>
+                    <Close onClick={toggleDrawer(false)} />
+                  </IconButton>
 
-              <Divider sx={{ mb: 2 }} />
+                  <Divider sx={{ mb: 2 }} />
 
-              <Box sx={{ mb: 2 }}>
-              <DropdownMenu
-              title="GENDER"
-              options={genderOptions}
-              isOpen={genderDropdown}
-              onClick={handleGenderClick}
-              updateSearchTerm={updateSearchTerm}
-            />
-            <DropdownMenu
-              title="CIVIL STATUS"
-              options={civilStatusOptions}
-              isOpen={civilStatusDropdown}
-              onClick={handleCivilStatusClick}
-              updateSearchTerm={updateSearchTerm}
-            />
-            <DropdownMenu
-              title="VOTER"
-              options={voterOptions}
-              isOpen={voterDropdown}
-              onClick={handleVoterClick}
-              updateSearchTerm={updateSearchTerm}
-            />
-            <DropdownMenu
-                title="STATUS"
-                options={statusOptions}
-                isOpen={statusDropdown}
-                onClick={handleStatusClick}
-                updateSearchTerm={updateSearchTerm}
-              />
-                
-              </Box>
+                  <Box sx={{ mb: 2 }}>
+                    <DropdownMenu
+                      title="GENDER"
+                      options={genderOptions}
+                      isOpen={genderDropdown}
+                      onClick={handleGenderClick}
+                      updateSearchTerm={updateSearchTerm} />
+                    <DropdownMenu
+                      title="CIVIL STATUS"
+                      options={civilStatusOptions}
+                      isOpen={civilStatusDropdown}
+                      onClick={handleCivilStatusClick}
+                      updateSearchTerm={updateSearchTerm} />
+                    <DropdownMenu
+                      title="VOTER"
+                      options={voterOptions}
+                      isOpen={voterDropdown}
+                      onClick={handleVoterClick}
+                      updateSearchTerm={updateSearchTerm} />
+                    <DropdownMenu
+                      title="STATUS"
+                      options={statusOptions}
+                      isOpen={statusDropdown}
+                      onClick={handleStatusClick}
+                      updateSearchTerm={updateSearchTerm} />
 
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  position: "relative",
-                  bottom: "0",
-                  left: "50%",
-                  transform: "translate(-50%, 0)",
-                }}
-              >
-                <Button variant="outlined" sx={{ m: '1 1 1 1', mt: 9, width: 250 }}>
-                  Sign Out
-                </Button>
-              </Box>
-            </Box>
-          </Drawer>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      position: "relative",
+                      bottom: "0",
+                      left: "50%",
+                      transform: "translate(-50%, 0)",
+                    }}
+                  >
+                    <Button variant="outlined" sx={{ m: '1 1 1 1', mt: 9, width: 250 }}>
+                      Sign Out
+                    </Button>
+                  </Box>
+                </Box>
+              </Drawer>
+              </>
+        )}
           <Button color="inherit" onClick={handleHome}>Home</Button>
           <Button color="inherit" onClick = {handleDashboard}>Dashboard</Button>
           <Button color="inherit" onClick = {handleAbout}>About</Button>
