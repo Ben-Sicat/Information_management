@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Box, Typography, Paper, Grid } from '@mui/material';
-import { collection, doc, getDoc, getFirestore } from 'firebase/firestore';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Box, Typography, Paper, Grid, Button } from '@mui/material';
+import { doc, getDoc, getFirestore, deleteDoc } from 'firebase/firestore';
 import { config } from '../config/config';
 import { initializeApp } from 'firebase/app';
 
@@ -18,7 +18,6 @@ interface Field {
   middleName?: string;
   lastName?: string;
   suffix?: string;
-
 }
 const fields: Field[] = [
   // field definitions...
@@ -43,10 +42,13 @@ const fields: Field[] = [
   { label: 'Email', name: 'email' },
   { label: 'Contact Number', name: 'contactNumber' },
 ];
-
 const UserProfile: React.FC = () => {
+  const navigate = useNavigate();
   const { userId } = useParams<{ userId: string }>();
   const [user, setUser] = useState<Field | null>(null);
+  const [ editUser, setEditUser ] = useState<Field | null>(null);
+  
+
 
   useEffect(() => {
     const getUser = async () => {
@@ -55,7 +57,7 @@ const UserProfile: React.FC = () => {
         const userDoc = await getDoc(userRef);
 
         if (userDoc.exists()) {
-          const userData = { ...userDoc.data(), id: userDoc.id };
+          const userData = { ...userDoc.data(), id: userDoc.id } as unknown as Field;
           console.log('userData:', userData);
           setUser(userData);
         } else {
@@ -68,7 +70,7 @@ const UserProfile: React.FC = () => {
 
     getUser();
   }, [userId, db]);
-   
+
   const getFullName = (): string => {
     if (user) {
       const { firstName, middleName, lastName, suffix } = user;
@@ -78,25 +80,46 @@ const UserProfile: React.FC = () => {
     return 'User Profile';
   };
 
+  const handleEditClick = () => {
+    navigate(`/dashboard/create-user/${userId}`);
+  };
+
+  const handleDeleteClick = async () => {
+    try{
+      const userRef = doc(db, 'citizens', userId);
+      await deleteDoc(userRef);
+      navigate('/dashboard');
+    }
+    catch(error){
+        console.error("Error delete user:", error)
+    }
+  };
+
   return (
-    <Box sx={{ padding: { xs: '12px', sm: '24px' } }}>
+    <Box sx={{ padding: { xs: '12px', sm: '24px' },
+  }}>
       <Typography variant="h4" sx={{ marginBottom: '20px' }}>
         {getFullName()}
       </Typography>
-      <Grid container spacing={2}>
-      
+      <Grid container spacing={2}
+     
+      >
         {fields.map((field) => (
           <Grid item xs={12} sm={6} md={4} key={field.name}>
-            <Paper sx={{ padding: '16px' }}>
-              
+            <Paper sx={{ padding: '16px',         boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )', }}>
               <Typography variant="body1" sx={{ marginBottom: '8px' }}>
                 <strong>{field.label}:</strong> {user?.[field.name] || '-'}
               </Typography>
             </Paper>
           </Grid>
-
         ))}
       </Grid>
+      <Button variant="contained" onClick={handleEditClick}>
+        Edit
+      </Button>
+      <Button variant="contained" onClick={handleDeleteClick}>
+        Delete
+      </Button>
     </Box>
   );
 };

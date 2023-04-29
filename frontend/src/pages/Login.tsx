@@ -18,17 +18,17 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
   const [authing, setAuthing] =  useState(false);
   const [error, setError] = useState<string>('');
 
-  const signInWithGoogle = async () => {
-    setAuthing(true);
-    signInWithPopup(auth, new GoogleAuthProvider())
-    .then(response =>{
-      navigate('/dashboard')
-    })
-    .catch(err => {
-      console.log(err)
-      setAuthing(false);
-    })
-  }
+  // const signInWithGoogle = async () => {
+  //   setAuthing(true);
+  //   signInWithPopup(auth, new GoogleAuthProvider())
+  //   .then(response =>{
+  //     navigate('/dashboard')
+  //   })
+  //   .catch(err => {
+  //     console.log(err)
+  //     setAuthing(false);
+  //   })
+  // }
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setAuthing(true);
@@ -36,9 +36,9 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       if (email === 'user@gmail.com') {
-        navigate('/dashboard', { state: { isAdmin: true } });
+        navigate('/main-menu', { state: { isAdmin: true } });
       } else {
-        navigate('/dashboard', { state: { isAdmin: false } });
+        navigate('/main-menu', { state: { isAdmin: false } });
       }
     } catch (err: FirebaseError | any) {
       setError(err?.message ?? 'An error occurred while signing in');
@@ -47,9 +47,6 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
   }
 
 
-  const handleSignUp: React.MouseEventHandler<HTMLButtonElement> = () => {
-    navigate('/signup');
-  }
 
   return (
 

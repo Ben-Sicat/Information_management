@@ -1,11 +1,9 @@
 import React from 'react';
-import { useState } from 'react';
 import './App.css';
 import { 
   Login, 
   Dashboard, 
   CreateUser, 
-  Registration,
   Main,
   About,
   UserProfile
@@ -13,7 +11,7 @@ import {
 import { Route, Routes, Navigate } from 'react-router-dom';
 import {initializeApp} from 'firebase/app';
 import { config } from './config/config';
-import AuthRoute from './components/AuthRoute';
+// import AuthRoute from './components/AuthRoute';
 // import { Button, CssBaseline, ThemeProvider, Typography,} from '@mui/material';
 // import { lightTheme, darkTheme } from './theme';
 // import { GlobalStyles } from './globalStyles';
