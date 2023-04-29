@@ -1,41 +1,38 @@
-import React, { useEffect } from 'react'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
-
+import React, { useEffect, useState } from 'react';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 export interface IAuthRouteProps {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const AuthRoute: React.FunctionComponent<IAuthRouteProps> = (props) => {
-    const { children } = props
-    const auth = getAuth();
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
+  const { children } = props;
+  const auth = getAuth();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        AuthCheck();
-        return () => {
-            AuthCheck()
-        }
-    },[auth])
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setLoading(false);
+      if (user) {
+        navigate('/dashboard');
+      } else {
+        navigate('/login');
+      }
+    });
 
-    const AuthCheck = onAuthStateChanged(auth, (user) => {
-        if (user) {
-            setLoading(false);
-            navigate('/dashboard')
-        } else {
-            setLoading(true);
-            navigate('/login')
-        }
-    })
+    return () => {
+      unsubscribe();
+    };
+  }, [auth, navigate]);
 
-    return (
-    <>
-    {children}
-    </>
-  )
-}
+  if (loading) {
+    // You can display a loading indicator here if needed
+    return <div>Loading...</div>;
+  }
 
-export default AuthRoute
+  return <>{children}</>;
+};
+
+export default AuthRoute;

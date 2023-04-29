@@ -3,63 +3,93 @@ import { config } from '../../config/config';
 import { initializeApp } from 'firebase/app';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase-config';
-import { Box, Typography, TextField, Button, Paper } from '@mui/material';
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import { Box, Typography } from '@mui/material';
 
 const firebaseApp = initializeApp(config.firebaseConfig);
 const citizenCollectionRef = collection(db, 'citizens');
 
-interface LocationProps {
-  minAge: number;
-  maxAge: number;
-}
-
-const AgeGroup: React.FC<LocationProps> = ({ minAge, maxAge }) => {
-  const [userCount, setUserCount] = useState<number>(0);
+const Location: React.FC = () => {
+  const [ageData, setAgeData] = useState<any[]>([]);
 
   useEffect(() => {
     const getCitizens = async () => {
       const querySnapshot = await getDocs(citizenCollectionRef);
       const citizens = querySnapshot.docs.map((doc) => doc.data());
 
-      // Filter citizens within the specified age range
-      const filteredCitizens = citizens.filter((citizen: any) => {
-        const age = citizen.age; // Replace 'age' with the actual field name that stores the age
+      const ageRanges = [
+        { range: '60-70', min: 60, max: 70 },
+        { range: '70-80', min: 70, max: 80 },
+        { range: '80-90', min: 80, max: 90 },
+        { range: '90-99+', min: 90, max: 150 },
+      ];
 
-        return age >= minAge && age <= maxAge;
+      // Calculate the count and percentage for each age range
+      const ageData = ageRanges.map((ageRange) => {
+        const filteredCitizens = citizens.filter((citizen: any) => {
+          const age = citizen.age; // Replace 'age' with the actual field name that stores the age
+          return age >= ageRange.min && age <= ageRange.max;
+        });
+
+        const count = filteredCitizens.length;
+        const percentage = (count / citizens.length) * 100;
+
+        return {
+          range: ageRange.range,
+          count,
+          percentage,
+        };
       });
 
-      // Set the user count
-      setUserCount(filteredCitizens.length);
+      setAgeData(ageData);
     };
 
     getCitizens();
-  }, [minAge, maxAge]);
+  }, []);
+
 
   return (
     <Box
       sx={{
-        width: '150px',
-        height: '150px',
+        width: '30%',
+        height: '300px',
         border: '1px solid #ccc',
-        borderRadius: '5px',
+        borderRadius: '30px',
         padding: '10px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#fff',
       }}
     >
       <Typography variant="h6" component="div">
-        Age Range
+        Age Distribution
       </Typography>
-      <Typography variant="body1" component="div" sx={{ marginTop: '10px' }}>
-        {minAge} - {maxAge} year olds:
-      </Typography>
-      <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
-        {userCount}
-      </Typography>
+      <ResponsiveContainer width="100%" height="80%">
+        <PieChart>
+          <Pie
+            data={ageData}
+            dataKey="percentage"
+            nameKey="range"
+            cx="50%"
+            cy="50%"
+            outerRadius={80}
+            fill="#8884d8"
+            label
+          >
+            {ageData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          
+          <Legend />
+        </PieChart>
+      </ResponsiveContainer>
     </Box>
   );
 };
 
-export default AgeGroup;
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
+export default Location;

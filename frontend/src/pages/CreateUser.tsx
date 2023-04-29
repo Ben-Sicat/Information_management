@@ -107,6 +107,9 @@ const AddProfile: React.FC = () => {
 					`Missing required fields: ${missingFields
 						.map((field) => field.label)
 						.join(', ')}`
+
+					// add styling for errors here
+					
 				);
 				return;
 			}

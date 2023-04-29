@@ -38,10 +38,8 @@ const Main: React.FC = () => {
     <>
       <Navbar burger={false} updateSearchTerm={(term: string) => {}} />
       <Box sx={{ height: '60vh', width: '100vw', backgroundColor: 'skyblue' }}>
-        <AgeGroup minAge={60} maxAge={70} />
-        <AgeGroup minAge={70} maxAge={80} />
-        <AgeGroup minAge={80} maxAge={90} />
-        <AgeGroup minAge={90} maxAge={130} />
+        <AgeGroup  />
+        
         <Typography variant="h1">Main</Typography>
       </Box>
     </>

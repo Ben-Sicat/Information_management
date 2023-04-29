@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+
 import { TextField, Container } from '@mui/material';
 
 interface SearchBarProps {
