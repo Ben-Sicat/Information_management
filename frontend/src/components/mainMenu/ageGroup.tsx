@@ -29,15 +29,17 @@ const Location: React.FC = () => {
         const filteredCitizens = citizens.filter((citizen: any) => {
           const age = citizen.age; // Replace 'age' with the actual field name that stores the age
           return age >= ageRange.min && age <= ageRange.max;
+
         });
 
         const count = filteredCitizens.length;
         const percentage = (count / citizens.length) * 100;
+        const roundedPercentage = Math.round(percentage * 100) / 100;
 
         return {
           range: ageRange.range,
           count,
-          percentage,
+          roundedPercentage,
         };
       });
 
@@ -70,7 +72,7 @@ const Location: React.FC = () => {
         <PieChart>
           <Pie
             data={ageData}
-            dataKey="percentage"
+            dataKey="roundedPercentage"
             nameKey="range"
             cx="50%"
             cy="50%"

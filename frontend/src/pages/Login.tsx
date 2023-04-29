@@ -36,11 +36,9 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      if (email === 'user@gmail.com') {
-        navigate('/main-menu', { state: { isAdmin: true } });
-      } else {
-        navigate('/main-menu', { state: { isAdmin: false } });
-      }
+     
+        navigate('/main-menu');
+     
     } catch (err: FirebaseError | any) {
       setError(err?.message ?? 'An error occurred while signing in');
       setAuthing(false);
@@ -156,12 +154,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
               Login
             </Button>
 
-            <Button type="submit" variant="contained" sx={{
-              marginBottom: '40px',
-              width: '350px',
-            }}>
-               <img src={googleIconSVG} alt="SVG logo image" style={{ height: "7%", width: "7%" }}/>
-            </Button>
+            
           </Box>
           <Box
             component="form"

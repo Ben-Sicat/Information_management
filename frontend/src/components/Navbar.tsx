@@ -4,6 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import {useState}  from 'react';
 import {ListItemButton, ListItemIcon, ListItemText, List, Collapse} from "@mui/material";
 import {ExpandLess, ExpandMore, Description, Menu, Close, LightMode,NightlightRound} from "@mui/icons-material";
+import { getAuth, signOut } from 'firebase/auth';
+
+import { initializeApp } from 'firebase/app';
+import { config } from '../config/config';
+
+
+const firebaseApp = initializeApp(config.firebaseConfig);
 
 
 
@@ -86,6 +93,8 @@ const Navbar: React.FC<NavbarProps> = ({ burger, toggleTheme, theme, updateSearc
   const handleVoterClick = () => setVoterDropdown(!voterDropdown);
   const handleStatusClick = () => setStatusDropdown(!statusDropdown);
 
+  const navigate = useNavigate();
+
 const handleAbout: React.MouseEventHandler<HTMLButtonElement> = () => {
   
   navigate('/about');
@@ -108,10 +117,23 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
     //changes the function state according to the value of open
     setState(open);
   };
+
+  const handleSignOut= () =>{
+    const auth = getAuth(firebaseApp);
+    signOut(auth)
+    .then(() => {
+      // Sign-out successful.
+      navigate('/login');
+    }
+    ).catch((error) => {
+      // An error happened.
+    }
+    );
+  }
+  
  
    
 
-  const navigate = useNavigate();
   return (
     <AppBar position="static">
       <Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center'}}>
@@ -190,7 +212,7 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
                       transform: "translate(-50%, 0)",
                     }}
                   >
-                    <Button variant="outlined" sx={{ m: '1 1 1 1', mt: 9, width: 250 }}>
+                    <Button variant="outlined" sx={{ m: '1 1 1 1', mt: 9, width: 250 }} onClick={handleSignOut}>
                       Sign Out
                     </Button>
                   </Box>
@@ -198,9 +220,16 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
               </Drawer>
               </>
         )}
-          <Button color="inherit" onClick={handleHome}>Home</Button>
-          <Button color="inherit" onClick = {handleDashboard}>Dashboard</Button>
-          <Button color="inherit" onClick = {handleAbout}>About</Button>
+          <IconButton color="inherit" onClick={handleHome}>
+            <ListItemText primary="Home" />
+          </IconButton>
+          <IconButton color="inherit" onClick={handleDashboard}>
+            <ListItemText primary="Dashboard" />
+          </IconButton>
+
+          <IconButton color="inherit" onClick={handleAbout}>
+            <ListItemText primary="About" />
+          </IconButton>
          
         </div>
         <div>
