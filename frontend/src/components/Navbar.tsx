@@ -50,7 +50,26 @@ const statusOptions: Option[] = [
   { value: 'transfer', label: 'TRANSFEREE' },
 ];
 
+
 const buildingNoOptions: Option[] = [
+  
+];
+const streetOptions: Option[] =[
+  {value: 'JORGE BOCOBO ST.', label: 'JORGE BOCOBO ST.'},
+  {value: 'ARKANSAS ST.', label: 'ARKANSAS ST.'},
+  {value: 'MA. OROSA ST.', label: 'MA. OROSA ST.'},
+  {value: 'PADRE FAURA ST.', label: 'PADRE FAURA ST.'},
+  {value: '526 U. N. Ave. cor. A. Mabini St.', label: '526 U. N. Ave. cor. A. Mabini St.'},
+  {value: 'A. FLORES ST.', label: 'A. FLORES ST.'},
+  {value: 'U.N. AVE.', label: 'U.N. AVE.'},
+  {value: 'A. MABINI ST.', label: 'A. MABINI ST.'},
+  {value: 'A. FLORES ST.', label: 'A. FLORES ST.'},
+  {value: 'PADRE FAURA ST.', label: 'PADRE FAURA ST.'},
+  {value: 'GREY ST.', label: 'GREY ST.'},
+  {value: 'ARQUIZA ST.', label: 'ARQUIZA ST.'},
+  {value: 'A. MABINI ST. COR. UN. AVE.', label: 'A. MABINI ST. COR. UN. AVE.'},
+  {value: 'NBI COMPOUND UN AVE.', label: 'NBI COMPOUND UN AVE.'},
+
   
 ]
 
@@ -94,12 +113,14 @@ const Navbar: React.FC<NavbarProps> = ({ burger, toggleTheme, theme, updateSearc
   const [voterDropdown, setVoterDropdown] = useState(false);
   const [statusDropdown, setStatusDropdown] = useState(false);
   const [buildingNoDropdown, setBuildingNoDropdown] = useState(false)
+  const [streetDropdown, setStreetDropdown] = useState(false)
 
   const handleGenderClick = () => setGenderDropdown(!genderDropdown);
   const handleCivilStatusClick = () => setCivilStatusDropdown(!civilStatusDropdown);
   const handleVoterClick = () => setVoterDropdown(!voterDropdown);
   const handleStatusClick = () => setStatusDropdown(!statusDropdown);
-  const handleBuildingNoClick = () => setBuildingNoDropdown(!buildingNoDropdown)
+  const handleBuildingNoClick = () => setBuildingNoDropdown(!buildingNoDropdown);
+  const handleStreetClick = () => setStreetDropdown(!streetDropdown);
 
   const navigate = useNavigate();
 
@@ -207,9 +228,15 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
                       isOpen={statusDropdown}
                       onClick={handleStatusClick}
                       updateSearchTerm={updateSearchTerm} />
+                      <DropdownMenu
+                      title="STREET"
+                      options={streetOptions}
+                      isOpen={streetDropdown}
+                      onClick={handleStreetClick}
+                      updateSearchTerm={updateSearchTerm} />
                     <DropdownMenu
                     title="BUILDING NO."
-                    option= {buildingNoOptions}
+                    options= {buildingNoOptions}
                     isOpen={buildingNoDropdown}
                     onClick={handleBuildingNoClick}
                     updateSearchTerm={updateSearchTerm}/>
