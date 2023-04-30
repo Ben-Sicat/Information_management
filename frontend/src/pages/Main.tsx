@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Button } from '@mui/material';
 import React, { useEffect } from 'react';
 import { Navbar } from '../components';
 import { config } from '../config/config';
@@ -42,12 +42,46 @@ const Main: React.FC = () => {
   return (
     <>
       <Navbar burger={false} updateSearchTerm={(term: string) => {}} />
-      <Box sx={{ height: '100vh', width: '99vw', backgroundColor: 'skyblue', display: 'flex' }}>
-        <Box sx={{ flex: '0 0 50%' , height: '100%'}}>
+
+      <Box 
+      sx={{ 
+        height: '70vh',
+        width: '100vw', 
+        backgroundColor: 'skyblue', 
+        justifyContent: 'center',
+        alignItems: 'center',
+        display: 'flex',
+        '@media screen and (max-width: 768px)': {
+          justifyContent: 'center',
+          direction: 'flex',
+          flexDirection: 'column',
+          height: '120vh'
+        },
+        }}>
+        {/* age distribution */}
+        <Box sx={{ 
+          flex: '0 0 50%',
+          '@media screen and (max-width: 768px)': {
+            margin: 0,
+            padding: 0,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '70%',
+          },
+          }}> 
+
           <AgeGroup />
+          <Box sx={{ marginTop: '12rem'}}>
+              <Button variant="outlined" sx={{
+                boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+                borderRadius: '15px'
+              }}>PROCEED TO DATA</Button>
         </Box>
-        <Grid container sx={{ flex: '0 0 40%', marginRigt: '50px', marginTop: '-10px' }}>
-          <Grid container spacing={5} sx={{ margin: '30px' }}>
+
+        </Box>
+        <Grid container sx={{ flex: '0 0 50%', margin: '-20px' }}>
+          <Grid container spacing={2} sx={{ margin: '30px' }}>
+
             {barStatConfig.slice(0, 2).map((config, index) => (
               <Grid item key={index} xs={config.size} sx={{ padding: '100px' }}>
                 <BarStat statusField={config.statusField} title={config.title} />
@@ -62,6 +96,7 @@ const Main: React.FC = () => {
             ))}
           </Grid>
         </Grid>
+
       </Box>
     </>
   );

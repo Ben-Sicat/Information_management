@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Typography, TextField, Button, Paper } from '@mui/material';
+import { Box, Typography, TextField, Button, Paper, Container } from '@mui/material';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
-import googleIconSVG from '../assets/google-icon.svg'
-
+import '../styles/globalStyles.css';
+import logoPNG from '../assets/Logo.png';
 
 interface ILoginProps {}
 
@@ -84,14 +84,14 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: 2,
-            px: 10,
-            py: 3,
+            gap: 3,
+            px: 20,
+            py: 20,
             borderRadius: 4,
             minWidth: '300px',
-            paddingLeft: '50px',
-            paddingRight: '50px',
-            background: 'linear-gradient(to bottom, #533A71 120px, #FDF4DC 120px)',
+            paddingLeft: '150px',
+            paddingRight: '150px',
+            background: '#FDF4DC',
             '@media screen and (max-width: 768px)': {
               flexBasis: '100%',
               width: 'auto',
@@ -99,16 +99,26 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
             },
           }}
         >
-          <Typography variant="h2" align="center" gutterBottom sx={{
-            marginBottom: '60px'
+          <Container sx={{
+            backgroundColor: 'var(--tertiary-color)',
+            justifyContent: 'center',
+            alignItems: 'center',
+            margin: '-60px 0px 50px',
+            paddingTop: '15px',
+            borderRadius: 3,
+          }}>
+          <Typography variant="h2" align="center"  gutterBottom sx={{
+            fontFamily: 'var(--font-family)',
           }}>
             Sign In
           </Typography>
           {error && (
-            <Typography sx={{ color: 'red', mb: 2 }} align="center">
+            <Typography sx={{ color: 'red' }} align="center">
               {error}
             </Typography>
           )}
+          </Container>
+
             <TextField
                 label="Email"
                 variant="outlined"
@@ -148,7 +158,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
 
 
             <Button type="submit" variant="contained" sx={{
-              marginTop: '20px',
+              marginTop: '4rem',
               width: '350px',
             }}>
               Login
@@ -165,8 +175,8 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
               alignItems: 'center',
               justifyContent: 'center',
               gap: 2,
-              px: 4,
-              py: 3,
+              px: 20,
+              py: 20,
               borderRadius: 4,
               minWidth: '300px',
               '@media screen and (max-width: 768px)': {
@@ -176,9 +186,10 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
               },
             }}
           >
-            <Typography variant="h2" align="center" gutterBottom>
-              BRGY LOGO
-            </Typography>
+            <img src={logoPNG} style={{
+              width: '15rem',
+              height: '15rem'
+            }}/>
           </Box>
         </Paper>
 

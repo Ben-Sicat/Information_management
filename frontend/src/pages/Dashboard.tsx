@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/system';
 import { Button, CssBaseline, ThemeProvider, Typography,} from '@mui/material';
 import { lightTheme, darkTheme } from '../theme';
-import { GlobalStyles } from '../globalStyles';
 const BodyContainer = styled('div')`
   display: flex;
   flex-direction: column;
@@ -44,7 +43,6 @@ const Dashboard: React.FC = () => {
     <>
     {/* <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}> */}
     <CssBaseline />
-      <GlobalStyles styles={undefined} />
       <BodyContainer>
       <Datagrid />
       </BodyContainer>

@@ -1,14 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { initializeApp } from 'firebase/app';
 import { config } from './config/config';
 import { Login, Dashboard, CreateUser, Main, About, UserProfile } from './pages';
 import AuthRoute from './components/AuthRoute';
+import { CssBaseline, ThemeProvider, Button} from '@mui/material';
+import { lightTheme, darkTheme } from './theme';
+import './styles/globalStyles.css';
 
 export const Firebase = initializeApp(config.firebaseConfig);
 
+
+
 function App() {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+const toggleTheme = () => {
+  setTheme(theme === 'light' ? 'dark' : 'light');
+};
   return (
+    <>
+        {/* <Button variant="contained" onClick={toggleTheme}> Theme</Button> */}
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}> 
+    <CssBaseline />
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<Login />} />
@@ -19,6 +33,8 @@ function App() {
       <Route path="/user-profile/:userId" element={<UserProfile />} />
       <Route path="*" element={<h1>404</h1>} />
     </Routes>
+    </ThemeProvider>
+    </>
   );
 }
 
