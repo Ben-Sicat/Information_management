@@ -1,6 +1,10 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import { useNavigate, useLocation  } from 'react-router-dom';
+import { Navbar, Footer } from '../components';
+import '../styles/globalStyles.css';
 import {
+	Box,
+	Button,
 	Container,
 	Grid,
 	MenuItem,
@@ -160,16 +164,36 @@ const AddProfile: React.FC = () => {
 	  };
 
 	return (
+		<>
+		<Navbar burger={false} updateSearchTerm={(term: string) => {}} />
+		<Container  sx={{ 
+			height: '100vh',
+			marginTop: '10%',
+			justifyContent: 'center',
+			alignItems: 'center',
+			'@media screen and (max-width: 899px)': {
+				height: '100%',
+				marginBottom: '30%'
+			  },
+			 }}>
 		<Container maxWidth="xl" sx={{
-			marginTop: '20px',
-			marginBottom: '20px',
 			padding: '20px',
 			border: '1px solid #ccc',
-			borderRadius: '5px',
+			borderRadius: '20px',
 			boxShadow: '0 2px 2px rgba(0, 0, 0, 0.3)',
+			background: 'linear-gradient(to bottom, #533A71 5rem, #FFFFFF 5rem)',
 			width: '100%',
 			maxWidth: '600px',
 		}}>
+		<Typography variant="h2" align="left"  gutterBottom sx={{
+			margin: '0.5rem 0rem 3.5rem',
+            fontFamily: 'var(--font-family-bold)',
+			fontSize: '2rem',
+			fontWeight: '30px',
+			color: 'var(--primary-color)'
+          }}>
+            ADD DATA
+        </Typography>
       {/* Render the form fields */}
       <Grid container spacing={2}>
         {fields.map((field) => (
@@ -202,10 +226,15 @@ const AddProfile: React.FC = () => {
           </Grid>
         ))}
         <Grid item xs={12}>
-          <button onClick={handleSubmit}>{buttonTitle}</button>
+          <Button variant="contained" onClick={handleSubmit}>{buttonTitle}</Button>
         </Grid>
       </Grid>
     </Container>
+	</Container>
+
+	<Footer />
+
+	</>
 	);
 };
 
