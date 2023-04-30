@@ -148,25 +148,36 @@ const Dashboard: React.FC = () => {
     <>
  <Navbar theme={theme} toggleTheme={toggleTheme} updateSearchTerm={updateSearchTerm} burger ={true}/>
 <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
-<div style={{ height: 'calc(100vh - 128px)', width: '100%' }}>
-          <DataGrid
-            rows={filteredCitizens}
-            columns={visibleColumns}
-            sx={{
-              overflowX:'scroll',
+<div style={{ height: '100%', width: '100%' }}>
+      <div style={{ height: 'calc(100% - 40px)', width: '100%', marginBottom: '20px' }}>
+        <DataGrid
+          rows={filteredCitizens}
+          columns={visibleColumns}
+          sx={{
+            '& .MuiDataGrid-cell': {
+              overflow: 'visible',
+              whiteSpace: 'normal',
+              wordWrap: 'break-word',
+            },
+            '& .MuiDataGrid-cell:hover': {
+              color: 'darkblue',
+            },
+            '& .MuiDataGrid-root': {
+              minHeight: '200px',
+              width: '100%',
               boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-              padding: '10px',
-              justifyContent: 'center',
-              alignItems: 'center',
-              '& .MuiDataGrid-cell:hover': {
-                color: 'dark blue',
+              '@media (max-width: 600px)': {
+                boxShadow: 'none',
+                border: '1px solid #ccc',
+                borderRadius: '4px',
               },
-              margin: '20px'
-            }}
-            onRowClick={handleRowClick}
-            autoHeight
-          />
+            },
+          }}
+          onRowClick={handleRowClick}
+          autoHeight
+        />
       </div>
+    </div>
 
 
     </>
