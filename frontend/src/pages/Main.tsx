@@ -1,10 +1,11 @@
 import { Box, Grid, Button } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect,} from 'react';
 import { Navbar } from '../components';
 import { config } from '../config/config';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { AgeGroup, BarStat } from '../components/mainMenu';
+import { useNavigate } from 'react-router-dom';
 
 const firebaseApp = initializeApp(config.firebaseConfig);
 const db = getFirestore(firebaseApp);
@@ -17,6 +18,7 @@ const barStatConfig = [
 ];
 
 const Main: React.FC = () => {
+  const navigate = useNavigate()
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -38,6 +40,10 @@ const Main: React.FC = () => {
 
     fetchData();
   }, []);
+
+  const handleSumbit = () =>{
+    navigate('/dashboard')
+  }
 
   return (
     <>
@@ -75,7 +81,10 @@ const Main: React.FC = () => {
               <Button variant="outlined" sx={{
                 boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
                 borderRadius: '15px'
-              }}>PROCEED TO DATA</Button>
+                
+              }}
+              onClick={handleSumbit}
+              >PROCEED TO DATA</Button>
         </Box>
 
         </Box>
