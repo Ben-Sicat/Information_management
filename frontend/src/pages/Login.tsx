@@ -3,7 +3,7 @@ import { Box, Typography, TextField, Button, Paper } from '@mui/material';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
-import googleIconSVG from '../assets/google-icon.svg'
+import '../styles/globalStyles.css';
 
 
 interface ILoginProps {}
@@ -99,7 +99,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
             },
           }}
         >
-          <Typography variant="h2" align="center" gutterBottom sx={{
+          <Typography variant="h2" align="center" style={{fontFamily: 'var(--font-family)'}} gutterBottom sx={{
             marginBottom: '60px'
           }}>
             Sign In
@@ -176,7 +176,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
               },
             }}
           >
-            <Typography variant="h2" align="center" gutterBottom>
+            <Typography variant="h2" align="center" gutterBottom style={{color: 'var(--tertiary-color)'}}>
               BRGY LOGO
             </Typography>
           </Box>
