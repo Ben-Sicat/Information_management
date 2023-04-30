@@ -13,8 +13,8 @@ function App() {
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<Login />} />
       <Route path="/main-menu" element={<AuthRoute><Main /></AuthRoute>} />
-      <Route path="/dashboard" element={<AuthRoute><Dashboard /></AuthRoute>} />
-      <Route path="/create-user" element={<AuthRoute><CreateUser /></AuthRoute>} />
+      <Route path="/dashboard/" element={<AuthRoute><Dashboard /></AuthRoute>} />
+      <Route path="/dashboard/create-user/:userId?" element={<AuthRoute><CreateUser /></AuthRoute>} />
       <Route path="/about" element={<About />} />
       <Route path="/user-profile/:userId" element={<UserProfile />} />
       <Route path="*" element={<h1>404</h1>} />

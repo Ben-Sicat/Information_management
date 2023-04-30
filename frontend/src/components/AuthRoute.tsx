@@ -12,9 +12,7 @@ const AuthRoute: React.FunctionComponent<IAuthRouteProps> = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        
-      } else {
+      if (!user) {
         navigate('/login');
       }
     });

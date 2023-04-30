@@ -9,7 +9,7 @@ import { Box, Typography } from '@mui/material';
 const firebaseApp = initializeApp(config.firebaseConfig);
 const citizenCollectionRef = collection(db, 'citizens');
 
-const Location: React.FC = () => {
+const AgeGroup: React.FC = () => {
   const [ageData, setAgeData] = useState<any[]>([]);
 
   useEffect(() => {
@@ -24,10 +24,10 @@ const Location: React.FC = () => {
         { range: '90-99+', min: 90, max: 150 },
       ];
 
-      // Calculate the count and percentage for each age range
+      
       const ageData = ageRanges.map((ageRange) => {
         const filteredCitizens = citizens.filter((citizen: any) => {
-          const age = citizen.age; // Replace 'age' with the actual field name that stores the age
+          const age = citizen.age;
           return age >= ageRange.min && age <= ageRange.max;
 
         });
@@ -53,45 +53,56 @@ const Location: React.FC = () => {
   return (
     <Box
       sx={{
-        width: '30%',
-        height: '300px',
-        border: '1px solid #ccc',
-        borderRadius: '30px',
-        padding: '10px',
+        width: '100%',
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#fff',
+        justifyContent: 'flex-start',
+        padding: '10px',
       }}
     >
-      <Typography variant="h6" component="div">
-        Age Distribution
-      </Typography>
-      <ResponsiveContainer width="100%" height="80%">
-        <PieChart>
-          <Pie
-            data={ageData}
-            dataKey="roundedPercentage"
-            nameKey="range"
-            cx="50%"
-            cy="50%"
-            outerRadius={80}
-            fill="#8884d8"
-            label
-          >
-            {ageData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-          
-          <Legend />
-        </PieChart>
-      </ResponsiveContainer>
+      <Box
+        sx={{
+          width: '90%',
+          height: '400px',
+          border: '1px solid #ccc',
+          borderRadius: '10px',
+          padding: '10px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: 'white',
+        }}
+      >
+        <Typography variant="h6" component="div">
+          Age Distribution
+        </Typography>
+        <Box sx={{ width: '100%', height: '80%' }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={ageData}
+                dataKey="roundedPercentage"
+                nameKey="range"
+                cx="50%"
+                cy="50%"
+                outerRadius={120}
+                fill="#8884d8"
+                label
+              >
+                {ageData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Legend />
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        </Box>
+      </Box>
     </Box>
   );
 };
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-export default Location;
+export default AgeGroup;

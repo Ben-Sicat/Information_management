@@ -80,9 +80,11 @@ const UserProfile: React.FC = () => {
     return 'User Profile';
   };
 
-  const handleEditClick = () => {
-    navigate(`/dashboard/create-user/${userId}`);
-  };
+    const handleEditClick = () => {
+      navigate(`/dashboard/create-user/${userId}`, { state: { userId, edit: true } });
+    };
+    
+  
 
   const handleDeleteClick = async () => {
     try{

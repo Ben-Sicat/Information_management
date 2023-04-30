@@ -36,7 +36,7 @@ const Dashboard: React.FC = () => {
 
   const navigate = useNavigate();
   const handleAddNowClick = () => {
-    navigate('/create-user');
+    navigate('/dashboard/create-user/');
   };
 
     
