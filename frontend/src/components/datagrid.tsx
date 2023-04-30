@@ -153,6 +153,7 @@ const Dashboard: React.FC = () => {
             rows={filteredCitizens}
             columns={visibleColumns}
             sx={{
+              overflowX:'scroll',
               boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
               padding: '10px',
               justifyContent: 'center',
