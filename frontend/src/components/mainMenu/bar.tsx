@@ -44,7 +44,12 @@ const BarStat: React.FC<BarStatProps> = ({ statusField, title }) => {
   }
 
   return (
-    <Box width="100%" height={200} sx={{ p: 2, backgroundColor: '#fff', borderRadius: '20px', overflow: 'hidden' }}>
+    <Box width="100%" height={200} sx={{
+       p: 2, 
+       backgroundColor: '#fff',
+       borderRadius: '35px', 
+       overflow: 'hidden', 
+       boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}>
       <Typography variant="h6" component="div" sx={{ marginBottom: '10px' }}>
         {title}
       </Typography>

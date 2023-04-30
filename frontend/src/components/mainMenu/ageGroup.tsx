@@ -57,26 +57,29 @@ const AgeGroup: React.FC = () => {
         display: 'flex',
         justifyContent: 'flex-start',
         padding: '10px',
+        marginBottom: '-10rem',
+        marginTop: '5rem',
       }}
     >
       <Box
         sx={{
-          width: '90%',
+          width: '100%',
           height: '400px',
           border: '1px solid #ccc',
-          borderRadius: '10px',
+          borderRadius: '35px',
           padding: '10px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: 'white',
+          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)'
         }}
       >
         <Typography variant="h6" component="div">
           Age Distribution
         </Typography>
-        <Box sx={{ width: '100%', height: '80%' }}>
+        <Box sx={{ width: '100%', height: '90%' }}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie

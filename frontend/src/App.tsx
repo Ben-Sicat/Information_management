@@ -20,7 +20,7 @@ const toggleTheme = () => {
 };
   return (
     <>
-        <Button variant="contained" onClick={toggleTheme}> Theme</Button>
+        {/* <Button variant="contained" onClick={toggleTheme}> Theme</Button> */}
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}> 
     <CssBaseline />
     <Routes>

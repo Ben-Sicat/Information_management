@@ -12,8 +12,8 @@ body {
   /* Colors */
   :root {
     --primary-color: #ffffff;
-    --secondary-color: #6c757d;
-    --tertiary-color: #000000;
+    --secondary-color: #000000;
+    --tertiary-color: #533A71;
     --success-color: #28a745;
     --danger-color: #dc3545;
     --font-family: 'Inter', sans-serif;
