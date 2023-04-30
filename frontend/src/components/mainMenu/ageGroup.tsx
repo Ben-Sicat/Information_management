@@ -53,7 +53,7 @@ const AgeGroup: React.FC = () => {
   return (
     <Box
       sx={{
-        width: '100%',
+        width: '90%',
         display: 'flex',
         justifyContent: 'flex-start',
         padding: '10px',
@@ -61,7 +61,7 @@ const AgeGroup: React.FC = () => {
     >
       <Box
         sx={{
-          width: '90%',
+          width: '50%',
           height: '400px',
           border: '1px solid #ccc',
           borderRadius: '10px',

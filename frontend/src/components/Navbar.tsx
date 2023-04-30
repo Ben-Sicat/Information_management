@@ -50,6 +50,10 @@ const statusOptions: Option[] = [
   { value: 'transfer', label: 'TRANSFEREE' },
 ];
 
+const buildingNoOptions: Option[] = [
+  
+]
+
 
 
 const DropdownMenu: React.FC<{
@@ -89,11 +93,13 @@ const Navbar: React.FC<NavbarProps> = ({ burger, toggleTheme, theme, updateSearc
   const [civilStatusDropdown, setCivilStatusDropdown] = useState(false);
   const [voterDropdown, setVoterDropdown] = useState(false);
   const [statusDropdown, setStatusDropdown] = useState(false);
+  const [buildingNoDropdown, setBuildingNoDropdown] = useState(false)
 
   const handleGenderClick = () => setGenderDropdown(!genderDropdown);
   const handleCivilStatusClick = () => setCivilStatusDropdown(!civilStatusDropdown);
   const handleVoterClick = () => setVoterDropdown(!voterDropdown);
   const handleStatusClick = () => setStatusDropdown(!statusDropdown);
+  const handleBuildingNoClick = () => setBuildingNoDropdown(!buildingNoDropdown)
 
   const navigate = useNavigate();
 
@@ -201,7 +207,12 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
                       isOpen={statusDropdown}
                       onClick={handleStatusClick}
                       updateSearchTerm={updateSearchTerm} />
-
+                    <DropdownMenu
+                    title="BUILDING NO."
+                    option= {buildingNoOptions}
+                    isOpen={buildingNoDropdown}
+                    onClick={handleBuildingNoClick}
+                    updateSearchTerm={updateSearchTerm}/>
                   </Box>
 
                   <Box

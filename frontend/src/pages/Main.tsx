@@ -42,21 +42,21 @@ const Main: React.FC = () => {
   return (
     <>
       <Navbar burger={false} updateSearchTerm={(term: string) => {}} />
-      <Box sx={{ height: '60vh', width: '100vw', backgroundColor: 'skyblue', display: 'flex' }}>
-        <Box sx={{ flex: '0 0 50%' }}>
+      <Box sx={{ height: '100vh', width: '99vw', backgroundColor: 'skyblue', display: 'flex' }}>
+        <Box sx={{ flex: '0 0 50%' , height: '100%'}}>
           <AgeGroup />
         </Box>
-        <Grid container sx={{ flex: '0 0 40%', margin: '-20px' }}>
-          <Grid container spacing={2} sx={{ margin: '30px' }}>
+        <Grid container sx={{ flex: '0 0 40%', marginRigt: '50px', marginTop: '-10px' }}>
+          <Grid container spacing={5} sx={{ margin: '30px' }}>
             {barStatConfig.slice(0, 2).map((config, index) => (
-              <Grid item key={index} xs={config.size} sx={{ padding: '5x' }}>
+              <Grid item key={index} xs={config.size} sx={{ padding: '100px' }}>
                 <BarStat statusField={config.statusField} title={config.title} />
               </Grid>
             ))}
           </Grid>
-          <Grid container spacing={2} sx={{ margin: '0 30px' }}>
-            {barStatConfig.slice(2, 4).map((config, index) => (
-              <Grid item key={index} xs={config.size} sx={{ padding: '5px' }}>
+          <Grid container spacing={5} sx={{  marginRigt: '50px', marginTop: '-10px' }}>
+            {barStatConfig.slice(0,2).map((config, index) => (
+              <Grid item key={index} xs={config.size} sx={{ padding: '100px' }}>
                 <BarStat statusField={config.statusField} title = {config.title} />
               </Grid>
             ))}
