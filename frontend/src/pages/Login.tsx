@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Paper, Container } from '@mui/material';
-import { getAuth, GoogleAuthProvider,signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth,signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 import '../styles/globalStyles.css';
@@ -16,8 +16,8 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [ setAuthing] =  useState(false);
-  const [error, setError] = useState<string>('');
+  const [authing, setAuthing] =  useState(false);
+  const [error] = useState<string>('');
 
   // const signInWithGoogle = async () => {
   //   setAuthing(true);
