@@ -16,7 +16,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [authing, setAuthing] =  useState(false);
+  const [, setAuthing] =  useState(false);
   const [error] = useState<string>('');
 
   // const signInWithGoogle = async () => {
@@ -33,16 +33,16 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setAuthing(true);
-
+  
     try {
       await signInWithEmailAndPassword(auth, email, password);
-     
-        navigate('/main-menu');
-     
-    } catch (any) {
-      
+      navigate('/main-menu');
+    } catch (error) {
+      // Handle error
+    } finally {
+      setAuthing(false);
     }
-  }
+  };
 
 
 
