@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Datagrid, Navbar } from '../components/index';
+import { Datagrid, Navbar, Footer } from '../components/index';
 import { getAuth, signOut } from 'firebase/auth';
 import CustomButton from '../components/Buttons';
 import { Alert, AlertTitle } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/system';
 import { Button, CssBaseline, ThemeProvider, Typography,} from '@mui/material';
-import { lightTheme, darkTheme } from '../theme';
+// import { lightTheme, darkTheme } from '../theme';
 const BodyContainer = styled('div')`
   display: flex;
   flex-direction: column;
@@ -43,12 +43,17 @@ const Dashboard: React.FC = () => {
     <>
     {/* <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}> */}
     <CssBaseline />
-      <BodyContainer>
+      <BodyContainer sx={{
+        			'@media screen and (max-width: 899px)': {
+                marginBottom: '100%'
+                },
+      }}>
       <Datagrid />
       </BodyContainer>
       <ButtonContainer>
         <CustomButton label="+"  onClick={handleAddNowClick} sx={{ color: 'secondary'}}/>
       </ButtonContainer>
+      <Footer/>      
             {/* </ThemeProvider> */}
     </>
   );
