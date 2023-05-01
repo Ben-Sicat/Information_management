@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Datagrid, Navbar, Footer } from '../components/index';
-import { getAuth, signOut } from 'firebase/auth';
+
+import { Datagrid, Footer } from '../components/index';
+
 import CustomButton from '../components/Buttons';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/system';
@@ -24,13 +24,11 @@ const ButtonContainer = styled('div')`
 
 const Dashboard: React.FC = () => {
   // const [scrolled, setScrolled] = useState(false);
-  const auth = getAuth();
+
 
  
 
-  const handleSignOut = () => {
-    signOut(auth);
-  };
+
 
   const navigate = useNavigate();
   const handleAddNowClick = () => {

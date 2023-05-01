@@ -3,7 +3,7 @@ import { useNavigate, useLocation  } from 'react-router-dom';
 import { Navbar, Footer } from '../components';
 import '../styles/globalStyles.css';
 import {
-	Box,
+
 	Button,
 	Container,
 	Grid,

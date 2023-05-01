@@ -189,7 +189,9 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
             <img src={logoPNG} style={{
               width: '15rem',
               height: '15rem'
-            }}/>
+            }}
+            alt="Description of the image"
+            />
           </Box>
         </Paper>
 
