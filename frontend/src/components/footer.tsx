@@ -4,7 +4,7 @@ import React from 'react';
 import { Box, Typography, Link, Divider } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
-import logoPNG from './assets/logo.png';
+
 
 const Footer: React.FC = () => {
   return (

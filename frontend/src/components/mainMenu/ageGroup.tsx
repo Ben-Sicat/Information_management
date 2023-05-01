@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { config } from '../../config/config';
-import { initializeApp } from 'firebase/app';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { Box, Typography } from '@mui/material';
 
-const firebaseApp = initializeApp(config.firebaseConfig);
 const citizenCollectionRef = collection(db, 'citizens');
 
 const AgeGroup: React.FC = () => {

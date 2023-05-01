@@ -46,7 +46,7 @@ const UserProfile: React.FC = () => {
   const navigate = useNavigate();
   const { userId } = useParams<{ userId: string }>();
   const [user, setUser] = useState<Field | null>(null);
-  const [ editUser, setEditUser ] = useState<Field | null>(null);
+  // const [ editUser, setEditUser ] = useState<Field | null>(null);
   
 
 

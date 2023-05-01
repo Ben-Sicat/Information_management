@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Paper, Container } from '@mui/material';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider,signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
 import '../styles/globalStyles.css';

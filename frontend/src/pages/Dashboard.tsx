@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Datagrid, Navbar, Footer } from '../components/index';
 import { getAuth, signOut } from 'firebase/auth';
 import CustomButton from '../components/Buttons';
-import { Alert, AlertTitle } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/system';
-import { Button, CssBaseline, ThemeProvider, Typography,} from '@mui/material';
+import { CssBaseline,} from '@mui/material';
 // import { lightTheme, darkTheme } from '../theme';
 const BodyContainer = styled('div')`
   display: flex;
@@ -24,7 +23,7 @@ const ButtonContainer = styled('div')`
 
 
 const Dashboard: React.FC = () => {
-  const [scrolled, setScrolled] = useState(false);
+  // const [scrolled, setScrolled] = useState(false);
   const auth = getAuth();
 
  

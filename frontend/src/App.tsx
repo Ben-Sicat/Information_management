@@ -4,7 +4,7 @@ import { initializeApp } from 'firebase/app';
 import { config } from './config/config';
 import { Login, Dashboard, CreateUser, Main, About, UserProfile } from './pages';
 import AuthRoute from './components/AuthRoute';
-import { CssBaseline, ThemeProvider, Button} from '@mui/material';
+import { CssBaseline, ThemeProvider} from '@mui/material';
 import { lightTheme, darkTheme } from './theme';
 import './styles/globalStyles.css';
 

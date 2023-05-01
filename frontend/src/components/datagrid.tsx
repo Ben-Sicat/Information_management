@@ -81,7 +81,7 @@ const visibleColumns = columns.filter((column) => !hiddenColumns.includes(column
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
-  const [filterField, setFilterField] = useState('');
+  const [filterField] = useState('');
   const [citizens, setCitizens] = useState<Citizen[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const citizenCollectionRef = collection(db, 'citizens');

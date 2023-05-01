@@ -11,7 +11,7 @@ import {
 	TextField,
 	Typography,
 } from '@mui/material';
-import { addDoc, collection, doc, getDoc, setDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
 interface User {
