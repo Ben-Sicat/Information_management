@@ -42,9 +42,9 @@ interface Citizen {
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 50 },
-  { field: 'lastName', headerName: 'Last Name', width: 100 },
-  { field: 'firstName', headerName: 'First Name', width: 100 },
-  { field: 'middleName', headerName: 'Middle Name', width: 100 },
+  { field: 'lastName', headerName: 'Last Name', width: 150 },
+  { field: 'firstName', headerName: 'First Name', width: 150 },
+  { field: 'middleName', headerName: 'Middle Name', width: 150 },
   { field: 'suffix', headerName: 'Suffix', width: 80 },
   { field: 'birthMonth', headerName: 'Birth Month', width: 150 },
   { field: 'birthDay', headerName: 'Birth Day', width: 100 },
@@ -52,7 +52,7 @@ const columns: GridColDef[] = [
   { field: 'contactNumber', headerName: 'Contact Num.', width: 180 },
   { field: 'age', headerName: 'Age', width: 100 },
   { field: 'bldgNo', headerName: 'Building No.', width: 150 },
-  { field: 'streetName', headerName: 'Street Name', width: 150 },
+  { field: 'streetName', headerName: 'Street Name', width: 200 },
   { field: 'districtNo', headerName: 'District No.', width: 150 },
   { field: 'districtName', headerName: 'District Name', width: 150 },
   { field: 'zone', headerName: 'Zone', width: 100 },
@@ -148,8 +148,8 @@ const Dashboard: React.FC = () => {
     <>
  <Navbar theme={theme} toggleTheme={toggleTheme} updateSearchTerm={updateSearchTerm} burger ={true}/>
 <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
-<div style={{ height: '100%', width: '100%' }}>
-      <div style={{ height: 'calc(100% - 40px)', width: '100%', marginBottom: '20px' }}>
+<div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ height: 'calc(100% - 40px)', width: '100%', margin: 'auto', marginBottom: '20px' }}>
         <DataGrid
           rows={filteredCitizens}
           columns={visibleColumns}
