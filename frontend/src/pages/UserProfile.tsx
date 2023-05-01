@@ -69,7 +69,7 @@ const UserProfile: React.FC = () => {
     };
 
     getUser();
-  }, [userId, db]);
+  }, [userId]);
 
   const getFullName = (): string => {
     if (user) {

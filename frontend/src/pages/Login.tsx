@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Paper, Container } from '@mui/material';
 import { getAuth, GoogleAuthProvider,signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { FirebaseError } from 'firebase/app';
+
 import '../styles/globalStyles.css';
 import logoPNG from '../assets/Logo.png';
 
@@ -11,12 +11,12 @@ interface ILoginProps {}
 
 const Login: React.FunctionComponent<ILoginProps> = () => {
   const auth = getAuth();
-  const provider = new GoogleAuthProvider();
+  
   const navigate = useNavigate();
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [authing, setAuthing] =  useState(false);
+  const [ setAuthing] =  useState(false);
   const [error, setError] = useState<string>('');
 
   // const signInWithGoogle = async () => {
@@ -39,9 +39,8 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
      
         navigate('/main-menu');
      
-    } catch (err: FirebaseError | any) {
-      setError(err?.message ?? 'An error occurred while signing in');
-      setAuthing(false);
+    } catch (any) {
+      
     }
   }
 
@@ -190,7 +189,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
               width: '15rem',
               height: '15rem'
             }}
-            alt="Description of the image"
+            alt="Description of some sort"
             />
           </Box>
         </Paper>
