@@ -52,7 +52,11 @@ const fields: Field[] = [
 	] },
 	{ label: 'Birth Day', name: 'birthDay', required: true },
 	{ label: 'Birth Year', name: 'birthYear', required: true },
-	{ label: 'Building Number', name: 'bldgNo', required: true },
+	{ label: 'Building Number', name: 'bldgNo', required: true,
+		options:[
+			
+		]
+},
 	{
 		label: 'Street Name',
 		name: 'streetName',

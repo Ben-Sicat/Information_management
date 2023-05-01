@@ -1,9 +1,11 @@
 
+
 import React from 'react';
 import { Box, Typography, Link, Divider } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import logoPNG from './assets/logo.png';
+
 const Footer: React.FC = () => {
   return (
     <Box
@@ -12,6 +14,7 @@ const Footer: React.FC = () => {
         backgroundColor: '#f5f5f5',
         py: 4,
         px: 2,
+
        }}
     >
       <Box
@@ -33,6 +36,7 @@ const Footer: React.FC = () => {
       </Box>
       <Divider />
       <Typography variant="body2" align="center" color="textSecondary" sx={{ mt: 2 }}>
+
         &copy; {new Date().getFullYear()} Your Website Name. All rights reserved.
       </Typography>
     </Box>
@@ -40,3 +44,4 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+
