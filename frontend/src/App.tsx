@@ -13,11 +13,11 @@ export const Firebase = initializeApp(config.firebaseConfig);
 
 
 function App() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme] = useState<'light' | 'dark'>('light');
 
-const toggleTheme = () => {
-  setTheme(theme === 'light' ? 'dark' : 'light');
-};
+// const toggleTheme = () => {
+//   setTheme(theme === 'light' ? 'dark' : 'light');
+// };
   return (
     <>
         {/* <Button variant="contained" onClick={toggleTheme}> Theme</Button> */}
