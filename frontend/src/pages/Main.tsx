@@ -12,7 +12,7 @@ const db = getFirestore(firebaseApp);
 
 const barStatConfig = [
   { statusField: 'status', size: 6, title: 'Status' },
-  { statusField: 'civilstatus', size: 6, title: ' Civil Status' },
+  { statusField: 'civilstatus', size: 6, title: 'Civil Status' },
   { statusField: 'voter', size: 6, title: 'Voter' },
   { statusField: 'gender', size: 6, title: 'Gender' },
 ];
@@ -50,57 +50,86 @@ const Main: React.FC = () => {
       <Navbar burger={false} updateSearchTerm={(term: string) => {}} />
 
       <Box 
-      sx={{ 
-        height: '70vh',
-        width: '100vw', 
-        backgroundColor: 'skyblue', 
-        justifyContent: 'center',
-        alignItems: 'center',
-        display: 'flex',
-        '@media screen and (max-width: 768px)': {
+        sx={{ 
+          height: '70vh',
+          width: '100vw', 
+          backgroundColor: 'skyblue', 
           justifyContent: 'center',
-          direction: 'flex',
-          flexDirection: 'column',
-          height: '120vh'
-        },
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          '@media screen and (max-width: 768px)': {
+            height: 'auto',
+            flexDirection: 'column',
+          },
         }}>
         {/* age distribution */}
         <Box sx={{ 
+          display: 'flex',
+          flexDirection: 'column',
           flex: '0 0 50%',
           '@media screen and (max-width: 768px)': {
-            margin: 0,
-            padding: 0,
-            justifyContent: 'center',
+            flexDirection: 'column',
             alignItems: 'center',
-            width: '70%',
+            width: '100%',
           },
-          }}> 
-
+        }}> 
           <AgeGroup />
-          <Box sx={{ marginTop: '12rem'}}>
-              <Button variant="outlined" sx={{
+          <Box sx={{ marginTop: { xl: '2rem',xs: '2rem', sm: '10rem'} }}>
+            <Button 
+              variant="outlined" 
+              sx={{
                 boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
                 borderRadius: '15px'
-                
               }}
               onClick={handleSumbit}
-              >PROCEED TO DATA</Button>
+            >
+              PROCEED TO DATA
+            </Button>
+          </Box>
         </Box>
 
-        </Box>
-        <Grid container sx={{ flex: '0 0 50%', margin: '-20px' }}>
-          <Grid container spacing={2} sx={{ margin: '30px' }}>
-
+        <Grid 
+          container 
+          sx={{ 
+            flex: '0 0 50%', 
+            margin: '-20px',
+            '@media screen and (max-width: 768px)': {
+              margin: '20px 0',
+              width: '100%',
+            },
+          }}
+        >
+          <Grid 
+            container 
+            spacing={2} 
+            sx={{ 
+              margin: '30px',
+              '@media screen and (max-width: 768px)': {
+                margin: 0,
+              },
+            }}
+          >
             {barStatConfig.slice(0, 2).map((config, index) => (
-              <Grid item key={index} xs={config.size} sx={{ padding: '100px' }}>
+              <Grid item key={index} xs={config.size} sx={{ padding: '20px' }}>
                 <BarStat statusField={config.statusField} title={config.title} />
               </Grid>
             ))}
           </Grid>
-          <Grid container spacing={5} sx={{  marginRigt: '50px', marginTop: '-10px' }}>
-            {barStatConfig.slice(0,2).map((config, index) => (
-              <Grid item key={index} xs={config.size} sx={{ padding: '100px' }}>
-                <BarStat statusField={config.statusField} title = {config.title} />
+          <Grid 
+            container 
+            spacing={2} 
+            sx={{ 
+              margin: '30px',
+              '@media screen and (max-width: 768px)': {
+                margin: 0,
+              },
+            }}
+          >
+            {barStatConfig.slice(2).map((config, index) => (
+              <Grid item key={index} xs={config.size} sx={{ padding: '20px' }}>
+                <BarStat statusField={config.statusField} title={config.title} />
               </Grid>
             ))}
           </Grid>
