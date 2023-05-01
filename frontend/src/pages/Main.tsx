@@ -51,8 +51,8 @@ const Main: React.FC = () => {
 
       <Box 
         sx={{ 
-          height: '70vh',
-          width: '100vw', 
+          height: '100%',
+          width: '100%', 
           backgroundColor: 'skyblue', 
           justifyContent: 'center',
           alignItems: 'center',
