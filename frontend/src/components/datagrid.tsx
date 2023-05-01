@@ -124,11 +124,6 @@ const Dashboard: React.FC = () => {
       }
       return false;
 
-      {/* 
-        Object.values(citizen).some((value) is a function that checks if the value of the object is a string or a number
-        its the same as doing this:
-           (citizen.firstName && citizen.firstName.toLowerCase().includes(searchTermLower)) 
-    */}
     });
   });
   
