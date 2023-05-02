@@ -11,6 +11,7 @@ const Footer: React.FC = () => {
     <Box
       component="footer"
       sx={{
+        marginBottom: '0',
         backgroundColor: '#f5f5f5',
         py: 4,
         px: 2,

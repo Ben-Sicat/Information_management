@@ -154,6 +154,7 @@ const AddProfile: React.FC = () => {
 			try {
 			  const userDoc = doc(userCollectionRef, userId);
 			  await setDoc(userDoc, editedUser);
+			  console.log(userDoc);
 			  console.log('User updated successfully!');
 			  setUser(editedUser);
 			} catch (error) {
