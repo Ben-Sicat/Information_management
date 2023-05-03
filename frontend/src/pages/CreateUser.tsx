@@ -11,7 +11,7 @@ import {
 	TextField,
 	Typography,
 } from '@mui/material';
-import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
+import { CollectionReference, DocumentData, collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
 interface User {
@@ -113,54 +113,67 @@ const fields: Field[] = [
 
 const userCollectionRef = collection(db, 'citizens'); // Replace 'users' with your desired collection name
 
+
 const AddProfile: React.FC = () => {
-  const [buttonTitle, setButtonTitle] = useState('Add Profile');
-  const navigate = useNavigate();
-  const location = useLocation();
-  const userId = location.pathname.split('/').pop() || ' ';
-
-  const [user, setUser] = useState<User>({});
-  const [editedUser, setEditedUser] = useState<User>({ ...user });
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const userDoc = doc(userCollectionRef, userId);
-      const docSnapshot = await getDoc(userDoc);
-
-      if (docSnapshot.exists()) {
-        const userData = docSnapshot.data() as User;
-        setUser(userData);
-        setEditedUser(userData);
-        setButtonTitle('Update Profile');
-      }
-    };
-
-    fetchUser();
-  }, [userId]);
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setEditedUser((prevUser) => ({
-      ...prevUser,
-      [name]: value || 'N/A',
-    }));
-  };
-
-  const handleSubmit = async () => {
-	try {
-		if (userId) {
+	const [buttonTitle, setButtonTitle] = useState('Add Profile');
+	const navigate = useNavigate();
+	const location = useLocation();
+	const userId = location.pathname.split('/').pop();
+  
+	const [user, setUser] = useState<User>({});
+	const [editedUser, setEditedUser] = useState<User>({ ...user });
+  
+	useEffect(() => {
+	  if (userId) {
+		const fetchUser = async () => {
 		  const userDoc = doc(userCollectionRef, userId);
-		  await setDoc(userDoc, editedUser);
-		  console.log('User updated successfully!');
-		  setUser(editedUser);
-		} else {
-		  console.error('Invalid userId');
-		}
-	  } catch (error) {
-		console.error('Error updating user:', error);
+		  const docSnapshot = await getDoc(userDoc);
+  
+		  if (docSnapshot.exists()) {
+			const userData = docSnapshot.data() as User;
+			setUser(userData);
+			setEditedUser(userData);
+			setButtonTitle('Update Profile');
+		  }
+		};
+  
+		fetchUser();
+	  } else {
+		setButtonTitle('Add Profile');
 	  }
-	  navigate('/dashboard');
-	};	  
+	}, [userId]);
+  
+	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+	  const { name, value } = e.target;
+	  setEditedUser((prevUser) => ({
+		...prevUser,
+		[name]: value,
+	  }));
+	  setUser((prevUser) => ({
+		...prevUser,
+		[name]: value,
+	  }));
+	};
+  
+	const handleSubmit = async () => {
+	  try{
+		if (userId) {
+			const userDoc = doc(userCollectionRef, userId);
+			await setDoc(userDoc, editedUser);
+		}
+		else{
+			const userDoc = doc(userCollectionRef);
+			await setDoc(userDoc, user);
+	  }
+	} catch (error) {
+		console.log(error);
+	}
+	navigate('/dashboard');
+	};
+
+
+  
+		  
 	return (
 		<>
 		<Navbar burger={false} updateSearchTerm={(term: string) => {}} />
@@ -237,3 +250,7 @@ const AddProfile: React.FC = () => {
 };
 
 export default AddProfile;
+function addDoc(userCollectionRef: CollectionReference<DocumentData>, editedUser: User) {
+	throw new Error('Function not implemented.');
+}
+
