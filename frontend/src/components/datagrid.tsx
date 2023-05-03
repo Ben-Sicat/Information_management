@@ -101,7 +101,7 @@ const Dashboard: React.FC = () => {
       setCitizens(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) as Citizen[]);
     }
     getCitizens();
-  }, [citizenCollectionRef]);
+  }, []);
     
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {

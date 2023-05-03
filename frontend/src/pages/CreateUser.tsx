@@ -113,18 +113,16 @@ const fields: Field[] = [
 
 const userCollectionRef = collection(db, 'citizens'); // Replace 'users' with your desired collection name
 
-
 const AddProfile: React.FC = () => {
-	const [buttonTitle, setButtonTitle] = useState('Add Profile');
-	const navigate = useNavigate();
-	const location = useLocation();
-	const userId = location.pathname.split('/').pop();
+  const [buttonTitle, setButtonTitle] = useState('Add Profile');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const userId = location.pathname.split('/').pop() || ' ';
 
-	const [user, setUser] = useState<User>({});
-	const [editedUser, setEditedUser] = useState<User>({ ...user });
+  const [user, setUser] = useState<User>({});
+  const [editedUser, setEditedUser] = useState<User>({ ...user });
 
   useEffect(() => {
-    // Fetch the user data from the database based on the userId
     const fetchUser = async () => {
       const userDoc = doc(userCollectionRef, userId);
       const docSnapshot = await getDoc(userDoc);
@@ -133,7 +131,7 @@ const AddProfile: React.FC = () => {
         const userData = docSnapshot.data() as User;
         setUser(userData);
         setEditedUser(userData);
-		setButtonTitle('Update Profile');
+        setButtonTitle('Update Profile');
       }
     };
 
@@ -141,28 +139,28 @@ const AddProfile: React.FC = () => {
   }, [userId]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-	const { name, value } = e.target;
-	setEditedUser((prevUser) => ({
-	  ...prevUser,
-	  [name]: value || 'N/A',
-	}));
+    const { name, value } = e.target;
+    setEditedUser((prevUser) => ({
+      ...prevUser,
+      [name]: value || 'N/A',
+    }));
   };
-  
 
-
-		const handleSubmit = async () => {
-			try {
-			  const userDoc = doc(userCollectionRef, userId);
-			  await setDoc(userDoc, editedUser);
-			  console.log(userDoc);
-			  console.log('User updated successfully!');
-			  setUser(editedUser);
-			} catch (error) {
-			  console.error('Error updating user:', error);
-			}
-			navigate('/dashboard');
-		  };
-		  
+  const handleSubmit = async () => {
+	try {
+		if (userId) {
+		  const userDoc = doc(userCollectionRef, userId);
+		  await setDoc(userDoc, editedUser);
+		  console.log('User updated successfully!');
+		  setUser(editedUser);
+		} else {
+		  console.error('Invalid userId');
+		}
+	  } catch (error) {
+		console.error('Error updating user:', error);
+	  }
+	  navigate('/dashboard');
+	};	  
 	return (
 		<>
 		<Navbar burger={false} updateSearchTerm={(term: string) => {}} />
