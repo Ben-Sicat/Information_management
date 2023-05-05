@@ -51,7 +51,7 @@ const BarStat: React.FC<BarStatProps> = ({ statusField, title }) => {
       height={300}
       sx={{
         p: 2,
-        backgroundColor: '#fff',
+        backgroundColor: '#9747FF',
         borderRadius: '10px',
         boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
       }}

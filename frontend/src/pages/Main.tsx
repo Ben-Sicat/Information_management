@@ -1,6 +1,6 @@
 import { Box, Grid, Button } from '@mui/material';
 import React, { useEffect,} from 'react';
-import { Navbar } from '../components';
+import { Navbar, Footer } from '../components';
 import { config } from '../config/config';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
@@ -53,7 +53,7 @@ const Main: React.FC = () => {
         sx={{ 
           height: '100%',
           width: '100%', 
-          backgroundColor: 'skyblue', 
+          // backgroundColor: 'skyblue', 
           justifyContent: 'center',
           alignItems: 'center',
           display: 'flex',
@@ -136,6 +136,7 @@ const Main: React.FC = () => {
         </Grid>
 
       </Box>
+      <Footer/>
     </>
   );
 };
