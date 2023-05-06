@@ -132,7 +132,10 @@ const Dashboard: React.FC = () => {
     const citizenId = params.row.id;
     navigate(`/user-profile/${citizenId}`);
   }
-
+  const handleAddNowClick = () => {
+    navigate('/dashboard/create-user/');
+  };
+  
   const Container = styled('div')`
   position: relative;
   height: 100vh;
@@ -190,7 +193,7 @@ const ButtonContainer = styled('div')`
       </div>
     </div>
     <ButtonContainer>
-        <Button variant="contained"  sx={{
+        <Button variant="contained" onClick={handleAddNowClick} sx={{
           py: 2,
           fontSize: '2rem',
           padding:0,
