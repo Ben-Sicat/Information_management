@@ -3,8 +3,6 @@ import { Datagrid, Navbar } from '../components/index';
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/system';
-import { Button} from '@mui/material';
-
 
 const ButtonContainer = styled('div')`
   position: static;
@@ -19,7 +17,6 @@ const Dashboard: React.FC = () => {
   const auth = getAuth();
 
  
-
   const handleSignOut = () => {
     signOut(auth);
   };
@@ -32,9 +29,7 @@ const Dashboard: React.FC = () => {
     
   return (
     <>
-      <Datagrid />
-
-      
+      <Datagrid />  
     </>
   );
 };

@@ -87,14 +87,6 @@ const Dashboard: React.FC = () => {
   const citizenCollectionRef = collection(db, 'citizens');
 
 
-
-  // const handleDeleteUser = () => {
-
-  // }
-  // const handleEditUser = () => {
-
-  // }
-
   useEffect(() => {
     const getCitizens = async () => {
       const data = await getDocs(citizenCollectionRef)
@@ -135,7 +127,7 @@ const Dashboard: React.FC = () => {
   const handleAddNowClick = () => {
     navigate('/dashboard/create-user/');
   };
-  
+
   const Container = styled('div')`
   position: relative;
   height: 100vh;

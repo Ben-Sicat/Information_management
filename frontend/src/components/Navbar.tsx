@@ -1,14 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {useState, useEffect}  from 'react';
-import {ListItemButton, ListItemIcon, ListItemText, List, Collapse, AppBar, Toolbar, Button, IconButton, Drawer, Box, Divider} from "@mui/material";
+import {Typography, ListItemButton, ListItemIcon, ListItemText, List, Collapse, AppBar, Toolbar, Button, IconButton, Drawer, Box, Divider} from "@mui/material";
 import {ExpandLess, ExpandMore, Description, Menu, Close} from "@mui/icons-material";
 import { getAuth, signOut } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { config } from '../config/config';
 import LogoSVG from '../assets/Logo.svg';
 import '../styles/globalStyles.css';
-
 
 const firebaseApp = initializeApp(config.firebaseConfig);
 
@@ -316,17 +315,17 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
         <div>
         {burger &&(
           <>
-          <IconButton
-              edge="start"
+          <Button
+              // edge="start"
               color="inherit"
-              aria-label="open drawer"
+              // aria-label="open drawer"
               onClick={toggleDrawer(true)}
               sx={{
                 mr: 2,
               }}
             >
               <Menu />
-            </IconButton><Drawer
+            </Button><Drawer
               //position of the drawer where to pop-out
               anchor="left"
               //if open is true --> drawer is shown
@@ -344,10 +343,10 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
                   }}
                 >
                   {/* when clicking the icon it will set the variable to false and closes the drawer */}
-                  <IconButton sx={{ mb: 2 }}>
+                  <Button sx={{ mb: 2 }}>
                     <Close onClick={toggleDrawer(false)} />
-                  </IconButton>
-
+                  </Button>
+         
                   <Divider sx={{ mb: 2 }} />
 
                   <Box sx={{ mb: 2 }}>
@@ -407,16 +406,9 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
               </Drawer>
               </>
         )}
-          <IconButton color="inherit" onClick={handleHome}>
-            <ListItemText primary="Home"/>
-          </IconButton>
-          <IconButton color="inherit" onClick={handleDashboard}>
-            <ListItemText primary="Dashboard" />
-          </IconButton>
-
-          <IconButton color="inherit" onClick={handleAbout}>
-            <ListItemText primary="About" />
-          </IconButton>
+          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleHome} >HOME</Button>
+          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleDashboard} >DASHBOARD</Button>
+          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleAbout} >ABOUT</Button>
          
         </div>
         <div>
