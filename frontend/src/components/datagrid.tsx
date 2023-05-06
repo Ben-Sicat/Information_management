@@ -7,13 +7,13 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 //   Button, 
 //   Paper } 
 //   from '@mui/material';
-
+import { styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import 'firebase/firestore';
 import {db}from '../firebase-config'
 import {collection, getDocs,} from 'firebase/firestore'
-import {SearchBar, Navbar} from '../components/index';
-
+import {SearchBar, Navbar, Footer} from '../components/index';
+import { Button} from '@mui/material';
 
 
 interface Citizen {
@@ -101,7 +101,7 @@ const Dashboard: React.FC = () => {
       setCitizens(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) as Citizen[]);
     }
     getCitizens();
-  }, [citizenCollectionRef]);
+  }, []);
     
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -133,15 +133,31 @@ const Dashboard: React.FC = () => {
     navigate(`/user-profile/${citizenId}`);
   }
 
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
+  const Container = styled('div')`
+  position: relative;
+  height: 100vh;
+`;
+  const BodyContainer = styled('div')`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+`;
+const ButtonContainer = styled('div')`
+  position: sticky;
+  bottom: 1.5rem;
+  left: 100rem;
+  z-index: 999;
+  '@media (max-width: 600px)': {
+    bottom: 1.5rem;
+  },
+`;
 
   return (
     <>
- <Navbar theme={theme} toggleTheme={toggleTheme} updateSearchTerm={updateSearchTerm} burger ={true}/>
+ <Navbar updateSearchTerm={updateSearchTerm} burger ={true}/>
+ <Container>
+ <BodyContainer>
 <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
 <div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div style={{ height: 'calc(100% - 40px)', width: '100%', margin: 'auto', marginBottom: '20px' }}>
@@ -173,8 +189,17 @@ const Dashboard: React.FC = () => {
         />
       </div>
     </div>
-
-
+    <ButtonContainer>
+        <Button variant="contained"  sx={{
+          py: 2,
+          fontSize: '2rem',
+          padding:0,
+          borderRadius: '50%'
+        }}>+</Button>
+      </ButtonContainer>
+    </BodyContainer>
+    </Container>
+    <Footer/>
     </>
   );
 };

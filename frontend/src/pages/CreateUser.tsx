@@ -11,7 +11,7 @@ import {
 	TextField,
 	Typography,
 } from '@mui/material';
-import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
+import { CollectionReference, DocumentData, collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
 interface User {
@@ -24,17 +24,17 @@ interface Field {
 	type?: string;
 	options?: string[];
 	defaultValue?: string;
-	required?: boolean;
+
 }
 
 const fields: Field[] = [
 	// field definitions...
-	{ label: 'Last Name', name: 'lastName', required: true },
-	{ label: 'First Name', name: 'firstName', required: true },
-	{ label: 'Middle Name', name: 'middleName', required: true },
-	{ label: 'Suffix', name: 'suffix', required: true },
-	{ label: 'Age', name: 'age', type: 'number', required: true },
-	{ label: 'Birth Month', name: 'birthMonth', required: true, 
+	{ label: 'Last Name', name: 'lastName' },
+	{ label: 'First Name', name: 'firstName' },
+	{ label: 'Middle Name', name: 'middleName' },
+	{ label: 'Suffix', name: 'suffix' },
+	{ label: 'Age', name: 'age', type: 'number' },
+	{ label: 'Birth Month', name: 'birthMonth', 
 	options:[
 		'January',
 		'February',
@@ -50,9 +50,9 @@ const fields: Field[] = [
 		'December',
 
 	] },
-	{ label: 'Birth Day', name: 'birthDay', required: true },
-	{ label: 'Birth Year', name: 'birthYear', required: true },
-	{ label: 'Building Number', name: 'bldgNo', required: true,
+	{ label: 'Birth Day', name: 'birthDay' },
+	{ label: 'Birth Year', name: 'birthYear' },
+	{ label: 'Building Number', name: 'bldgNo',
 		options:[
 			
 		]
@@ -76,38 +76,38 @@ const fields: Field[] = [
 			'A. MABINI ST. COR. UN. AVE.',
 			'NBI COMPOUND UN AVE.',
 		],
-		required: true,
+
 	},
 	
 	{
 		label: 'District Number',
 		name: 'districtNo',
 		defaultValue: '5',
-		required: true,
+
 	},
-	{ label: 'District Name', name: 'districtName', required: true },
-	{ label: 'Zone', name: 'zone', defaultValue: '72', required: true },
+	{ label: 'District Name', name: 'districtName' },
+	{ label: 'Zone', name: 'zone', defaultValue: '72' },
 	{
 		label: 'Gender',
 		name: 'gender',
 		options: ['Male', 'Female', 'Other'],
-		required: true,
+
 	},
 	{
 		label: 'Civil Status',
 		name: 'civilstatus',
 		options: ['Single', 'Married', 'Divorced', 'Widowed'],
-		required: true,
+
 	},
-	{ label: 'Voter', name: 'voter', options: ['Yes', 'No'], required: true },
+	{ label: 'Voter', name: 'voter', options: ['Yes', 'No'] },
 	{
 		label: 'Status',
 		name: 'status',
 		options: ['Active', 'Inactive', 'Deceased', 'Bedridden'],
-		required: true,
+
 	},
-	{ label: 'Email', name: 'email', required: true },
-	{ label: 'Contact Number', name: 'contactNumber', required: true },
+	{ label: 'Email', name: 'email' },
+	{ label: 'Contact Number', name: 'contactNumber' },
 	
 ];
 
@@ -119,54 +119,61 @@ const AddProfile: React.FC = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const userId = location.pathname.split('/').pop();
-
+  
 	const [user, setUser] = useState<User>({});
 	const [editedUser, setEditedUser] = useState<User>({ ...user });
-
-  useEffect(() => {
-    // Fetch the user data from the database based on the userId
-    const fetchUser = async () => {
-      const userDoc = doc(userCollectionRef, userId);
-      const docSnapshot = await getDoc(userDoc);
-
-      if (docSnapshot.exists()) {
-        const userData = docSnapshot.data() as User;
-        setUser(userData);
-        setEditedUser(userData);
-		setButtonTitle('Update Profile');
-      }
-    };
-
-    fetchUser();
-  }, [userId]);
-
+  
+	useEffect(() => {
+	  if (userId) {
+		const fetchUser = async () => {
+		  const userDoc = doc(userCollectionRef, userId);
+		  const docSnapshot = await getDoc(userDoc);
+  
+		  if (docSnapshot.exists()) {
+			const userData = docSnapshot.data() as User;
+			setUser(userData);
+			setEditedUser(userData);
+			setButtonTitle('Update Profile');
+		  }
+		};
+  
+		fetchUser();
+	  } else {
+		setButtonTitle('Add Profile');
+	  }
+	}, [userId]);
+  
 	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setUser((prevUser) => ({
-			...prevUser,
-			[name]: value || 'N/A',
-		}));
+	  const { name, value } = e.target;
+	  setEditedUser((prevUser) => ({
+		...prevUser,
+		[name]: value,
+	  }));
+	  setUser((prevUser) => ({
+		...prevUser,
+		[name]: value,
+	  }));
+	};
+  
+	const handleSubmit = async () => {
+	  try{
+		if (userId) {
+			const userDoc = doc(userCollectionRef, userId);
+			await setDoc(userDoc, editedUser);
+		}
+		else{
+			const userDoc = doc(userCollectionRef);
+			await setDoc(userDoc, user);
+	  }
+	} catch (error) {
+		console.log(error);
+	}
+	navigate('/dashboard');
 	};
 
-	const handleSubmit = async () => {
-		try {
-		  const requiredFields = fields.filter((field) => field.required);
-		  const missingFields = requiredFields.filter((field) => !editedUser[field.name]);
-		  if (missingFields.length > 0) {
-			console.error(`Missing required fields: ${missingFields.map((field) => field.label).join(', ')}`);
-			return;
-		  }
-	
-		  const userDoc = doc(userCollectionRef, userId);
-		  await setDoc(userDoc, editedUser);
-		  console.log('User updated successfully!');
-		  setUser(editedUser);
-		} catch (error) {
-		  console.error('Error updating user:', error);
-		}
-		navigate('/dashboard');
-	  };
 
+  
+		  
 	return (
 		<>
 		<Navbar burger={false} updateSearchTerm={(term: string) => {}} />
@@ -243,3 +250,7 @@ const AddProfile: React.FC = () => {
 };
 
 export default AddProfile;
+function addDoc(userCollectionRef: CollectionReference<DocumentData>, editedUser: User) {
+	throw new Error('Function not implemented.');
+}
+

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import { Box, Typography } from '@mui/material';
@@ -25,9 +25,10 @@ const BarStat: React.FC<BarStatProps> = ({ statusField, title }) => {
           data[status] = (data[status] || 0) + 1;
         });
 
-        const chartData = Object.keys(data).map((status) => ({
+        const chartData = Object.keys(data).map((status, index) => ({
           status,
           count: data[status],
+          fill: COLORS[index % COLORS.length],
         }));
 
         setChartData(chartData);
@@ -44,27 +45,39 @@ const BarStat: React.FC<BarStatProps> = ({ statusField, title }) => {
   }
 
   return (
-    <Box width="100%" height={200} sx={{
-       p: 2, 
-       backgroundColor: '#fff',
-       borderRadius: '35px', 
-       overflow: 'hidden', 
-       boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}>
-      <Typography variant="h6" component="div" sx={{ marginBottom: '10px' }}>
+    <div style={{width: '100%'}}>
+    <Box
+      width="100%"
+      height={300}
+      sx={{
+        p: 2,
+        backgroundColor: '#9747FF',
+        borderRadius: '10px',
+        boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+      }}
+    >
+      <Typography variant="h6" component="div" sx={{ marginBottom: '10px', textAlign: 'center' }}>
         {title}
       </Typography>
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={chartData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="status" />
-          <YAxis />
+      <ResponsiveContainer width="100%" height="80%">
+        <BarChart data={chartData} layout="vertical">
+          <CartesianGrid strokeDasharray="3 3" horizontal={false} />
+          <XAxis type="number" tickLine={false} />
+          <YAxis dataKey="status" type="category" tickLine={false} width={50} fontSize={10} />
           <Tooltip />
           <Legend />
-          <Bar dataKey="count" fill="#8884d8" />
+          <Bar dataKey="count" radius={[0, 10, 10, 0]}>
+            {chartData.map((entry: any[], index: any) => (
+              <Cell key={`cell-${index}`} />
+            ))}
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </Box>
+    </div>
   );
 };
+
+const COLORS = ['#FF6B6B', '#FF9F1C', '#FFCD56', '#4ECDC4', '#36A2EB', '#9966FF'];
 
 export default BarStat;
