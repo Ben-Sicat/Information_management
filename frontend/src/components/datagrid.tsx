@@ -125,7 +125,7 @@ const Dashboard: React.FC = () => {
     navigate(`/user-profile/${citizenId}`);
   }
   const handleAddNowClick = () => {
-    navigate('/dashboard/create-user/');
+    navigate('/Datagrid/create-user/');
   };
 
   const Container = styled('div')`

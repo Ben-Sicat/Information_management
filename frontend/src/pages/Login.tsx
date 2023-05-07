@@ -36,7 +36,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
   
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/main-menu');
+      navigate('/Datagrid');
     } catch (error) {
       // Handle error
     } finally {

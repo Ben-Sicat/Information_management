@@ -240,7 +240,7 @@ const handleDashboard: React.MouseEventHandler<HTMLButtonElement> = () => {
   navigate('/dashboard');
 }
 const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
-  navigate('/main-menu');
+  navigate('/Datagrid');
 }
 
 
