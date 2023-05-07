@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Typography, Paper, Grid, Button } from '@mui/material';
+import { Navbar, Footer } from '../components';
 import { doc, getDoc, getFirestore, deleteDoc } from 'firebase/firestore';
 import { config } from '../config/config';
 import { initializeApp } from 'firebase/app';
@@ -98,10 +99,13 @@ const UserProfile: React.FC = () => {
   };
 
   return (
+    <>
+    <Navbar burger={false} updateSearchTerm={(term: string) => {}} />
+    
     <Box sx={{ padding: { xs: '12px', sm: '24px' },
   }}>
       <Typography variant="h4" sx={{ marginBottom: '20px' }}>
-        {getFullName()}
+        {getFullName()} - SENIOR PROFILE
       </Typography>
       <Grid container spacing={2}
      
@@ -119,10 +123,14 @@ const UserProfile: React.FC = () => {
       <Button variant="contained" onClick={handleEditClick}>
         Edit
       </Button>
+      <Button variant="contained">
+        Print
+      </Button>
       <Button variant="contained" onClick={handleDeleteClick}>
         Delete
       </Button>
     </Box>
+    </>
   );
 };
 

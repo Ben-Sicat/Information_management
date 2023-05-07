@@ -12,16 +12,13 @@ const Footer: React.FC = () => {
       component="footer"
       sx={{
 
-        backgroundColor: '#F9F3FF',
-        display: 'flex',
-        flexDirection: 'column',
-
+        width: '100%',
         marginBottom: '0',
         backgroundColor: '#f5f5f5',
+        py: 4,
+        px: 2,
+       }}
 
-        
-      
-      }}
     >
       <Box
         sx={{

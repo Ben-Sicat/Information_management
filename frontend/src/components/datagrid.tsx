@@ -13,7 +13,7 @@ import 'firebase/firestore';
 import {db}from '../firebase-config'
 import {collection, getDocs,} from 'firebase/firestore'
 import {SearchBar, Navbar, Footer} from '../components/index';
-import { Button} from '@mui/material';
+import { Button, Box} from '@mui/material';
 
 
 interface Citizen {
@@ -87,14 +87,6 @@ const Dashboard: React.FC = () => {
   const citizenCollectionRef = collection(db, 'citizens');
 
 
-
-  // const handleDeleteUser = () => {
-
-  // }
-  // const handleEditUser = () => {
-
-  // }
-
   useEffect(() => {
     const getCitizens = async () => {
       const data = await getDocs(citizenCollectionRef)
@@ -132,6 +124,9 @@ const Dashboard: React.FC = () => {
     const citizenId = params.row.id;
     navigate(`/user-profile/${citizenId}`);
   }
+  const handleAddNowClick = () => {
+    navigate('/Datagrid/create-user/');
+  };
 
   const Container = styled('div')`
   position: relative;
@@ -190,7 +185,7 @@ const ButtonContainer = styled('div')`
       </div>
     </div>
     <ButtonContainer>
-        <Button variant="contained"  sx={{
+        <Button variant="contained" onClick={handleAddNowClick} sx={{
           py: 2,
           fontSize: '2rem',
           padding:0,
@@ -198,8 +193,9 @@ const ButtonContainer = styled('div')`
         }}>+</Button>
       </ButtonContainer>
     </BodyContainer>
-    </Container>
     <Footer/>
+    </Container>
+    
     </>
   );
 };
