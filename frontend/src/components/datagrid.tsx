@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react'; 
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-// import { 
-//   Box, 
-//   Typography, 
-//   TextField, 
-//   Button, 
-//   Paper } 
-//   from '@mui/material';
-
 import { useNavigate } from 'react-router-dom';
 import 'firebase/firestore';
 import {db}from '../firebase-config'
@@ -83,6 +75,8 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [filterField] = useState('');
   const [citizens, setCitizens] = useState<Citizen[]>([]);
+  const [cachedData, setCachedData] = useState<Citizen[]>([]);
+  const [lastFetched, setLastFetched] = useState<number>(0);
   const [searchTerm, setSearchTerm] = useState('');
   const citizenCollectionRef = collection(db, 'citizens');
 
@@ -96,12 +90,22 @@ const Dashboard: React.FC = () => {
   // }
 
   useEffect(() => {
-    const getCitizens = async () => {
-      const data = await getDocs(citizenCollectionRef)
-      setCitizens(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) as Citizen[]);
+    const cacheExpiry = 30 * 60 * 1000; // 30 minutes in milliseconds
+    const currentTime = Date.now();
+    if (cachedData.length === 0 || currentTime - lastFetched >= cacheExpiry) {
+      const getCitizens = async () => {
+        const data = await getDocs(citizenCollectionRef)
+        const newData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) as Citizen[];
+        setCitizens(newData);
+        setCachedData(newData);
+        setLastFetched(Date.now());
+      }
+      getCitizens();      
+    } else {
+      setCitizens(cachedData);
     }
-    getCitizens();
-  }, []);
+  }, [cachedData, lastFetched]);
+  
     
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -141,7 +145,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
- <Navbar theme={theme} toggleTheme={toggleTheme} updateSearchTerm={updateSearchTerm} burger ={true}/>
+<Navbar theme={theme} toggleTheme={toggleTheme} updateSearchTerm={updateSearchTerm} burger ={true}/>
 <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
 <div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div style={{ height: 'calc(100% - 40px)', width: '100%', margin: 'auto', marginBottom: '20px' }}>

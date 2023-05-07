@@ -16,20 +16,9 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
- 
   const [error] = useState<string>('');
 
-  // const signInWithGoogle = async () => {
-  //   setAuthing(true);
-  //   signInWithPopup(auth, new GoogleAuthProvider())
-  //   .then(response =>{
-  //     navigate('/dashboard')
-  //   })
-  //   .catch(err => {
-  //     console.log(err)
-  //     setAuthing(false);
-  //   })
-  // }
+
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
