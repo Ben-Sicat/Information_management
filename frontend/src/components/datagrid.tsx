@@ -90,7 +90,7 @@ const Dashboard: React.FC = () => {
   // }
 
   useEffect(() => {
-    const cacheExpiry = 30 * 60 * 1000; // 30 minutes in milliseconds
+    const cacheExpiry = 1120 * 60 * 1000; // 1 day
     const currentTime = Date.now();
     if (cachedData.length === 0 || currentTime - lastFetched >= cacheExpiry) {
       const getCitizens = async () => {
