@@ -1,4 +1,4 @@
-import { Box, Grid, Button, Container } from '@mui/material';
+import { Box, Grid, Button } from '@mui/material';
 import React, { useEffect,} from 'react';
 import { Navbar, Footer } from '../components';
 import { config } from '../config/config';
@@ -6,6 +6,7 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { AgeGroup, BarStat } from '../components/mainMenu';
 import { useNavigate } from 'react-router-dom';
+import { styled } from '@mui/system';
 
 const firebaseApp = initializeApp(config.firebaseConfig);
 const db = getFirestore(firebaseApp);
@@ -45,18 +46,22 @@ const Dashboard: React.FC = () => {
     navigate('/dashboard')
   }
 
+  const Container = styled('div')`
+  position: relative;
+  height: 100vh;
+`;
+  const BodyContainer = styled('div')`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+`;
+
   return (
     <>
       <Navbar burger={false} updateSearchTerm={(term: string) => {}} />
-      <Container sx={{
-          position: 'relative',
-          height: '100vh',
-      }}>
-      <Container sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-      }}>
+      <Container>
+      <BodyContainer>
       <Box 
         sx={{ 
           height: '100%',
@@ -144,9 +149,12 @@ const Dashboard: React.FC = () => {
         </Grid>
 
       </Box>
-      </Container>
+      </BodyContainer>
       <Footer />
       </Container>
+
+  
+      
     </>
   );
 };

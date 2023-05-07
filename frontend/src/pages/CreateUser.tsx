@@ -168,7 +168,7 @@ const AddProfile: React.FC = () => {
 	} catch (error) {
 		console.log(error);
 	}
-	navigate('/dashboard');
+	navigate('/datagrid');
 	};
 
 
