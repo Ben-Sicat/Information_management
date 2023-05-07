@@ -1,4 +1,4 @@
-import { Box, Grid, Button } from '@mui/material';
+import { Box, Grid, Button, Container } from '@mui/material';
 import React, { useEffect,} from 'react';
 import { Navbar, Footer } from '../components';
 import { config } from '../config/config';
@@ -48,7 +48,15 @@ const Dashboard: React.FC = () => {
   return (
     <>
       <Navbar burger={false} updateSearchTerm={(term: string) => {}} />
-
+      <Container sx={{
+          position: 'relative',
+          height: '100vh',
+      }}>
+      <Container sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+      }}>
       <Box 
         sx={{ 
           height: '100%',
@@ -136,7 +144,9 @@ const Dashboard: React.FC = () => {
         </Grid>
 
       </Box>
-      <Footer/>
+      </Container>
+      <Footer />
+      </Container>
     </>
   );
 };

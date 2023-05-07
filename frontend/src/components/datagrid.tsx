@@ -13,7 +13,7 @@ import 'firebase/firestore';
 import {db}from '../firebase-config'
 import {collection, getDocs,} from 'firebase/firestore'
 import {SearchBar, Navbar, Footer} from '../components/index';
-import { Button} from '@mui/material';
+import { Button, Box} from '@mui/material';
 
 
 interface Citizen {
@@ -193,8 +193,9 @@ const ButtonContainer = styled('div')`
         }}>+</Button>
       </ButtonContainer>
     </BodyContainer>
-    </Container>
     <Footer/>
+    </Container>
+    
     </>
   );
 };
