@@ -1,48 +1,94 @@
-
-
 import React from 'react';
 import { Box, Typography, Link, Divider } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
-
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
+import CallIcon from '@mui/icons-material/Call';
+import logoPNG from '../assets/Logo.png';
 
 const Footer: React.FC = () => {
   return (
     <Box
       component="footer"
       sx={{
+
+        width: '100%',
         marginBottom: '0',
         backgroundColor: '#f5f5f5',
         py: 4,
         px: 2,
-
        }}
+
     >
       <Box
         sx={{
+          px: 35,
+          alignItems: 'flex-start',
           display: 'flex',
-          alignItems: 'center',
+          flexDirection: 'row',
           justifyContent: 'space-between',
           mb: 2,
+          '& > *': {
+            marginRight: 3,
+            marginTop: 2, 
+         
+          },
         }}
       >
-        <Typography variant="body2">
-          <Link href="/dashboard">Main Menu</Link> | <Link href="/about">About</Link>
-        </Typography>
-        <Box display="flex" alignItems="center">
-          <Typography variant="body2">Phone: 123-456-7890</Typography>
-          <FacebookIcon sx={{ ml: 1, fontSize: 20 }} />
-          <GoogleIcon sx={{ ml: 1, fontSize: 20 }} />
+        <Box>
+          <Link href='/main-menu'><img src={logoPNG} height={134} width={134}/></Link>
         </Box>
+        <Box>
+          <Typography variant="body2" sx={{ display:'flex', flexDirection:'column' }}>
+            <Link href="/dashboard" underline='none'>Dashboard</Link>
+            <Link href="/about" underline='none'>About</Link>
+            <Link href="/main-menu" underline='none'>Contact</Link>
+          </Typography>
+        </Box>
+        <Box>
+          <Typography variant="body2" sx={{ display:'flex', flexDirection:'column' }}>
+            <Link href="#" underline='none'>Support</Link>
+            <Link href="#" underline='none'>Services</Link>
+            <Link href="#" underline='none'>Contact Us</Link>
+          </Typography>
+        </Box>
+        <Box>
+          <Typography variant="body2" sx={{ display:'flex', flexDirection:'column' }}>
+            <Link href="#" underline='none'>Announcements</Link>
+            <Link href="#" underline='none'>Events</Link>
+          </Typography>
+        </Box>
+        <Box>
+          <Typography sx={{ fontSize: 16 }}>
+            <GoogleIcon sx={{ fontSize: 20 }} />
+          </Typography>
+          <Typography sx={{ fontSize: 16 }}>
+            <CallIcon sx={{ fontSize: 20 }} />
+          </Typography>
+        
+        </Box>
+
+        <Box sx={{display:'flex',flexDirection:'column', marginLeft:-15}}>
+          
+       <Link href="mailto:barangay670@gmail.com" underline="none" target='_blank'>barangay670@gmail.com</Link>
+        <Typography> (+63)917-907-7814</Typography>
+        </Box>
+        <Box>
+          <Typography>
+            <FacebookIcon sx={{ fontSize: 20 }} />
+          </Typography>
+          <Typography sx={{ fontSize: 10 }}>
+            <FmdGoodIcon sx={{ fontSize: 20 }} />
+          </Typography>
+        </Box>
+       
       </Box>
       <Divider />
       <Typography variant="body2" align="center" color="textSecondary" sx={{ mt: 2 }}>
-
-        &copy; {new Date().getFullYear()} Your Website Name. All rights reserved.
+        &copy; {new Date().getFullYear()} All rights reserved.
       </Typography>
     </Box>
   );
 };
 
 export default Footer;
-

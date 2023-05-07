@@ -25,11 +25,9 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
   
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/main-menu');
+      navigate('/Datagrid');
     } catch (error) {
       // Handle error
-    } finally {
-    
     }
   };
 
@@ -40,150 +38,124 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
 
   // theme={theme === 'light' ? lightTheme : darkTheme}
     
-    <Box  
+  <Box
+  sx={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '100vh',
+    padding: '20px',
+  }}
+>
+  <Paper
+    elevation={5}
+    className="glassmorphism"
+    sx={{
+      display: 'flex',
+      borderRadius: '20px',
+      boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
+      backgroundColor: 'rgba(211, 211, 211, 0.2)',
+      flexWrap: 'wrap',
+      gap: '20px',
+      maxWidth: '800px',
+      width: '100%',
+    }}
+  >
+    <Box
+      component="form"
+      onSubmit={handleSignIn}
       sx={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100vh',
-        margin: 'auto',
-        '@media screen and (max-width: 768px)': {
-          margin: '120px',
-        },
+        gap: 3,
+        padding: '20px',
+        flex: '1 1 50%',
+        background: '#FDF4DC',
       }}
     >
-      <Paper elevation={5} className="glassmorphism" 
+      <Container
         sx={{
-          display: 'flex',
-          borderRadius: '20px',
-          boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
+          backgroundColor: 'var(--tertiary-color)',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'rgba(211, 211, 211, 0.2)',
-          flexWrap: 'wrap',
-          gap: '20px',
-        }}>
-        <Box
-          component="form"
-          onSubmit={handleSignIn}
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 3,
-            px: 20,
-            py: 20,
-            borderRadius: 4,
-            minWidth: '300px',
-            paddingLeft: '150px',
-            paddingRight: '150px',
-            background: '#FDF4DC',
-            '@media screen and (max-width: 768px)': {
-              flexBasis: '100%',
-              width: 'auto',
-              order: 2,
-            },
-          }}
-        >
-          <Container sx={{
-            backgroundColor: 'var(--tertiary-color)',
-            justifyContent: 'center',
-            alignItems: 'center',
-            margin: '-60px 0px 50px',
-            paddingTop: '15px',
-            borderRadius: 3,
-          }}>
-          <Typography variant="h2" align="center"  gutterBottom sx={{
-            fontFamily: 'var(--font-family)',
-          }}>
-            Sign In
-          </Typography>
-          {error && (
-            <Typography sx={{ color: 'red' }} align="center">
-              {error}
-            </Typography>
-          )}
-          </Container>
+          margin: '10px 0px 50px',
+          paddingTop: '15px',
+          borderRadius: 3,
+        }}
+      >
+        <Typography variant="h3" align="center" gutterBottom sx={{ fontFamily: 'var(--font-family)' }}>
+          Sign In
+        </Typography>
+        {error && <Typography sx={{ color: 'red' }} align="center">{error}</Typography>}
+      </Container>
 
-            <TextField
-                label="Email"
-                variant="outlined"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                sx={{
-                  width: '350px',
-                  input: {textAlign: 'center'},
-                  "& .MuiInputLabel-root": {
-                    right: 0,
-                    textAlign: "center",
-                  },
-                  "& .MuiInputLabel-shrink": {
-                    textAlign: "left"
-                  },
-                }}
-              />
+      <TextField
+        label="Email"
+        variant="outlined"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        sx={{
+          width: '100%',
+          input: { textAlign: 'center' },
+          "& .MuiInputLabel-root": {
+            right: 0,
+            textAlign: "center",
+          },
+          "& .MuiInputLabel-shrink": {
+            textAlign: "left"
+          },
+        }}
+      />
 
-            <TextField
-              label="Password"
-              variant="outlined"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              sx={{
-                width: '350px',
-                input: {textAlign: 'center'},
-                "& .MuiInputLabel-root": {
-                  right: 0,
-                  textAlign: "center",
-                },
-                "& .MuiInputLabel-shrink": {
-                  textAlign: "left"
-                },
-              }}
-            />
+      <TextField
+        label="Password"
+        variant="outlined"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        sx={{
+          width: '100%',
+          input: { textAlign: 'center' },
+          "& .MuiInputLabel-root": {
+            right: 0,
+            textAlign: "center",
+          },
+          "& .MuiInputLabel-shrink": {
+            textAlign: "left"
+          },
+        }}
+      />
 
+      <Button type="submit" variant="contained" sx={{ marginTop: '2rem', width: '60%' }}>
+        Login
+      </Button>
+    </Box>
 
-            <Button type="submit" variant="contained" sx={{
-              marginTop: '4rem',
-              width: '350px',
-            }}>
-              Login
-            </Button>
-
-            
-          </Box>
-          <Box
-            component="form"
-            onSubmit={handleSignIn}
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 2,
-              px: 20,
-              py: 20,
-              borderRadius: 4,
-              minWidth: '300px',
-              '@media screen and (max-width: 768px)': {
-                flexBasis: '100%', 
-                width: 'auto',
-                order: 1,
-              },
-            }}
-          >
-            <img src={logoPNG} style={{
-              width: '15rem',
-              height: '15rem'
-            }}
-            alt="Description of some sort"
-            />
-          </Box>
+    <Box
+      component="form"
+      onSubmit={handleSignIn}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 2,
+        padding: '20px',
+        flex: '1 1 50%',
+      }}
+    >
+      <img
+        src={logoPNG}
+        style={{
+          width: '15rem',
+          height: '15rem',
+        }}alt="Description of some sort"
+        />
+        </Box>
         </Paper>
-
-      </Box>
+        </Box>
   );
 };
 

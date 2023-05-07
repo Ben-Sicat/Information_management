@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { initializeApp } from 'firebase/app';
 import { config } from './config/config';
-import { Login, Dashboard, CreateUser, Main, About, UserProfile } from './pages';
+import { Login, Datagrid, CreateUser, Dashboard, About, UserProfile } from './pages';
 import AuthRoute from './components/AuthRoute';
 import { CssBaseline, ThemeProvider} from '@mui/material';
 import { lightTheme, darkTheme } from './theme';
@@ -26,9 +26,12 @@ function App() {
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/main-menu" element={<AuthRoute><Main /></AuthRoute>} />
+      <Route path="/Dashboard" element={<AuthRoute><Dashboard /></AuthRoute>} />
+      <Route path="/Datagrid/" element={<AuthRoute><Datagrid /></AuthRoute>} />
+      <Route path="/Datagrid/create-user/:userId?" element={<AuthRoute><CreateUser /></AuthRoute>} />
+      {/* <Route path="/main-menu" element={<AuthRoute><Main /></AuthRoute>} />
       <Route path="/dashboard/" element={<AuthRoute><Dashboard /></AuthRoute>} />
-      <Route path="/dashboard/create-user/:userId?" element={<AuthRoute><CreateUser /></AuthRoute>} />
+      <Route path="/dashboard/create-user/:userId?" element={<AuthRoute><CreateUser /></AuthRoute>} /> */}
       <Route path="/about" element={<About />} />
       <Route path="/user-profile/:userId" element={<UserProfile />} />
       <Route path="*" element={<h1>404</h1>} />

@@ -1,18 +1,18 @@
 import Login from './Login';
-import Dashboard from './Dashboard';
+import Datagrid from './DatagridPage';
 import CreateUser from './CreateUser';
 
 import About from './About';
-import Main from './Main';
+import Dashboard from './Dashboard';
 import UserProfile from './UserProfile';
 import Error404 from './Error404';
 
 export {
 	Login,
-	Dashboard,
+	Datagrid,
 	CreateUser,
 	About,
-	Main,
+	Dashboard,
 	UserProfile,
 	Error404,
 };

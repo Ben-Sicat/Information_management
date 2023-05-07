@@ -1,14 +1,13 @@
 import React from 'react';
-import {AppBar, Toolbar, Button, IconButton, Drawer, Box, Divider} from '@mui/material/';
 import { useNavigate } from 'react-router-dom';
-import {useState}  from 'react';
-import {ListItemButton, ListItemIcon, ListItemText, List, Collapse} from "@mui/material";
-import {ExpandLess, ExpandMore, Description, Menu, Close, LightMode,NightlightRound} from "@mui/icons-material";
+import {useState, useEffect}  from 'react';
+import {Typography, ListItemButton, ListItemIcon, ListItemText, List, Collapse, AppBar, Toolbar, Button, IconButton, Drawer, Box, Divider} from "@mui/material";
+import {ExpandLess, ExpandMore, Description, Menu, Close} from "@mui/icons-material";
 import { getAuth, signOut } from 'firebase/auth';
-
 import { initializeApp } from 'firebase/app';
 import { config } from '../config/config';
-
+import LogoSVG from '../assets/Logo.svg';
+import '../styles/globalStyles.css';
 
 const firebaseApp = initializeApp(config.firebaseConfig);
 
@@ -184,9 +183,6 @@ const streetOptions: Option[] =[
 
   
 ]
-
-
-
 const DropdownMenu: React.FC<{
   title: string;
   options: Option[];
@@ -218,7 +214,7 @@ const DropdownMenu: React.FC<{
 );
 
 
-const Navbar: React.FC<NavbarProps> = ({ burger, toggleTheme, theme, updateSearchTerm }) => {
+const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
 
   const [genderDropdown, setGenderDropdown] = useState(false);
   const [civilStatusDropdown, setCivilStatusDropdown] = useState(false);
@@ -244,7 +240,7 @@ const handleDashboard: React.MouseEventHandler<HTMLButtonElement> = () => {
   navigate('/dashboard');
 }
 const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
-  navigate('/main-menu');
+  navigate('/Datagrid');
 }
 
 
@@ -272,26 +268,64 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
     );
   }
   
- 
+  const styles = {
+    appBar: {
+      border: 'none',
+      color: 'var(--secondary-color)',
+      fontWeight: 'bold',
+      transition: 'background-color 2.5s linear',
+    },
+    solidBackground: {
+      background: 'var(--tertiary-color)',
+      color: 'var(--primary-color)'
+    },
+    gradientBackground: {
+      background: 'linear-gradient(to bottom, #C38DFF, rgba(195, 141, 255, 0) 85%)',
+    },
+  };
+
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleScroll = () => {
+    if (window.pageYOffset > 60) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  };
+
    
 
   return (
-    <AppBar position="static">
+<div style={{ overflow: 'hidden' }}>
+    <AppBar
+      position="static"
+      sx={{
+        ...styles.appBar,
+        ...(isScrolled ? styles.solidBackground : styles.gradientBackground),
+      }}
+    >
+
       <Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center'}}>
         <div>
         {burger &&(
           <>
-          <IconButton
-              edge="start"
+          <Button
+              // edge="start"
               color="inherit"
-              aria-label="open drawer"
+              // aria-label="open drawer"
               onClick={toggleDrawer(true)}
               sx={{
                 mr: 2,
               }}
             >
               <Menu />
-            </IconButton><Drawer
+            </Button><Drawer
               //position of the drawer where to pop-out
               anchor="left"
               //if open is true --> drawer is shown
@@ -309,10 +343,10 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
                   }}
                 >
                   {/* when clicking the icon it will set the variable to false and closes the drawer */}
-                  <IconButton sx={{ mb: 2 }}>
+                  <Button sx={{ mb: 2 }}>
                     <Close onClick={toggleDrawer(false)} />
-                  </IconButton>
-
+                  </Button>
+         
                   <Divider sx={{ mb: 2 }} />
 
                   <Box sx={{ mb: 2 }}>
@@ -372,29 +406,25 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
               </Drawer>
               </>
         )}
-          <IconButton color="inherit" onClick={handleHome}>
-            <ListItemText primary="Home" />
-          </IconButton>
-          <IconButton color="inherit" onClick={handleDashboard}>
-            <ListItemText primary="Dashboard" />
-          </IconButton>
-
-          <IconButton color="inherit" onClick={handleAbout}>
-            <ListItemText primary="About" />
-          </IconButton>
+          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleHome} >HOME</Button>
+          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleDashboard} >DASHBOARD</Button>
+          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleAbout} >ABOUT</Button>
          
         </div>
         <div>
-          <IconButton
-            color="inherit"
-            aria-label="theme"
-            onClick={toggleTheme}
-          >
-            {theme === 'light' ? <NightlightRound /> : <LightMode />}
-          </IconButton>
+          <Box sx={{ 
+            height: '130px', 
+            width: '130px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            }}>
+          <img src={LogoSVG} height="100px" width="100px" />
+          </Box>
         </div>
       </Toolbar>
     </AppBar>
+    </div>
   );
 };
 
