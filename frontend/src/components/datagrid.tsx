@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import 'firebase/firestore';
 import {db}from '../firebase-config'
 import {collection, getDocs,} from 'firebase/firestore'
-import {SearchBar, Navbar} from '../components/index';
+import {SearchBar, Navbar, Footer} from '../components/index';
 
 
 
@@ -134,7 +134,7 @@ const Dashboard: React.FC = () => {
 
   const handleRowClick = (params: any) => {
     const citizenId = params.row.id;
-    navigate(`/user-profile/${citizenId}`);
+    navigate(`/Datagrid/create-user/${citizenId}`);
   }
 
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -177,7 +177,7 @@ const Dashboard: React.FC = () => {
         />
       </div>
     </div>
-
+    <Footer />
 
     </>
   );
