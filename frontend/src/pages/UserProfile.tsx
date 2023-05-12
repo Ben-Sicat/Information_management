@@ -5,6 +5,7 @@ import { Navbar, Footer } from '../components';
 import { doc, getDoc, getFirestore, deleteDoc } from 'firebase/firestore';
 import { config } from '../config/config';
 import { initializeApp } from 'firebase/app';
+import { styled } from '@mui/system';
 
 const app = initializeApp(config.firebaseConfig);
 const db = getFirestore(app);
@@ -15,34 +16,39 @@ interface Field {
   type?: string;
   options?: string[];
   defaultValue?: string;
+  [key: string]: any;
   firstName?: string;
   middleName?: string;
   lastName?: string;
   suffix?: string;
 }
 const fields: Field[] = [
-  // field definitions...
-  { label: 'Last Name', name: 'lastName' },
-  { label: 'First Name', name: 'firstName' },
-  { label: 'Middle Name', name: 'middleName' },
-  { label: 'Suffix', name: 'suffix' },
-  { label: 'Age', name: 'age', type: 'number' },
-  { label: 'Birth Month', name: 'birthMonth' },
-  { label: 'Birth Day', name: 'birthDay' },
-  { label: 'Birth Year', name: 'birthYear' },
-  { label: 'Building Number', name: 'bldgNo' },
-  { label: 'Street Name', name: 'streetName'
- },
-  { label: 'District Number', name: 'districtNo', defaultValue: '5' },
-  { label: 'District Name', name: 'districtName' },
-  { label: 'Zone', name: 'zone', defaultValue: '72' },
-  { label: 'Gender', name: 'gender', options: ['Male', 'Female', 'Other'] },
-  { label: 'Civil Status', name: 'civilstatus' ,options: ['Single', 'Married', 'Divorced', 'Widowed']},
-  { label: 'Voter', name: 'voter' ,options: ['Yes', 'No'],},
-  { label: 'Status', name: 'status', options: ['Active', 'Inactive', 'Deceased','Bedridden']},
-  { label: 'Email', name: 'email' },
-  { label: 'Contact Number', name: 'contactNumber' },
+  { label: 'FIRST NAME', name: 'firstName' },
+  { label: 'MIDDLE NAME', name: 'middleName' },
+  { label: 'LAST NAME', name: 'lastName' },
+  { label: 'SUFFIX', name: 'suffix' },
+
+  { label: 'BUILDING NUMBER', name: 'bldgNo' },
+  { label: 'STREET NAME', name: 'streetName' },
+  { label: 'DISTRICT NUMBER', name: 'districtNo', defaultValue: '5' },
+  { label: 'DISTRICT NAME', name: 'districtName' },
+
+  { label: 'AGE', name: 'age', type: 'number' },
+  { label: 'BIRTH MONTH', name: 'birthMonth' },
+  { label: 'BIRTH DAY', name: 'birthDay' },
+  { label: 'BIRTH YEAR', name: 'birthYear' },
+  { label: 'EMAIL', name: 'email' },
+  { label: 'CONTACT NUMBER', name: 'contactNumber' },
+ 
+
+  { label: 'ZONE', name: 'zone', defaultValue: '72' },
+  { label: 'GENDER', name: 'gender', options: ['Male', 'Female', 'Other'] },
+  { label: 'CIVIL STATUS', name: 'civilstatus' ,options: ['Single', 'Married', 'Divorced', 'Widowed']},
+  { label: 'VOTER', name: 'voter' ,options: ['Yes', 'No'],},
+  { label: 'STATUS', name: 'status', options: ['Active', 'Inactive', 'Deceased','Bedridden']},
 ];
+
+
 const UserProfile: React.FC = () => {
   const navigate = useNavigate();
   const { userId } = useParams<{ userId: string }>();
@@ -98,28 +104,67 @@ const UserProfile: React.FC = () => {
     }
   };
 
+  const Container = styled('div')`
+  position: relative;
+  height: 100vh;
+`;
+  const BodyContainer = styled('div')`
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+`;
+
   return (
     <>
     <Navbar burger={false} updateSearchTerm={(term: string) => {}} />
-    
-    <Box sx={{ padding: { xs: '12px', sm: '24px' },
-  }}>
-      <Typography variant="h4" sx={{ marginBottom: '20px' }}>
-        {getFullName()} - SENIOR PROFILE
-      </Typography>
-      <Grid container spacing={2}
-     
-      >
-        {fields.map((field) => (
-          <Grid item xs={12} sm={6} md={4} key={field.name}>
-            <Paper sx={{ padding: '16px',         boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )', }}>
-              <Typography variant="body1" sx={{ marginBottom: '8px' }}>
-                <strong>{field.label}:</strong> {user?.[field.name] || '-'}
-              </Typography>
-            </Paper>
-          </Grid>
+    <Container>
+    <BodyContainer>
+    <Box sx={{ padding: { xs: '12px', sm: '24px' }, marginBottom: '3rem' }}>
+  <Typography variant="h4" sx={{ marginBottom: '20px' }}>
+    {getFullName()} - SENIOR PROFILE
+  </Typography>
+  <Grid container spacing={2}>
+    <Grid item xs={12} md={6}>
+      <Paper sx={{ padding: '16px', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}>
+        {fields.slice(0, 4).map((field) => (
+          <Typography variant="body1" sx={{ marginBottom: '8px' }}>
+            <strong>{field.label}:</strong> {user?.[field.name] || '-'}
+          </Typography>
         ))}
-      </Grid>
+      </Paper>
+    </Grid>
+    <Grid item xs={12} md={6}>
+      <Paper sx={{ padding: '16px', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}>
+        {fields.slice(4, 8).map((field) => (
+          <Typography variant="body1" sx={{ marginBottom: '8px' }}>
+            <strong>{field.label}:</strong> {user?.[field.name] || '-'}
+          </Typography>
+        ))}
+      </Paper>
+    </Grid>
+    <Grid item xs={12} md={6}>
+      <Paper sx={{ padding: '16px', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}>
+        {fields.slice(8, 12).map((field) => (
+          <Typography variant="body1" sx={{ marginBottom: '8px' }}>
+            <strong>{field.label}:</strong> {user?.[field.name] || '-'}
+          </Typography>
+        ))}
+      </Paper>
+    </Grid>
+    <Grid item xs={12} md={6}>
+      <Paper sx={{ padding: '16px', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}>
+        {fields.slice(12,19).map((field) => (
+          <Typography variant="body1" sx={{ marginBottom: '8px' }}>
+            <strong>{field.label}:</strong> {user?.[field.name] || '-'}
+          </Typography>
+        ))}
+      </Paper>
+    </Grid>
+  </Grid>
+</Box>
+
+
+    <Box sx={{ display: 'flex', gap: '2rem' }}>
       <Button variant="contained" onClick={handleEditClick}>
         Edit
       </Button>
@@ -130,6 +175,9 @@ const UserProfile: React.FC = () => {
         Delete
       </Button>
     </Box>
+    </BodyContainer>
+      <Footer />
+      </Container>
     </>
   );
 };
