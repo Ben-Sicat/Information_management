@@ -406,7 +406,7 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
               </Drawer>
               </>
         )}
-          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleHome} >HOME</Button>
+          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleHome} >DATAGRID</Button>
           <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleDashboard} >DASHBOARD</Button>
           <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleAbout} >ABOUT</Button>
          
