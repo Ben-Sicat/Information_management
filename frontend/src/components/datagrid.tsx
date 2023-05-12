@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from 'react'; 
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+// import { 
+//   Box, 
+//   Typography, 
+//   TextField, 
+//   Button, 
+//   Paper } 
+//   from '@mui/material';
+import { styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import 'firebase/firestore';
 import {db}from '../firebase-config'
 import {collection, getDocs,} from 'firebase/firestore'
 import {SearchBar, Navbar, Footer} from '../components/index';
-
+import { Button, Box} from '@mui/material';
 
 
 interface Citizen {
   id: string;
+  rowID: number;
   lastName: string;
   firstName: string;
   middleName: string;
@@ -34,26 +43,27 @@ interface Citizen {
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 50 },
-  { field: 'lastName', headerName: 'Last Name', width: 150 },
-  { field: 'firstName', headerName: 'First Name', width: 150 },
-  { field: 'middleName', headerName: 'Middle Name', width: 150 },
-  { field: 'suffix', headerName: 'Suffix', width: 80 },
-  { field: 'birthMonth', headerName: 'Birth Month', width: 150 },
-  { field: 'birthDay', headerName: 'Birth Day', width: 100 },
-  { field: 'birthYear', headerName: 'Birth Year', width: 150 },
-  { field: 'contactNumber', headerName: 'Contact Num.', width: 180 },
-  { field: 'age', headerName: 'Age', width: 100 },
-  { field: 'bldgNo', headerName: 'Building No.', width: 150 },
-  { field: 'streetName', headerName: 'Street Name', width: 200 },
-  { field: 'districtNo', headerName: 'District No.', width: 150 },
-  { field: 'districtName', headerName: 'District Name', width: 150 },
-  { field: 'zone', headerName: 'Zone', width: 100 },
-  { field: 'gender', headerName: 'Gender', width: 100 },
-  { field: 'civilStatus', headerName: 'Civil Status', width: 150 },
-  { field: 'voter', headerName: 'Voter', width: 100 },
-  { field: 'status', headerName: 'Status', width: 150 },
-  { field: 'email', headerName: 'Email', width: 250 },
-  { field: 'address', headerName: 'Address', width: 250 },
+  { field: 'rowID', headerName: 'ID', width: 50 },
+  { field: 'lastName', headerName: 'Last Name', headerAlign: 'center', align:'center', width: 150 },
+  { field: 'firstName', headerName: 'First Name', headerAlign: 'center', align:'center', width: 150 },
+  { field: 'middleName', headerName: 'Middle Name', headerAlign: 'center', align:'center', width: 150 },
+  { field: 'suffix', headerName: 'Suffix', headerAlign: 'center', align:'center', width: 80 },
+  { field: 'birthMonth', headerName: 'Birth Month', headerAlign: 'center', align:'center', width: 150 },
+  { field: 'birthDay', headerName: 'Birth Day', headerAlign: 'center', align:'center', width: 100 },
+  { field: 'birthYear', headerName: 'Birth Year', headerAlign: 'center', align:'center', width: 150 },
+  { field: 'contactNumber', headerName: 'Contact Num.', headerAlign: 'center', align:'center',width: 180 },
+  { field: 'age', headerName: 'Age', headerAlign: 'center', align:'center', width: 100 },
+  { field: 'bldgNo', headerName: 'Building No.', headerAlign: 'center', align:'center', width: 150 },
+  { field: 'streetName', headerName: 'Street Name', headerAlign: 'center', align:'center', width: 200 },
+  { field: 'districtNo', headerName: 'District No.', headerAlign: 'center', align:'center', width: 150 },
+  { field: 'districtName', headerName: 'District Name', headerAlign: 'center', align:'center', width: 150 },
+  { field: 'zone', headerName: 'Zone', headerAlign: 'center', align:'center', width: 100 },
+  { field: 'gender', headerName: 'Gender', headerAlign: 'center', align:'center', width: 100 },
+  { field: 'civilStatus', headerName: 'Civil Status', headerAlign: 'center', align:'center', width: 150 },
+  { field: 'voter', headerName: 'Voter', headerAlign: 'center', align:'center', width: 100 },
+  { field: 'status', headerName: 'Status', headerAlign: 'center', align:'center', width: 150 },
+  { field: 'email', headerName: 'Email', headerAlign: 'center', align:'center', width: 250 },
+  { field: 'address', headerName: 'Address', headerAlign: 'center', align:'center',width: 250 },
 ];
 
 
@@ -71,41 +81,21 @@ const hiddenColumns = [
 const visibleColumns = columns.filter((column) => !hiddenColumns.includes(column.field));
 
 
-const Dashboard: React.FC = () => {
+const DataPageGrid: React.FC = () => {
   const navigate = useNavigate();
   const [filterField] = useState('');
   const [citizens, setCitizens] = useState<Citizen[]>([]);
-  const [cachedData, setCachedData] = useState<Citizen[]>([]);
-  const [lastFetched, setLastFetched] = useState<number>(0);
   const [searchTerm, setSearchTerm] = useState('');
   const citizenCollectionRef = collection(db, 'citizens');
 
 
-
-  // const handleDeleteUser = () => {
-
-  // }
-  // const handleEditUser = () => {
-
-  // }
-
   useEffect(() => {
-    const cacheExpiry = 1120 * 60 * 1000; // 1 day
-    const currentTime = Date.now();
-    if (cachedData.length === 0 || currentTime - lastFetched >= cacheExpiry) {
-      const getCitizens = async () => {
-        const data = await getDocs(citizenCollectionRef)
-        const newData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) as Citizen[];
-        setCitizens(newData);
-        setCachedData(newData);
-        setLastFetched(Date.now());
-      }
-      getCitizens();      
-    } else {
-      setCitizens(cachedData);
+    const getCitizens = async () => {
+      const data = await getDocs(citizenCollectionRef)
+      setCitizens(data.docs.map((doc, index) => ({ ...doc.data(), id: doc.id, rowID: index + 1 })) as Citizen[]);
     }
-  }, [cachedData, lastFetched]);
-  
+    getCitizens();
+  }, []);
     
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -134,18 +124,38 @@ const Dashboard: React.FC = () => {
 
   const handleRowClick = (params: any) => {
     const citizenId = params.row.id;
-    navigate(`/Datagrid/create-user/${citizenId}`);
+    navigate(`/user-profile/${citizenId}`);
   }
-
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+  const handleAddNowClick = () => {
+    navigate('/Datagrid/create-user/');
   };
+
+  const Container = styled('div')`
+  position: relative;
+  height: 100vh;
+`;
+  const BodyContainer = styled('div')`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+`;
+const ButtonContainer = styled('div')`
+  position: sticky;
+  bottom: 1.5rem;
+  left: 100rem;
+  z-index: 999;
+  '@media (max-width: 600px)': {
+    bottom: 1.5rem;
+  },
+`;
+  
 
   return (
     <>
-<Navbar theme={theme} toggleTheme={toggleTheme} updateSearchTerm={updateSearchTerm} burger ={true}/>
+ <Navbar updateSearchTerm={updateSearchTerm} burger ={true}/>
+ <Container>
+ <BodyContainer>
 <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
 <div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div style={{ height: 'calc(100% - 40px)', width: '100%', margin: 'auto', marginBottom: '20px' }}>
@@ -177,10 +187,20 @@ const Dashboard: React.FC = () => {
         />
       </div>
     </div>
-    <Footer />
-
+    <ButtonContainer>
+        <Button variant="contained" onClick={handleAddNowClick} sx={{
+          py: 2,
+          fontSize: '2rem',
+          padding:0,
+          borderRadius: '50%'
+        }}>+</Button>
+      </ButtonContainer>
+    </BodyContainer>
+    <Footer/>
+    </Container>
+    
     </>
   );
 };
 
-export default Dashboard;
+export default DataPageGrid;
