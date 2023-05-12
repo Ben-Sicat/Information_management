@@ -44,8 +44,7 @@ const statusOptions: Option[] = [
   { value: 'active', label: 'ACTIVE' },
   { value: 'inactive', label: 'INACTIVE' },
   { value: 'bedridden', label: 'BED RIDDEN' },
-  { value: 'new', label: 'NEW' },
-  { value: 'senior', label: 'SENIOR' },
+  { value: 'new senior', label: 'NEW SENIOR' },
   { value: 'transfer', label: 'TRANSFEREE' },
 ];
 
@@ -230,18 +229,22 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
   const handleBuildingNoClick = () => setBuildingNoDropdown(!buildingNoDropdown);
   const handleStreetClick = () => setStreetDropdown(!streetDropdown);
 
-  const navigate = useNavigate();
 
-const handleAbout: React.MouseEventHandler<HTMLButtonElement> = () => {
-  
-  navigate('/about');
-}
-const handleDashboard: React.MouseEventHandler<HTMLButtonElement> = () => {
-  navigate('/dashboard');
-}
-const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
-  navigate('/Datagrid');
-}
+  // HANDLER FOR NAVIGATION LINKS
+  const navigate = useNavigate();
+  const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
+    navigate('/home');
+  }
+  const handleDataGridPage: React.MouseEventHandler<HTMLButtonElement> = () => {
+    navigate('/Datagrid');
+  }
+  const handleDashboard: React.MouseEventHandler<HTMLButtonElement> = () => {
+    navigate('/dashboard');
+  }
+  const handleAbout: React.MouseEventHandler<HTMLButtonElement> = () => {
+    navigate('/about');
+  }
+ 
 
 
   const [open, setState] = useState<boolean>(false);
@@ -406,7 +409,8 @@ const handleHome: React.MouseEventHandler<HTMLButtonElement> = () => {
               </Drawer>
               </>
         )}
-          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleHome} >DATAGRID</Button>
+          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleHome} >HOME</Button>
+          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleDataGridPage} >DATAGRID</Button>
           <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleDashboard} >DASHBOARD</Button>
           <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleAbout} >ABOUT</Button>
          

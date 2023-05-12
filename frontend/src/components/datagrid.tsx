@@ -18,7 +18,7 @@ import { Button, Box} from '@mui/material';
 
 interface Citizen {
   id: string;
-  rowID: number;
+  rowNumber: number;
   lastName: string;
   firstName: string;
   middleName: string;
@@ -43,7 +43,7 @@ interface Citizen {
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 50 },
-  { field: 'rowID', headerName: 'ID', width: 50 },
+  { field: 'rowNumber', headerName: '#', width: 50 },
   { field: 'lastName', headerName: 'Last Name', headerAlign: 'center', align:'center', width: 150 },
   { field: 'firstName', headerName: 'First Name', headerAlign: 'center', align:'center', width: 150 },
   { field: 'middleName', headerName: 'Middle Name', headerAlign: 'center', align:'center', width: 150 },
@@ -92,7 +92,7 @@ const DataPageGrid: React.FC = () => {
   useEffect(() => {
     const getCitizens = async () => {
       const data = await getDocs(citizenCollectionRef)
-      setCitizens(data.docs.map((doc, index) => ({ ...doc.data(), id: doc.id, rowID: index + 1 })) as Citizen[]);
+      setCitizens(data.docs.map((doc, index) => ({ ...doc.data(), id: doc.id, rowNumber: ++index })) as Citizen[]);
     }
     getCitizens();
   }, []);
