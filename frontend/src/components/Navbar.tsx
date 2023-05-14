@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {useState, useEffect}  from 'react';
-import {Typography, ListItemButton, ListItemIcon, ListItemText, List, Collapse, AppBar, Toolbar, Button, IconButton, Drawer, Box, Divider} from "@mui/material";
+import {ListItemButton, ListItemIcon, ListItemText, List, Collapse, AppBar, Toolbar, Button, Drawer, Box, Divider} from "@mui/material";
 import {ExpandLess, ExpandMore, Description, Menu, Close} from "@mui/icons-material";
 import { getAuth, signOut } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
@@ -423,7 +423,7 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
             justifyContent: 'center',
             alignItems: 'center',
             }}>
-          <img src={LogoSVG} height="100px" width="100px" />
+          <img src={LogoSVG} alt= "LOGO" height="100px" width="100px" />
           </Box>
         </div>
       </Toolbar>

@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
         }}
       >
         <Box>
-          <Link href='/main-menu'><img src={logoPNG} height={134} width={134}/></Link>
+          <Link href='/main-menu'><img src={logoPNG} alt="BrgyLOGO" height={134} width={134}/></Link>
         </Box>
         <Box>
           <Typography variant="body2" sx={{ display:'flex', flexDirection:'column' }}>
