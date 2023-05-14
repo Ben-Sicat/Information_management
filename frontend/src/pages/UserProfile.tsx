@@ -97,7 +97,7 @@ const UserProfile: React.FC = () => {
     try{
       const userRef = doc(db, 'citizens', userId);
       await deleteDoc(userRef);
-      navigate('/dashboard');
+      navigate('/Datagrid');
     }
     catch(error){
         console.error("Error delete user:", error)

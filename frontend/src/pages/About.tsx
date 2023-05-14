@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navbar, Footer } from '../components';
-import { Box, Typography, Container, Grid } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
 import { styled } from '@mui/system';
-import { Padding } from '@mui/icons-material';
+
 
 const About = () => {
   const Container = styled('div')`

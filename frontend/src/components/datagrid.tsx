@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from 'react'; 
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-// import { 
-//   Box, 
-//   Typography, 
-//   TextField, 
-//   Button, 
-//   Paper } 
-//   from '@mui/material';
 import { styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import 'firebase/firestore';
 import {db}from '../firebase-config'
 import {collection, getDocs,} from 'firebase/firestore'
 import {SearchBar, Navbar, Footer} from '../components/index';
-import { Button, Box} from '@mui/material';
+import { Button} from '@mui/material';
 
 
 interface Citizen {
