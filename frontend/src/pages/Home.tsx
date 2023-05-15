@@ -1,23 +1,71 @@
 import React from 'react'
-import { Navbar } from '../components/index';
-import { Box, Paper,Typography, Container} from '@mui/material'
+import { Navbar, Footer } from '../components/index';
+import { Typography, Container, Grid, Button} from '@mui/material'
+import LogoSVG from '../assets/Logo.svg';
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
   return (
    <>
     <Navbar burger={false} updateSearchTerm={(term: string) => {}}/>
     <Container sx={{
         width: '100%',
-        height: '100%',
+        height: '100vh',
         backgroundColor: '',// add styling or make this a background photo and another container to change the color of the pic to purple with a set opacity
     }}> 
-    <Typography variant="h1" sx={{color: 'white', textAlign: 'center', paddingTop: '20px'}}>Welcome to the Home Page</Typography>
+   <Container sx={{
+
+        alighItems: 'center',
+        justifyContent: 'center',
+        display: 'flex',
+   }}>
+    <Grid container spacing={16}>
+      <Grid item xs={2} sm={6}>
+        <Typography variant="h2" sx={{
+          color: 'black',
+          textAlign: 'left',
+          marginTop: '50%',
+
+          }}>
+            BARANGAY 670 ZONE 72
+            </Typography>
+      </Grid>
+      <Grid item xs={2} sm={6}>
+        <img src={LogoSVG} alt="Logo" width="100%" height="100%" />
+      </Grid>
+    </Grid>
+
+
+    </Container>
     
+    <Button variant="outlined" sx={{
+      marginTop: '2rem',
+      width: '30%',
+      
+      color: 'purple',
+      fontSize: '1.5rem',
+      borderRadius: '10px',
+      padding: '.5rem',
+      '&:hover': {
+        backgroundColor: 'purple',
+        color: 'black',
+      }
+    }} onClick={() => {navigate('/login')}}>
+      Login
+    </Button>
+
     
     </Container>
+
+        <Footer />
    </> 
   )
   
 }
 
 export default Home
+
