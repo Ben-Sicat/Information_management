@@ -410,8 +410,8 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
               </>
         )}
           <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleHome} >HOME</Button>
+          <Button sx={{ fontWeight: 698}} color="inherit" onClick={handleDashboard} >DASHBOARD</Button>
           <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleDataGridPage} >DATAGRID</Button>
-          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleDashboard} >DASHBOARD</Button>
           <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleAbout} >ABOUT</Button>
          
         </div>
