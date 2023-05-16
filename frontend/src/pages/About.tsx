@@ -5,6 +5,7 @@ import { styled } from '@mui/system';
 import ComputerIcon from '@mui/icons-material/Computer';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import logoBIG from '../assets/LOGOBIG.png';
 
 const About = () => {
   const Container = styled('div')`
@@ -41,7 +42,7 @@ const About = () => {
     display: 'flex',
     flexDirection: 'column',
     gap:'100px',
-    mt: '30em',
+    mt: '100em',
     textAlign: 'center',
     alignItems:'center',
     mb:'5em',
@@ -50,7 +51,13 @@ const About = () => {
   const icony={
     fontSize: '100px'
   }
-
+  const logy={
+  display: 'flex',
+  flexDirextion: 'row',
+  gap: '100px',
+  alignItems:'center',
+  justifyContent:'center'
+}
   
 
   return (
@@ -59,20 +66,21 @@ const About = () => {
       <Container >     
         <BodyContainer sx={{textAlign: 'justify'}} >
         <Container sx ={conty}>
-          
-         
-          
-          <Box sx={{ width: '75%' }}>
-          <Typography variant="h4" sx={{fontWeight: "1000", textTransform: "uppercase"}}>
-            About Us
-          </Typography>
-            <Typography variant="body1" sx={{textAlign: 'justify'}}>
-              The Senior Citizen Information System is a replacement for the traditional method of visualizing data,
-              managing records and information of senior citizens. It functions as a database that stores and manages
-              records of senior citizens in Barangay 670 Zone 72, eliminating the need for paperwork and minimizing the
-              risk of human errors in record-keeping. The website is capable of efficiently managing records of senior
-              citizens in the barangays. 
+          <Box sx={logy}>
+            <Box sx={{width:'35%'}}>
+            <Typography variant="h4" sx={{fontWeight: "1000", textTransform: "uppercase",mb:'20px', textAlign:'left'}}>
+              <Typography variant="h4"  sx={{color:"#440079"}}>Senior Citizen </Typography> Information Management System
             </Typography>
+              <Typography variant="body1" sx={{textAlign: 'left'}}>
+                The Senior Citizen Information System is a replacement for the traditional method of visualizing data,
+                managing records and information of senior citizens. It functions as a database that stores and manages
+                records of senior citizens in Barangay 670 Zone 72, eliminating the need for paperwork and minimizing the
+                risk of human errors in record-keeping. The website is capable of efficiently managing records of senior
+                citizens in the barangays. 
+            </Typography>
+            </Box>
+          <img src={logoBIG}  alt= "LOGO" height="400px" width="400px"/>
+
           </Box>
           <Box sx={boxy}>
             <Box>
@@ -103,7 +111,7 @@ const About = () => {
           <Typography variant="h4" sx={{textTransform: "uppercase"}}>
            Barangay 670 Zone 72
           </Typography>
-            <Typography variant="body1"  sx={{textAlign: 'justify'}}>
+            <Typography variant="body1"  sx={{textAlign: 'center'}}>
               The Senior Citizen Information System is a replacement for the traditional method of visualizing data,
               managing records and information of senior citizens. It functions as a database that stores and manages
               records of senior citizens in Barangay 670 Zone 72, eliminating the need for paperwork and minimizing the
@@ -172,9 +180,11 @@ const About = () => {
               </Box>
             </Grid>
           </Grid>
+          <Footer />
         </BodyContainer>
+      
       </Container>
-      <Footer />
+      
     </>
   );  
 };
