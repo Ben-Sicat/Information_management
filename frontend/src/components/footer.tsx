@@ -17,6 +17,7 @@ const Footer: React.FC = () => {
         backgroundColor: '#f5f5f5',
         py: 4,
         px: 2,
+        mt: 60,
        }}
 
     >
@@ -28,6 +29,7 @@ const Footer: React.FC = () => {
           flexDirection: 'row',
           justifyContent: 'space-between',
           mb: 2,
+         
           '& > *': {
             marginRight: 3,
             marginTop: 2, 
