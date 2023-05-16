@@ -357,47 +357,77 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
 
                   <Box sx={{ mb: 2 }}>
                     <DropdownMenu
+<<<<<<< HEAD
                       IconMenu={<Wc />}
+=======
+                      IconMenu={<Wc sx={{ color: 'primary.main' }} />}
+>>>>>>> 34a07d4d3d4b4aad4f1421d5ede452c68932a313
                       title="GENDER"
                       options={genderOptions}
                       isOpen={genderDropdown}
                       onClick={handleGenderClick}
                       updateSearchTerm={updateSearchTerm} />
                     <DropdownMenu
+<<<<<<< HEAD
                        IconMenu={<Wc />}
+=======
+                      IconMenu={<Description sx={{ color: 'primary.main' }} />}
+>>>>>>> 34a07d4d3d4b4aad4f1421d5ede452c68932a313
                       title="CIVIL STATUS"
                       options={civilStatusOptions}
                       isOpen={civilStatusDropdown}
                       onClick={handleCivilStatusClick}
                       updateSearchTerm={updateSearchTerm} />
                     <DropdownMenu
+<<<<<<< HEAD
                     IconMenu={<Wc />}
+=======
+                      IconMenu={<Description sx={{ color: 'primary.main' }} />}
+>>>>>>> 34a07d4d3d4b4aad4f1421d5ede452c68932a313
                       title="VOTER"
                       options={voterOptions}
                       isOpen={voterDropdown}
                       onClick={handleVoterClick}
                       updateSearchTerm={updateSearchTerm} />
                     <DropdownMenu
+<<<<<<< HEAD
                     IconMenu={<Wc />}
+=======
+                      IconMenu={<Description sx={{ color: 'primary.main' }} />}
+>>>>>>> 34a07d4d3d4b4aad4f1421d5ede452c68932a313
                       title="STATUS"
                       options={statusOptions}
                       isOpen={statusDropdown}
                       onClick={handleStatusClick}
                       updateSearchTerm={updateSearchTerm} />
+<<<<<<< HEAD
                       <DropdownMenu
                       IconMenu={<Wc />}
+=======
+                    <DropdownMenu
+                      IconMenu={<Description sx={{ color: 'primary.main' }} />}
+>>>>>>> 34a07d4d3d4b4aad4f1421d5ede452c68932a313
                       title="STREET"
                       options={streetOptions}
                       isOpen={streetDropdown}
                       onClick={handleStreetClick}
                       updateSearchTerm={updateSearchTerm} />
                     <DropdownMenu
+<<<<<<< HEAD
                     IconMenu={<Wc />}
                     title="BUILDING NO."
                     options= {buildingNoOptions}
                     isOpen={buildingNoDropdown}
                     onClick={handleBuildingNoClick}
                     updateSearchTerm={updateSearchTerm}/>
+=======
+                      IconMenu={<Description sx={{ color: 'primary.main' }} />}
+                      title="BUILDING NO."
+                      options= {buildingNoOptions}
+                      isOpen={buildingNoDropdown}
+                      onClick={handleBuildingNoClick}
+                      updateSearchTerm={updateSearchTerm}/>
+>>>>>>> 34a07d4d3d4b4aad4f1421d5ede452c68932a313
                   </Box>
 
                   <Box
