@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {useState, useEffect}  from 'react';
 import {ListItemButton, ListItemIcon, ListItemText, List, Collapse, AppBar, Toolbar, Button, Drawer, Box, Divider} from "@mui/material";
-import {ExpandLess, ExpandMore, Description, Menu, Close} from "@mui/icons-material";
+import {ExpandLess, ExpandMore, Description, Menu, Close, Wc} from "@mui/icons-material";
 import { getAuth, signOut } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { config } from '../config/config';
@@ -183,16 +183,17 @@ const streetOptions: Option[] =[
   
 ]
 const DropdownMenu: React.FC<{
+  IconMenu: React.ReactElement;
   title: string;
   options: Option[];
   isOpen: boolean;
   onClick: () => void;
   updateSearchTerm: (value: string) => void;
-}> = ({ title, options, isOpen, onClick, updateSearchTerm }) => (
+}> = ({IconMenu, title, options, isOpen, onClick, updateSearchTerm }) => (
   <>
     <ListItemButton onClick={onClick}>
       <ListItemIcon>
-        <Description sx={{ color: 'primary.main' }} />
+        {IconMenu}
       </ListItemIcon>
       <ListItemText primary={title} />
       {isOpen ? <ExpandLess /> : <ExpandMore />}
@@ -354,41 +355,47 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
 
                   <Box sx={{ mb: 2 }}>
                     <DropdownMenu
+                      IconMenu={<Wc sx={{ color: 'primary.main' }} />}
                       title="GENDER"
                       options={genderOptions}
                       isOpen={genderDropdown}
                       onClick={handleGenderClick}
                       updateSearchTerm={updateSearchTerm} />
                     <DropdownMenu
+                      IconMenu={<Description sx={{ color: 'primary.main' }} />}
                       title="CIVIL STATUS"
                       options={civilStatusOptions}
                       isOpen={civilStatusDropdown}
                       onClick={handleCivilStatusClick}
                       updateSearchTerm={updateSearchTerm} />
                     <DropdownMenu
+                      IconMenu={<Description sx={{ color: 'primary.main' }} />}
                       title="VOTER"
                       options={voterOptions}
                       isOpen={voterDropdown}
                       onClick={handleVoterClick}
                       updateSearchTerm={updateSearchTerm} />
                     <DropdownMenu
+                      IconMenu={<Description sx={{ color: 'primary.main' }} />}
                       title="STATUS"
                       options={statusOptions}
                       isOpen={statusDropdown}
                       onClick={handleStatusClick}
                       updateSearchTerm={updateSearchTerm} />
-                      <DropdownMenu
+                    <DropdownMenu
+                      IconMenu={<Description sx={{ color: 'primary.main' }} />}
                       title="STREET"
                       options={streetOptions}
                       isOpen={streetDropdown}
                       onClick={handleStreetClick}
                       updateSearchTerm={updateSearchTerm} />
                     <DropdownMenu
-                    title="BUILDING NO."
-                    options= {buildingNoOptions}
-                    isOpen={buildingNoDropdown}
-                    onClick={handleBuildingNoClick}
-                    updateSearchTerm={updateSearchTerm}/>
+                      IconMenu={<Description sx={{ color: 'primary.main' }} />}
+                      title="BUILDING NO."
+                      options= {buildingNoOptions}
+                      isOpen={buildingNoDropdown}
+                      onClick={handleBuildingNoClick}
+                      updateSearchTerm={updateSearchTerm}/>
                   </Box>
 
                   <Box
