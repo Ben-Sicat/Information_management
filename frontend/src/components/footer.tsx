@@ -8,10 +8,13 @@ import logoPNG from '../assets/Logo.png';
 
 const Footer: React.FC = () => {
   return (
+    <div style={{ overflow: 'hidden' }}>
     <Box
       component="footer"
       sx={{
-
+        position: 'static',
+        display: 'flex',
+        flexDirection: 'column',
         width: '100%',
         marginBottom: '0',
         backgroundColor: '#f5f5f5',
@@ -88,6 +91,7 @@ const Footer: React.FC = () => {
         &copy; {new Date().getFullYear()} All rights reserved.
       </Typography>
     </Box>
+    </div>
   );
 };
 
