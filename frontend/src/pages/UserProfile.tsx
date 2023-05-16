@@ -88,7 +88,7 @@ const UserProfile: React.FC = () => {
   };
 
     const handleEditClick = () => {
-      navigate(`/dashboard/create-user/${userId}`, { state: { userId, edit: true } });
+      navigate(`/DataGrid/create-user/${userId}`, { state: { userId, edit: true } });
     };
     
   
