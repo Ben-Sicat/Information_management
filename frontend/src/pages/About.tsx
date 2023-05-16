@@ -17,7 +17,7 @@ const About = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
+  margin: 120px 10px 120px 10px;
   gap: 4rem;
   `;
  
