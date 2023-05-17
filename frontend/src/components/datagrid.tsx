@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect, useMemo, useCallback, ChangeEvent } from 'react'; 
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import {db}from '../firebase-config'
 import {collection, getDocs,} from 'firebase/firestore'
 import {SearchBar, Navbar, Footer} from '../components/index';
 import { Button} from '@mui/material';
+import { debounce } from 'lodash';
 
 
 interface Citizen {
@@ -76,54 +77,57 @@ const visibleColumns = columns.filter((column) => !hiddenColumns.includes(column
 
 const DataPageGrid: React.FC = () => {
   const navigate = useNavigate();
-  const [filterField] = useState('');
-  const [citizens, setCitizens] = useState<Citizen[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage] = useState(1);
+  const [citizens, setCitizens] = useState<Citizen[]>([]);
+  const [lastFetched, setLastFetched] = useState<number>(0);
+
   const citizenCollectionRef = collection(db, 'citizens');
 
-  const PAGE_SIZE = 25; 
-
   useEffect(() => {
-    const getCitizens = async () => {
-      const data = await getDocs(citizenCollectionRef);
-      const allCitizens = data.docs.map((doc, index) => ({ ...doc.data(), id: doc.id, rowNumber: ++index }));
-      
+    const cacheExpiry = 1120 * 60 * 1000; // 1 day
+    const currentTime = Date.now();
 
-      const startIndex = (currentPage - 1) * PAGE_SIZE;
-      const endIndex = startIndex + PAGE_SIZE;
-      const paginatedCitizens = allCitizens.slice(startIndex, endIndex);
-  
-      setCitizens(paginatedCitizens as Citizen[]);
-    };
-  
-    getCitizens();
-  }, [citizenCollectionRef, currentPage]);
-    
+    if (citizens.length === 0 || currentTime - lastFetched >= cacheExpiry) {
+      const getCitizens = async () => {
+        try {
+          const data = await getDocs(citizenCollectionRef);
+          const newData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) as Citizen[];
+          setCitizens(newData);
+          setLastFetched(Date.now());
+        } catch (error) {
+          console.error('Error fetching citizens:', error);
+        }
+      };
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
+      getCitizens();
+    }
+  }, [citizens, lastFetched, citizenCollectionRef]);
 
-  console.log(filterField)
+  const handleSearch = useCallback(
+    debounce((event: ChangeEvent<HTMLInputElement>) => {
+      const term = event.target.value;
+      setSearchTerm(term);
+    }, 300),
+    []
+  );
+
   const updateSearchTerm = (term: string) => {
-    setSearchTerm(term);
+    handleSearch({ target: { value: term } } as ChangeEvent<HTMLInputElement>);
   };
 
-  
-  const filteredCitizens = citizens.filter((citizen) => {
+  const filteredCitizens = useMemo(() => {
     const searchTermLower = searchTerm.toLowerCase();
-    return Object.values(citizen).some((value) => {
-      if (typeof value === 'string') {
-        return value.toLowerCase().includes(searchTermLower);
-      } else if (typeof value === 'number') {
-        return value.toString().includes(searchTerm);
-      }
-      return false;
-
+    return citizens.filter((citizen) => {
+      return Object.values(citizen).some((value) => {
+        if (typeof value === 'string') {
+          return value.toLowerCase().includes(searchTermLower);
+        } else if (typeof value === 'number') {
+          return value.toString().includes(searchTerm);
+        }
+        return false;
+      });
     });
-  });
-  
+  }, [citizens, searchTerm]);
 
   const handleRowClick = (params: any) => {
     const citizenId = params.row.id;

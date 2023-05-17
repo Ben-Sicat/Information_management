@@ -54,30 +54,45 @@ const UserProfile: React.FC = () => {
   const { userId } = useParams<{ userId: string }>();
   const [user, setUser] = useState<Field | null>(null);
   // const [ editUser, setEditUser ] = useState<Field | null>(null);
+  const [cachedUserData, setCachedUserData] = useState<Field | null>(null);
+
   
 
 
   useEffect(() => {
-    const getUser = async () => {
-      try {
+    const cachedData = localStorage.getItem('userData');
+    if (cachedData) {
+      const userData = JSON.parse(cachedData) as Field;
+      setCachedUserData(userData);
+    }
+  }, []);
+  
+  const fetchUser = async () => {
+    try {
+      if (cachedUserData) {
+        setUser(cachedUserData);
+      } else {
         const userRef = doc(db, 'citizens', userId);
         const userDoc = await getDoc(userRef);
-
+  
         if (userDoc.exists()) {
           const userData = { ...userDoc.data(), id: userDoc.id } as unknown as Field;
-          console.log('userData:', userData);
           setUser(userData);
+          setCachedUserData(userData);
+          localStorage.setItem('userData', JSON.stringify(userData));
         } else {
           console.log('No such document!');
         }
-      } catch (error) {
-        console.error('Error retrieving user:', error);
       }
-    };
-
-    getUser();
+    } catch (error) {
+      console.error('Error retrieving user:', error);
+    }
+  };
+  
+  useEffect(() => {
+    fetchUser();
   }, [userId]);
-
+  
   const getFullName = (): string => {
     if (user) {
       const { firstName, middleName, lastName, suffix } = user;
@@ -86,21 +101,18 @@ const UserProfile: React.FC = () => {
     }
     return 'User Profile';
   };
-
-    const handleEditClick = () => {
-      navigate(`/DataGrid/create-user/${userId}`, { state: { userId, edit: true } });
-    };
-    
   
-
+  const handleEditClick = () => {
+    navigate(`/DataGrid/create-user/${userId}`, { state: { userId, edit: true } });
+  };
+  
   const handleDeleteClick = async () => {
-    try{
+    try {
       const userRef = doc(db, 'citizens', userId);
       await deleteDoc(userRef);
       navigate('/Datagrid');
-    }
-    catch(error){
-        console.error("Error delete user:", error)
+    } catch (error) {
+      console.error('Error deleting user:', error);
     }
   };
 
