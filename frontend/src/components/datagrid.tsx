@@ -102,14 +102,10 @@ const DataPageGrid: React.FC = () => {
       getCitizens();
     }
   }, [citizens, lastFetched, citizenCollectionRef]);
-
-  const handleSearch = useCallback(
-    debounce((event: ChangeEvent<HTMLInputElement>) => {
-      const term = event.target.value;
-      setSearchTerm(term);
-    }, 300),
-    []
-  );
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+  };
 
   const updateSearchTerm = (term: string) => {
     handleSearch({ target: { value: term } } as ChangeEvent<HTMLInputElement>);
