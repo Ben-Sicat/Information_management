@@ -4,7 +4,7 @@ import { getAuth,signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 import '../styles/globalStyles.css';
-import logoPNG from '../assets/Logo.png';
+import logoPNG from '../assets/Logo.svg';
 
 interface ILoginProps {}
 
