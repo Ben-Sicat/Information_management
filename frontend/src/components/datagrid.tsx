@@ -136,12 +136,12 @@ const DataPageGrid: React.FC = () => {
   const Container = styled('div')`
   position: relative;
   height: 100vh;
+  margin: 150px 10px 10px 10px;
 `;
   const BodyContainer = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
 `;
 const ButtonContainer = styled('div')`
   position: sticky;

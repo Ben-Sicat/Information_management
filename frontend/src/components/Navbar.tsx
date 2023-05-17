@@ -307,7 +307,7 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
    
 
   return (
-<div style={{ overflow: 'hidden' }}>
+<div style={{ overflow: 'hidden', position: 'fixed', width: '100%', top: 0, zIndex: 999}}>
     <AppBar
       position="static"
       sx={{
