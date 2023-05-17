@@ -9,44 +9,56 @@ const citizenCollectionRef = collection(db, 'citizens');
 const AgeGroup: React.FC = () => {
   const [ageData, setAgeData] = useState<any[]>([]);
 
-  useEffect(() => {
-    const fetchAgeData = async () => {
-      try {
-        const querySnapshot = await getDocs(citizenCollectionRef);
-        const citizens = querySnapshot.docs.map((doc) => doc.data());
+  const getCachedAgeData = (): any[] => {
+    const cachedData = localStorage.getItem('ageData');
+    return cachedData ? JSON.parse(cachedData) : [];
+  };
   
-        const ageRanges = [
-          { range: '60-70', min: 60, max: 70 },
-          { range: '70-80', min: 70, max: 80 },
-          { range: '80-90', min: 80, max: 90 },
-          { range: '90-99+', min: 90, max: 150 },
-        ];
-  
-        const ageData = ageRanges.map((ageRange) => {
-          const count = citizens.filter((citizen: any) => {
-            const age = citizen.age;
-            return age >= ageRange.min && age <= ageRange.max;
-          }).length;
-  
-          const percentage = (count / citizens.length) * 100;
-          const roundedPercentage = Math.round(percentage * 100) / 100;
-  
-          return {
-            range: ageRange.range,
-            count,
-            roundedPercentage,
-          };
+  const setCachedAgeData = (data: any[]) => {
+    localStorage.setItem('ageData', JSON.stringify(data));
+  };
+
+useEffect(() => {
+  const getCitizens = async () => {
+    const cachedAgeData = getCachedAgeData();
+
+    if (cachedAgeData.length > 0) {
+      setAgeData(cachedAgeData);
+    } else {
+      const querySnapshot = await getDocs(citizenCollectionRef);
+      const citizens = querySnapshot.docs.map((doc) => doc.data());
+
+      const ageRanges = [
+        { range: '60-70', min: 60, max: 70 },
+        { range: '70-80', min: 70, max: 80 },
+        { range: '80-90', min: 80, max: 90 },
+        { range: '90-99+', min: 90, max: 150 },
+      ];
+
+      const ageData = ageRanges.map((ageRange) => {
+        const filteredCitizens = citizens.filter((citizen: any) => {
+          const age = citizen.age;
+          return age >= ageRange.min && age <= ageRange.max;
         });
-  
-        // Update ageData state
-      } catch (error) {
-        console.error('Error fetching age data:', error);
-      }
-    };
-  
-    fetchAgeData();
-  }, []);
-  
+
+        const count = filteredCitizens.length;
+        const percentage = (count / citizens.length) * 100;
+        const roundedPercentage = Math.round(percentage * 100) / 100;
+
+        return {
+          range: ageRange.range,
+          count,
+          roundedPercentage,
+        };
+      });
+
+      setAgeData(ageData);
+      setCachedAgeData(ageData);
+    }
+  };
+
+  getCitizens();
+}, []);
 
 
   return (

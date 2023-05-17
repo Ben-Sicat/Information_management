@@ -90,6 +90,17 @@ const UserProfile: React.FC = () => {
   };
   
   useEffect(() => {
+    const cachedData = localStorage.getItem('userData');
+    if (cachedData) {
+      const userData = JSON.parse(cachedData) as Field;
+      setCachedUserData(userData);
+      setUser(userData);
+    } else {
+      fetchUser();
+    }
+  }, [userId]);
+  
+  useEffect(() => {
     fetchUser();
   }, [userId]);
   
