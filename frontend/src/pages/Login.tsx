@@ -72,16 +72,16 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
         alignItems: 'center',
         justifyContent: 'center',
         gap: 3,
-        padding: '10px',
+        padding: '50px',
         flex: '1 1 80%',
-        background: '#ddaae9',
+        background: '#FFFFFF',
       }}
     >
       <img
         src={logoPNG}
         style={{
-          width: '30rem',
-          height: '30rem',
+          width: '25rem',
+          height: '25rem',
         }}alt="Description of some sort"
         />
 
@@ -94,7 +94,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         sx={{
-          width: '60%',
+          width: '70%',
           input: { textAlign: 'center' },
           "& .MuiInputLabel-root": {
             right: 0,
@@ -115,7 +115,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         sx={{
-          width: '60%',
+          width: '70%',
           input: { textAlign: 'center' },
           "& .MuiInputLabel-root": {
             right: 0,
@@ -127,7 +127,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
         }}
       />
 
-      <Button type="submit" variant="contained" sx={{ marginTop: '0rem', width: '40%'   }}>
+      <Button type="submit" variant="contained" sx={{ marginTop: '0rem', width: '40%', borderRadius: '24px'  }}>
         Login
       </Button>
     </Box>
