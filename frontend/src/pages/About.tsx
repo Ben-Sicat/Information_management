@@ -5,7 +5,7 @@ import { styled } from '@mui/system';
 import ComputerIcon from '@mui/icons-material/Computer';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
-import logoBIG from '../assets/LOGOBIG.png';
+import logoBIG from '../assets/LOGOBIG.svg';
  
 const About = () => {
   const Container = styled('div')`
