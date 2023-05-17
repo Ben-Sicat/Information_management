@@ -78,6 +78,7 @@ const visibleColumns = columns.filter((column) => !hiddenColumns.includes(column
 const DataPageGrid: React.FC = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
+  const [filterField] = useState('');
   const [citizens, setCitizens] = useState<Citizen[]>([]);
   const [lastFetched, setLastFetched] = useState<number>(0);
 
@@ -102,13 +103,13 @@ const DataPageGrid: React.FC = () => {
       getCitizens();
     }
   }, [citizens, lastFetched, citizenCollectionRef]);
-  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    const term = event.target.value;
-    setSearchTerm(term);
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
   };
 
+  console.log(filterField)
   const updateSearchTerm = (term: string) => {
-    handleSearch({ target: { value: term } } as ChangeEvent<HTMLInputElement>);
+    setSearchTerm(term);
   };
 
   const filteredCitizens = useMemo(() => {
