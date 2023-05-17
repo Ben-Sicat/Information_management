@@ -140,12 +140,12 @@ const DataPageGrid: React.FC = () => {
   const Container = styled('div')`
   position: relative;
   height: 100vh;
+  margin: 150px 10px 10px 10px;
 `;
   const BodyContainer = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
 `;
 const ButtonContainer = styled('div')`
   position: sticky;
@@ -164,7 +164,7 @@ const ButtonContainer = styled('div')`
  <Container>
  <BodyContainer>
 <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
-<div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+<div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
       <div style={{ height: 'calc(100% - 40px)', width: '100%', margin: 'auto', marginBottom: '20px' }}>
         <DataGrid
           rows={filteredCitizens}

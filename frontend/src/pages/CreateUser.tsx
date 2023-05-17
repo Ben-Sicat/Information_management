@@ -179,7 +179,7 @@ const AddProfile: React.FC = () => {
 		<Navbar burger={false} updateSearchTerm={(term: string) => {}} />
 		<Container  sx={{ 
 			height: '100vh',
-			marginTop: '10%',
+			marginTop: '15%',
 			justifyContent: 'center',
 			alignItems: 'center',
 			'@media screen and (max-width: 899px)': {

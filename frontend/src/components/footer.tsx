@@ -4,7 +4,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import CallIcon from '@mui/icons-material/Call';
-import logoPNG from '../assets/Logo.png';
+import logoPNG from '../assets/Logo.svg';
 
 const Footer: React.FC = () => {
   return (

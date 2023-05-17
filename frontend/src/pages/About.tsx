@@ -5,7 +5,7 @@ import { styled } from '@mui/system';
 import ComputerIcon from '@mui/icons-material/Computer';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
-import logoBIG from '../assets/LOGOBIG.png';
+import logoBIG from '../assets/LOGOBIG.svg';
  
 const About = () => {
   const Container = styled('div')`
@@ -17,7 +17,7 @@ const About = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 120px 10px 120px 10px;
+  margin: 200px 10px 120px 10px;
   gap: 4rem;
   `;
  

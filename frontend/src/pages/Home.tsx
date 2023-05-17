@@ -15,8 +15,10 @@ const Home: React.FC = () => {
     <Container sx={{
         width: '100%',
         height: '100vh',
+        margin: '170px 0px 0px 0px',
         backgroundColor: '',// add styling or make this a background photo and another container to change the color of the pic to purple with a set opacity
-    }}> 
+      
+   }}> 
    <Container sx={{
 
         alighItems: 'center',
