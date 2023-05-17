@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {useState, useEffect}  from 'react';
-import {ListItemButton, ListItemIcon, ListItemText, List, Collapse, AppBar, Toolbar, Button, Drawer, Box, Divider} from "@mui/material";
+import { MenuItem, ListItemButton, ListItemIcon, ListItemText, List, Collapse, AppBar, Toolbar, Button, Drawer, Box, Divider} from "@mui/material";
 import {ExpandLess, ExpandMore, Description, Menu, Close, Wc} from "@mui/icons-material";
 import { getAuth, signOut } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
@@ -304,7 +304,19 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
     }
   };
 
-   
+  const navBtnSX ={
+    fontWeight: 700,
+    '@media (max-width: 768px)': {
+      display: 'none'
+    },
+  }
+  const navPhoneBtnSX ={
+    fontWeight: 700,
+    display: 'none',
+    '@media (max-width: 768px)': {
+      display: 'inline'
+    },
+  }
 
   return (
 <div style={{ overflow: 'hidden', position: 'fixed', width: '100%', top: 0, zIndex: 999}}>
@@ -417,10 +429,14 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
               </Drawer>
               </>
         )}
-          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleHome} >HOME</Button>
-          <Button sx={{ fontWeight: 698}} color="inherit" onClick={handleDashboard} >DASHBOARD</Button>
-          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleDataGridPage} >DATAGRID</Button>
-          <Button sx={{ fontWeight: 700}} color="inherit" onClick={handleAbout} >ABOUT</Button>
+          <Button 
+                  sx={navPhoneBtnSX} color="inherit">NAVIGATIONS</Button>
+
+
+          <Button sx={navBtnSX} color="inherit" onClick={handleHome} >HOME</Button>
+          <Button sx={navBtnSX} color="inherit" onClick={handleDashboard} >DASHBOARD</Button>
+          <Button sx={navBtnSX} color="inherit" onClick={handleDataGridPage} >DATAGRID</Button>
+          <Button sx={navBtnSX} color="inherit" onClick={handleAbout} >ABOUT</Button>
          
         </div>
         <div>
