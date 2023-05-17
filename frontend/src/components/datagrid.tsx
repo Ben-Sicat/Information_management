@@ -79,7 +79,7 @@ const DataPageGrid: React.FC = () => {
   const [filterField] = useState('');
   const [citizens, setCitizens] = useState<Citizen[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage] = useState(1);
   const citizenCollectionRef = collection(db, 'citizens');
 
   const PAGE_SIZE = 25; 
