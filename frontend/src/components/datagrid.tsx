@@ -79,16 +79,26 @@ const DataPageGrid: React.FC = () => {
   const [filterField] = useState('');
   const [citizens, setCitizens] = useState<Citizen[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage] = useState(1);
   const citizenCollectionRef = collection(db, 'citizens');
 
+  const PAGE_SIZE = 25; 
 
   useEffect(() => {
     const getCitizens = async () => {
-      const data = await getDocs(citizenCollectionRef)
-      setCitizens(data.docs.map((doc, index) => ({ ...doc.data(), id: doc.id, rowNumber: ++index })) as Citizen[]);
-    }
+      const data = await getDocs(citizenCollectionRef);
+      const allCitizens = data.docs.map((doc, index) => ({ ...doc.data(), id: doc.id, rowNumber: ++index }));
+      
+
+      const startIndex = (currentPage - 1) * PAGE_SIZE;
+      const endIndex = startIndex + PAGE_SIZE;
+      const paginatedCitizens = allCitizens.slice(startIndex, endIndex);
+  
+      setCitizens(paginatedCitizens as Citizen[]);
+    };
+  
     getCitizens();
-  }, []);
+  }, [citizenCollectionRef, currentPage]);
     
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {

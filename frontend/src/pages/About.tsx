@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Footer } from '../components';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import ComputerIcon from '@mui/icons-material/Computer';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';

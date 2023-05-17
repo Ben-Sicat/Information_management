@@ -28,7 +28,7 @@ const Home: React.FC = () => {
         <Typography variant="h2" sx={{
           color: 'black',
           textAlign: 'left',
-          marginTop: '50%',
+          
 
           }}>
             BARANGAY 670 ZONE 72
