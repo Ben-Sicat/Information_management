@@ -43,6 +43,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#f1ddf6',
     minHeight: '100vh',
     padding: '20px',
   }}
@@ -52,11 +53,12 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
     className="glassmorphism"
     sx={{
       display: 'flex',
-      borderRadius: '20px',
+      borderRadius: '25px',
+      padding: '20px',
       boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
-      backgroundColor: 'rgba(211, 211, 211, 0.2)',
+      backgroundColor: '#d699e5',
       flexWrap: 'wrap',
-      gap: '20px',
+      gap: '0px',
       maxWidth: '800px',
       width: '100%',
     }}
@@ -70,34 +72,29 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
         alignItems: 'center',
         justifyContent: 'center',
         gap: 3,
-        padding: '20px',
-        flex: '1 1 50%',
-        background: '#FDF4DC',
+        padding: '10px',
+        flex: '1 1 80%',
+        background: '#ddaae9',
       }}
     >
-      <Container
-        sx={{
-          backgroundColor: 'var(--tertiary-color)',
-          justifyContent: 'center',
-          alignItems: 'center',
-          margin: '10px 0px 50px',
-          paddingTop: '15px',
-          borderRadius: 3,
-        }}
-      >
-        <Typography variant="h3" align="center" gutterBottom sx={{ fontFamily: 'var(--font-family)' }}>
-          Sign In
-        </Typography>
-        {error && <Typography sx={{ color: 'red' }} align="center">{error}</Typography>}
-      </Container>
+      <img
+        src={logoPNG}
+        style={{
+          width: '30rem',
+          height: '30rem',
+        }}alt="Description of some sort"
+        />
 
       <TextField
-        label="Email"
-        variant="outlined"
+        id="filled-email-input"
+        label="E-mail"
+        type="email"
+        autoComplete="current-email"
+        variant="filled"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         sx={{
-          width: '100%',
+          width: '60%',
           input: { textAlign: 'center' },
           "& .MuiInputLabel-root": {
             right: 0,
@@ -110,13 +107,15 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
       />
 
       <TextField
+        id="filled-password-input"
         label="Password"
-        variant="outlined"
         type="password"
+        autoComplete="current-password"
+        variant="filled"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         sx={{
-          width: '100%',
+          width: '60%',
           input: { textAlign: 'center' },
           "& .MuiInputLabel-root": {
             right: 0,
@@ -128,7 +127,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
         }}
       />
 
-      <Button type="submit" variant="contained" sx={{ marginTop: '2rem', width: '60%' }}>
+      <Button type="submit" variant="contained" sx={{ marginTop: '0rem', width: '40%'   }}>
         Login
       </Button>
     </Box>
@@ -142,17 +141,11 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
         alignItems: 'center',
         justifyContent: 'center',
         gap: 2,
-        padding: '20px',
-        flex: '1 1 50%',
+        padding: '0px',
+        flex: '1 1 70%',
       }}
     >
-      <img
-        src={logoPNG}
-        style={{
-          width: '15rem',
-          height: '15rem',
-        }}alt="Description of some sort"
-        />
+     
         </Box>
         </Paper>
         </Box>
