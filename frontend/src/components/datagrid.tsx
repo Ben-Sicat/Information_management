@@ -98,7 +98,7 @@ const DataPageGrid: React.FC = () => {
     };
   
     getCitizens();
-  }, [currentPage]);
+  }, [citizenCollectionRef, currentPage]);
     
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
