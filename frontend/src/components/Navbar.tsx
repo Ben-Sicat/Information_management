@@ -278,7 +278,7 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
       border: 'none',
       color: 'var(--secondary-color)',
       fontWeight: 'bold',
-      transition: 'background-color 2.5s linear',
+      transition: 'background-color 1.6s linear',
     },
     solidBackground: {
       background: 'var(--tertiary-color)',
@@ -297,7 +297,7 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
   }, []);
 
   const handleScroll = () => {
-    if (window.pageYOffset > 60) {
+    if (window.pageYOffset > 50) {
       setIsScrolled(true);
     } else {
       setIsScrolled(false);
@@ -307,7 +307,7 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
    
 
   return (
-<div style={{ overflow: 'hidden' }}>
+<div style={{ overflow: 'hidden', position: 'fixed', width: '100%', top: 0, zIndex: 999}}>
     <AppBar
       position="static"
       sx={{

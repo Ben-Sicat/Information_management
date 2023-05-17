@@ -111,7 +111,7 @@ const UserProfile: React.FC = () => {
   const BodyContainer = styled('div')`
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  margin: 150px 20px 20px 20px;
 `;
 
   return (
