@@ -9,8 +9,22 @@ const citizenCollectionRef = collection(db, 'citizens');
 const AgeGroup: React.FC = () => {
   const [ageData, setAgeData] = useState<any[]>([]);
 
-  useEffect(() => {
-    const getCitizens = async () => {
+  const getCachedAgeData = (): any[] => {
+    const cachedData = localStorage.getItem('ageData');
+    return cachedData ? JSON.parse(cachedData) : [];
+  };
+  
+  const setCachedAgeData = (data: any[]) => {
+    localStorage.setItem('ageData', JSON.stringify(data));
+  };
+
+useEffect(() => {
+  const getCitizens = async () => {
+    const cachedAgeData = getCachedAgeData();
+
+    if (cachedAgeData.length > 0) {
+      setAgeData(cachedAgeData);
+    } else {
       const querySnapshot = await getDocs(citizenCollectionRef);
       const citizens = querySnapshot.docs.map((doc) => doc.data());
 
@@ -21,12 +35,10 @@ const AgeGroup: React.FC = () => {
         { range: '90-99+', min: 90, max: 150 },
       ];
 
-      
       const ageData = ageRanges.map((ageRange) => {
         const filteredCitizens = citizens.filter((citizen: any) => {
           const age = citizen.age;
           return age >= ageRange.min && age <= ageRange.max;
-
         });
 
         const count = filteredCitizens.length;
@@ -41,10 +53,12 @@ const AgeGroup: React.FC = () => {
       });
 
       setAgeData(ageData);
-    };
+      setCachedAgeData(ageData);
+    }
+  };
 
-    getCitizens();
-  }, []);
+  getCitizens();
+}, []);
 
 
   return (

@@ -19,26 +19,27 @@ const BarStat: React.FC<BarStatProps> = ({ statusField, title }) => {
       try {
         const querySnapshot = await getDocs(citizenCollectionRef);
         const data: any = {};
-
+  
         querySnapshot.forEach((doc) => {
           const status = doc.data()[statusField];
           data[status] = (data[status] || 0) + 1;
         });
-
+  
         const chartData = Object.keys(data).map((status, index) => ({
           status,
           count: data[status],
           fill: COLORS[index % COLORS.length],
         }));
-
+  
         setChartData(chartData);
       } catch (error) {
         console.error('Error fetching data from Firebase:', error);
       }
     };
-
+  
     fetchData();
   }, [statusField]);
+  
 
   if (!chartData) {
     return <div>Loading...</div>;
@@ -51,7 +52,7 @@ const BarStat: React.FC<BarStatProps> = ({ statusField, title }) => {
       height={300}
       sx={{
         p: 2,
-        backgroundColor: '#9747FF',
+        // backgroundColor: '#9747FF',
         borderRadius: '10px',
         boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
       }}
