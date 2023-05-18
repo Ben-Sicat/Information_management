@@ -147,7 +147,19 @@ const UserProfile: React.FC = () => {
   flex-direction: column;
   margin: 150px 20px 20px 20px;
 `;
+const handleShareClick = () => {
+  const linkToShare = window.location.href;
 
+  navigator.clipboard.writeText(linkToShare)
+    .then(() => {
+      console.log('Link copied to clipboard:', linkToShare);
+      alert('Link copied to clipboard!');
+    })
+    .catch((error) => {
+      console.error('Error copying link:', error);
+      alert('Error copying link. Please try again.');
+    });
+};
   return (
     <>
     <Navbar burger={false} updateSearchTerm={(term: string) => {}} />
@@ -206,6 +218,9 @@ const UserProfile: React.FC = () => {
       <Button variant="contained" onClick={handleDeleteClick}>
         Delete
       </Button>
+      <Button variant="contained" onClick={handleShareClick}>
+            Share
+          </Button>
     </Box>
     </BodyContainer>
       <Footer />

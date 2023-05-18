@@ -16,6 +16,7 @@ const barStatConfig = [
   { statusField: 'civilstatus', size: 6, title: 'Civil Status' },
   { statusField: 'voter', size: 6, title: 'Voter' },
   { statusField: 'gender', size: 6, title: 'Gender' },
+  { statusField: 'Benefits', size: 6, title: 'Benefits' },
 ];
 
 const Dashboard: React.FC = () => {
@@ -72,6 +73,7 @@ const Dashboard: React.FC = () => {
           display: 'flex',
           flexDirection: 'row',
           flexWrap: 'wrap',
+          
           '@media screen and (max-width: 768px)': {
             height: 'auto',
             flexDirection: 'column',

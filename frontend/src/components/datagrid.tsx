@@ -108,8 +108,6 @@ const DataPageGrid: React.FC = () => {
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
-
-  console.log(filterField)
   const updateSearchTerm = (term: string) => {
     setSearchTerm(term);
   };
