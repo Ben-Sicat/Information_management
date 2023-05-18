@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Typography, Paper, Grid, Button } from '@mui/material';
 import { Navbar, Footer } from '../components';
-import { doc, getDoc, getFirestore, deleteDoc } from 'firebase/firestore';
+import { doc, getDoc, getFirestore, deleteDoc, setDoc } from 'firebase/firestore';
 import { config } from '../config/config';
 import { initializeApp } from 'firebase/app';
 import { styled } from '@mui/system';
@@ -120,10 +120,20 @@ const UserProfile: React.FC = () => {
   const handleDeleteClick = async () => {
     try {
       const userRef = doc(db, 'citizens', userId);
-      await deleteDoc(userRef);
-      navigate('/Datagrid');
+      const userDoc = await getDoc(userRef);
+  
+      if (userDoc.exists()) {
+        const user = { ...userDoc.data(), id: userDoc.id };
+        const archiveRef = doc(db, 'archive', userId);
+        
+        await setDoc(archiveRef, user);
+        await deleteDoc(userRef); // Delete the document from the citizens collection
+        navigate('/Datagrid');
+      } else {
+        console.log('No such document!');
+      }
     } catch (error) {
-      console.error('Error deleting user:', error);
+      console.error('Error moving user to archive:', error);
     }
   };
 
