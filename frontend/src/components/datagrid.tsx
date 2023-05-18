@@ -92,8 +92,9 @@ const DataPageGrid: React.FC = () => {
     if (citizens.length === 0 || currentTime - lastFetched >= cacheExpiry) {
       const getCitizens = async () => {
         try {
+          let rowIndex =0;
           const data = await getDocs(citizenCollectionRef);
-          const newData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) as Citizen[];
+          const newData = data.docs.map((doc) => ({ ...doc.data(), rowNumber: ++rowIndex,id: doc.id })) as Citizen[];
           setCitizens(newData);
           setLastFetched(Date.now());
         } catch (error) {
