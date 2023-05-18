@@ -6,6 +6,7 @@ import { doc, getDoc, getFirestore, deleteDoc, setDoc } from 'firebase/firestore
 import { config } from '../config/config';
 import { initializeApp } from 'firebase/app';
 import { styled } from '@mui/system';
+import { Benefits } from '../components/index';
 
 const app = initializeApp(config.firebaseConfig);
 const db = getFirestore(app);
@@ -196,6 +197,7 @@ const UserProfile: React.FC = () => {
   </Grid>
 </Box>
 
+<Benefits userId={userId}/>
 
     <Box sx={{ display: 'flex', gap: '2rem' }}>
       <Button variant="contained" onClick={handleEditClick}>

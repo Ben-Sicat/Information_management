@@ -108,6 +108,9 @@ const fields: Field[] = [
 	},
 	{ label: 'Email', name: 'email' },
 	{ label: 'Contact Number', name: 'contactNumber' },
+	{ label: 'Benefits', name: 'Benefits', options:[
+		'claimed','unclaimed'
+	]},
 	
 ];
 
