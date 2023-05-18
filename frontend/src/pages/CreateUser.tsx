@@ -53,9 +53,9 @@ const fields: Field[] = [
 	{ label: 'Birth Day', name: 'birthDay' },
 	{ label: 'Birth Year', name: 'birthYear' },
 	{ label: 'Building Number', name: 'bldgNo',
-		options:[
+		// options:[
 			
-		]
+		// ]
 },
 	{
 		label: 'Street Name',
