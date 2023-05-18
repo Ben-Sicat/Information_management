@@ -53,10 +53,10 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
     className="glassmorphism"
     sx={{
       display: 'flex',
-      borderRadius: '25px',
-      padding: '20px',
+      borderRadius: '35px',
+      padding: '5px',
       boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
-      backgroundColor: '#d699e5',
+      backgroundColor: '#FFFFFF',
       flexWrap: 'wrap',
       gap: '0px',
       maxWidth: '800px',
@@ -68,6 +68,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
       onSubmit={handleSignIn}
       sx={{
         display: 'flex',
+        borderRadius: '30px',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
