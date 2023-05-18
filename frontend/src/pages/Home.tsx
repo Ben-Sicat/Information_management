@@ -58,6 +58,7 @@ const Home: React.FC = () => {
         </Box>
         <Box>
             <Box sx={{marginTop: '25rem'}}>
+            <Divider />
               <Typography variant="h4" color="var(--secondary-color)" sx={{position: 'absolute', left:'13.5rem'}}>ANNOUNCEMENTS | EVENTS</Typography>
             </Box>
             <Box>
