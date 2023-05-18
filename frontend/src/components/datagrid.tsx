@@ -56,8 +56,9 @@ const columns: GridColDef[] = [
   { field: 'civilStatus', headerName: 'Civil Status', headerAlign: 'center', align:'center', width: 150 },
   { field: 'voter', headerName: 'Voter', headerAlign: 'center', align:'center', width: 100 },
   { field: 'status', headerName: 'Status', headerAlign: 'center', align:'center', width: 150 },
-  { field: 'email', headerName: 'Email', headerAlign: 'center', align:'center', width: 250 },
+  { field: 'email', headerName: 'Email', headerAlign: 'center', align:'center', width: 200 },
   { field: 'address', headerName: 'Address', headerAlign: 'center', align:'center',width: 250 },
+  { field: 'Benefits', headerName: 'Benefits', headerAlign: 'center', align:'center',width: 90 },
 ];
 
 
@@ -91,8 +92,9 @@ const DataPageGrid: React.FC = () => {
     if (citizens.length === 0 || currentTime - lastFetched >= cacheExpiry) {
       const getCitizens = async () => {
         try {
+          let rowIndex = 0;
           const data = await getDocs(citizenCollectionRef);
-          const newData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) as Citizen[];
+          const newData = data.docs.map((doc) => ({ ...doc.data(), rowNumber: ++rowIndex, id: doc.id })) as Citizen[];
           setCitizens(newData);
           setLastFetched(Date.now());
         } catch (error) {
@@ -106,8 +108,6 @@ const DataPageGrid: React.FC = () => {
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
-
-  console.log(filterField)
   const updateSearchTerm = (term: string) => {
     setSearchTerm(term);
   };

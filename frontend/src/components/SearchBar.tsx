@@ -27,12 +27,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, handleSearch }) => {
         fullWidth
         margin="normal"
         value={searchTerm}
-        onChange={handleSearch}
+        onInput={handleSearch}
         size="small"
         sx={{
           "& fieldset": { border: 'none' },
           borderRadius: 3,
-          boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )'
+          boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
+          '& input': { disableUnderline: true },
         }}
       />
     </Container>

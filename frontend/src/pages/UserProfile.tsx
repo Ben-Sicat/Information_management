@@ -6,6 +6,7 @@ import { doc, getDoc, getFirestore, deleteDoc, setDoc } from 'firebase/firestore
 import { config } from '../config/config';
 import { initializeApp } from 'firebase/app';
 import { styled } from '@mui/system';
+import { Benefits } from '../components/index';
 
 const app = initializeApp(config.firebaseConfig);
 const db = getFirestore(app);
@@ -146,7 +147,19 @@ const UserProfile: React.FC = () => {
   flex-direction: column;
   margin: 150px 20px 20px 20px;
 `;
+const handleShareClick = () => {
+  const linkToShare = window.location.href;
 
+  navigator.clipboard.writeText(linkToShare)
+    .then(() => {
+      console.log('Link copied to clipboard:', linkToShare);
+      alert('Link copied to clipboard!');
+    })
+    .catch((error) => {
+      console.error('Error copying link:', error);
+      alert('Error copying link. Please try again.');
+    });
+};
   return (
     <>
     <Navbar burger={false} updateSearchTerm={(term: string) => {}} />
@@ -196,17 +209,18 @@ const UserProfile: React.FC = () => {
   </Grid>
 </Box>
 
+<Benefits userId={userId}/>
 
     <Box sx={{ display: 'flex', gap: '2rem' }}>
       <Button variant="contained" onClick={handleEditClick}>
         Edit
       </Button>
-      <Button variant="contained">
-        Print
-      </Button>
       <Button variant="contained" onClick={handleDeleteClick}>
         Delete
       </Button>
+      <Button variant="contained" onClick={handleShareClick}>
+            Share
+          </Button>
     </Box>
     </BodyContainer>
       <Footer />
