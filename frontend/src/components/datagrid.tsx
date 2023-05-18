@@ -56,8 +56,9 @@ const columns: GridColDef[] = [
   { field: 'civilStatus', headerName: 'Civil Status', headerAlign: 'center', align:'center', width: 150 },
   { field: 'voter', headerName: 'Voter', headerAlign: 'center', align:'center', width: 100 },
   { field: 'status', headerName: 'Status', headerAlign: 'center', align:'center', width: 150 },
-  { field: 'email', headerName: 'Email', headerAlign: 'center', align:'center', width: 250 },
+  { field: 'email', headerName: 'Email', headerAlign: 'center', align:'center', width: 200 },
   { field: 'address', headerName: 'Address', headerAlign: 'center', align:'center',width: 250 },
+  { field: 'Benefits', headerName: 'Benefits', headerAlign: 'center', align:'center',width: 90 },
 ];
 
 
