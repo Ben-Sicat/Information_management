@@ -1,11 +1,12 @@
 import React from 'react';
 import { Navbar, Footer } from '../components';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography,Button,Link,Select } from '@mui/material';
 import { styled } from '@mui/system';
 import ComputerIcon from '@mui/icons-material/Computer';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import logoBIG from '../assets/LOGOBIG.svg';
+import blob from '../assets/blowwb.png';
  
 const About = () => {
   const Container = styled('div')`
@@ -55,7 +56,9 @@ const About = () => {
     '@media screen and (max-width: 768px)': {
       fontSize: '70px',
     },
+    zIndex:'1'
   }
+
  
  
   return (
@@ -82,13 +85,28 @@ const About = () => {
                 <Typography variant="h4" sx={{fontWeight: "1000", textTransform: "uppercase",mb:'20px', textAlign:'left'}}>
                     <Typography variant="h4"  sx={{color:"#440079"}}>Senior Citizen </Typography> Information Management System
                   </Typography>
-                <Typography variant="body1" sx={{textAlign: 'left'}}>
-                  The Senior Citizen Information System is a replacement for the traditional method of visualizing data,
+                <Typography variant="body1" sx={{mb:'20px',textAlign: 'left'}}>
+                  The  <Box fontWeight='bold' display='inline' color={'#533A71'}>Senior Citizen Information System</Box> is a replacement for the traditional method of visualizing data,
                   managing records and information of senior citizens. It functions as a database that stores and manages
-                  records of senior citizens in Barangay 670 Zone 72, eliminating the need for paperwork and minimizing the
+                  records of senior citizens in  <Box fontWeight='bold' display='inline' color={'#533A71'}>Barangay 670 Zone 72</Box>, eliminating the need for paperwork and minimizing the
                   risk of human errors in record-keeping. The website is capable of efficiently managing records of senior
                   citizens in the barangays. 
               </Typography>
+
+              
+              <Button 
+              variant="outlined" 
+              sx={{
+                fontWeight:'bold',
+                color: '#533A71',
+                borderRadius: '15px'
+                
+              }}
+           
+            >
+              
+             <Link href="mailto:barangay670@gmail.com" underline="none" target='_blank'>CONTACT US</Link>
+            </Button>
             </Box>
             <Box sx={{
               height: '400px',
@@ -102,19 +120,30 @@ const About = () => {
             </Box>
        </Box>
 
-      
+   
           <Box sx={boxy}>
 
-                <Box sx={advantagesBoxSX}>
+                <Box sx={advantagesBoxSX}> 
                 <ComputerIcon sx={icony}/>
                 <Typography variant='subtitle1' sx={{color:'#66478C'}}> It can be accessed from 
                 anywhere with an internet connection</Typography>
+                <Box sx={{position:'absolute', top:'490px',left:'350px',opacity:'0.5','@media screen and (max-width: 768px)': {
+                  position:'absolute', top:'66em',left:'135px', height:'15%', width:'30%',opacity:'0.5'
+                },}}>
+                <img src={blob} alt="blob" height="70%" width="70%" />
+                </Box>
+              
                 </Box>
     
                 <Box sx={advantagesBoxSX}>
                 <AccessTimeIcon sx={icony}/>   
                 <Typography variant='subtitle1' sx={{color:'#66478C'}}>It can automate many 
                 tasks that would otherwise require manual effort</Typography>
+                <Box sx={{position:'absolute', top:'490px',left:'50em',opacity:'0.5','@media screen and (max-width: 768px)': {
+                  position:'absolute', top:'80em',left:'135px', height:'15%', width:'30%',opacity:'0.5'
+                },}}>
+                <img src={blob} alt="blob" height="70%" width="70%" />
+                </Box>
                 </Box>
         
                 <Box sx={advantagesBoxSX}>
@@ -122,6 +151,11 @@ const About = () => {
                 <Typography variant='subtitle1' sx={{color:'#66478C'}}>It can reduce the 
                 need for physical storage space and administrative staff</Typography>
                </Box>
+               <Box sx={{position:'absolute', top:'490px',left:'82em',opacity:'0.5','@media screen and (max-width: 768px)': {
+                  position:'absolute', top:'95em',left:'149px', height:'15%', width:'30%',opacity:'0.5'
+                },}}>
+                <img src={blob} alt="blob" height="70%" width="70%" />
+                </Box>
 
          </Box>
 
@@ -132,12 +166,21 @@ const About = () => {
             <Typography variant="h4" sx={{textTransform: "uppercase"}}>
             Barangay 670 Zone 72
             </Typography>
-              <Typography variant="body1"  sx={{textAlign: 'justify'}}>
-                The Senior Citizen Information System is a replacement for the traditional method of visualizing data,
-                managing records and information of senior citizens. It functions as a database that stores and manages
-                records of senior citizens in Barangay 670 Zone 72, eliminating the need for paperwork and minimizing the
-                risk of human errors in record-keeping. The website is capable of efficiently managing records of senior
-                citizens in the barangays. 
+              <Typography variant="body1"  sx={{textAlign: 'center', p:'25px'}}>
+              Barangay is composed of an elected Punong Barangay, Sangguniang Barangay 
+              consisting of Seven Councilors, Sangguniang Kabataan Chairman and members, 
+              appointed Secretary, and appointed Treasurer. <br/><br/>
+
+              Barangay 670 is headed by  <Box fontWeight='bold' display='inline' color={'#533A71'}>
+                Chairman Bai Aleyah S. Bidua</Box>, with her members 
+              Kagawad Octavius Oprin, Kagawad Jerry Catalan, Kagawad Celso Gonzalo, 
+              Kagawad Paul Anthony Nievera, Kagawad Abdullah S. Bidua, Kagawad Carlos Antoni, 
+              and Kagawad Najelah S. Anta.<br/><br/>
+
+              They have several programs implemented to solve the existing problems of issues 
+              in the barangay and each and everyone of them must render full service to the benefits 
+              of all people living in their respective sectors.
+
               </Typography>
           </Box>
 
@@ -174,12 +217,11 @@ const About = () => {
                 <Typography variant="h4" sx={{  textTransform: "uppercase", marginBottom: '1.5rem' }}>
                 Mission
                 </Typography>
-                <Typography variant="body1" sx={{textAlign: 'justify'}}>
-                  The Senior Citizen Information System is a replacement for the traditional method of visualizing data,
-                  managing records and information of senior citizens. It functions as a database that stores and manages
-                  records of senior citizens in Barangay 670 Zone 72, eliminating the need for paperwork and minimizing the
-                  risk of human errors in record-keeping. The website is capable of efficiently managing records of senior
-                  citizens in the barangays.
+                <Typography variant="body1" sx={{textAlign: 'center'}}>
+                To create a community of people unitedly working together 
+                towards the attainment of a progressive and peaceful city of 
+                Manila.
+
                 </Typography>
               </Box>
      
@@ -204,12 +246,11 @@ const About = () => {
                 <Typography variant="h4" sx={{textTransform: "uppercase", marginBottom: '1.5rem' }}>
                   Vision
                 </Typography>
-                <Typography variant="body1" sx={{textAlign: 'justify'}}>
-              The Senior Citizen Information System is a replacement for the traditional method of visualizing data,
-              managing records and information of senior citizens. It functions as a database that stores and manages
-              records of senior citizens in Barangay 670 Zone 72, eliminating the need for paperwork and minimizing the
-              risk of human errors in record-keeping. The website is capable of efficiently managing records of senior
-              citizens in the barangays.
+                <Typography variant="body1" sx={{textAlign: 'center'}}>
+                To create a community of people unitedly working together 
+                towards the attainment of a progressive and peaceful 
+                city of Manila.
+
             </Typography>
             </Box>
             </Box>
