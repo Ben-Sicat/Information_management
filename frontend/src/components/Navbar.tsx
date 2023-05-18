@@ -12,6 +12,13 @@ import '../styles/globalStyles.css';
 
 const firebaseApp = initializeApp(config.firebaseConfig);
 
+  // HANDLER FOR NAVIGATION LINKS
+
+  // const handleHome  = () => {
+  //   window.location.href = '/about';
+  // };
+
+ 
 
 
 interface NavbarProps {
@@ -30,6 +37,14 @@ const genderOptions: Option[] = [
   { IconDrop: Wc, value: 'male', label: 'MALE' },
   { IconDrop: Wc, value: 'female', label: 'FEMALE' },
 ];
+
+const phoneNavOptions: Option[] = [
+  { IconDrop: Wc, value: 'home', label: 'HOME' },
+  // { IconDrop: Wc, value: 'dashboard', label: 'DASHBOARD' },
+  // { IconDrop: Wc, value: 'datagrid', label: 'DATAGRID' },
+  // { IconDrop: Wc, value: 'about', label: 'ABOUT' },
+];
+
 
 const civilStatusOptions: Option[] = [
   { IconDrop: Description, value: 'widow', label: 'WIDOW' },
@@ -216,7 +231,7 @@ const DropdownMenu: React.FC<{
 
 
 const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
-
+  const [phoneNavDropdown, setphoneNavDropdown] = useState(false);
   const [genderDropdown, setGenderDropdown] = useState(false);
   const [civilStatusDropdown, setCivilStatusDropdown] = useState(false);
   const [voterDropdown, setVoterDropdown] = useState(false);
@@ -224,6 +239,7 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
   const [buildingNoDropdown, setBuildingNoDropdown] = useState(false)
   const [streetDropdown, setStreetDropdown] = useState(false)
 
+  const handlephoneNavClick = () => setphoneNavDropdown(!phoneNavDropdown);
   const handleGenderClick = () => setGenderDropdown(!genderDropdown);
   const handleCivilStatusClick = () => setCivilStatusDropdown(!civilStatusDropdown);
   const handleVoterClick = () => setVoterDropdown(!voterDropdown);
@@ -278,7 +294,7 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
       border: 'none',
       color: 'var(--secondary-color)',
       fontWeight: 'bold',
-      transition: 'background-color 1.6s linear',
+      transition: 'background-color 1s linear',
     },
     solidBackground: {
       background: 'var(--tertiary-color)',
@@ -365,7 +381,20 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
                   </Button>
          
                   <Divider sx={{ mb: 2 }} />
-
+                  <Box sx={{ mb: 2 , display: 'none',     '@media (max-width: 768px)': {
+                    display: 'block'
+                  },}}>
+                     <DropdownMenu
+                      IconMenu={<Wc sx={{ color: 'primary.main' }} />}
+                      title="NAVIGATIONS"
+                      options={phoneNavOptions}
+                      isOpen={phoneNavDropdown}
+                      onClick={handlephoneNavClick}
+                      updateSearchTerm={updateSearchTerm} />
+                  </Box>
+                  <Divider sx={{ mb: 2 , display: 'none',     '@media (max-width: 768px)': {
+                    display: 'block'
+                  },}} />
                   <Box sx={{ mb: 2 }}>
                     <DropdownMenu
                       IconMenu={<Wc sx={{ color: 'primary.main' }} />}
@@ -429,10 +458,6 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
               </Drawer>
               </>
         )}
-          <Button 
-                  sx={navPhoneBtnSX} color="inherit">NAVIGATIONS</Button>
-
-
           <Button sx={navBtnSX} color="inherit" onClick={handleHome} >HOME</Button>
           <Button sx={navBtnSX} color="inherit" onClick={handleDashboard} >DASHBOARD</Button>
           <Button sx={navBtnSX} color="inherit" onClick={handleDataGridPage} >DATAGRID</Button>
