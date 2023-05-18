@@ -1,69 +1,72 @@
 import React from 'react'
 import { Navbar, Footer } from '../components/index';
-import { Typography, Container, Grid, Button} from '@mui/material'
-import LogoSVG from '../assets/Logo.svg';
+import { Typography, Container, Grid, Button, Box, Divider} from '@mui/material'
+import LogoSVG from '../assets/LOGOBIG.svg';
 import { useNavigate } from 'react-router-dom';
-
+import { styled } from '@mui/system';
+import { BorderColor } from '@mui/icons-material';
 
 
 
 const Home: React.FC = () => {
+  const ModContainer = styled('div')`
+  position: relative;
+  height: 100vh;
+  `;
+ 
+  const BodyContainer = styled('div')`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 200px 10px 120px 10px;
+  gap: 4rem;
+  `;
   const navigate = useNavigate();
   return (
    <>
     <Navbar burger={false} updateSearchTerm={(term: string) => {}}/>
-    <Container sx={{
-        width: '100%',
-        height: '100vh',
-        margin: '170px 0px 0px 0px',
-        backgroundColor: '',// add styling or make this a background photo and another container to change the color of the pic to purple with a set opacity
-      
-   }}> 
-   <Container sx={{
-
-        alighItems: 'center',
-        justifyContent: 'center',
-        display: 'flex',
-   }}>
-    <Grid container spacing={16}>
-      <Grid item xs={2} sm={6}>
-        <Typography variant="h2" sx={{
-          color: 'black',
-          textAlign: 'left',
-          
-
+    <ModContainer>
+      <BodyContainer>
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}>
+          <Box sx={{
+            marginTop: '5rem',
+            width: '50%'
           }}>
-            BARANGAY 670 ZONE 72
-            </Typography>
-      </Grid>
-      <Grid item xs={2} sm={6}>
-        <img src={LogoSVG} alt="Logo" width="100%" height="100%" />
-      </Grid>
-    </Grid>
-
-
-    </Container>
-    
-    <Button variant="outlined" sx={{
-      marginTop: '2rem',
-      width: '30%',
-      
-      color: 'purple',
-      fontSize: '1.5rem',
-      borderRadius: '10px',
-      padding: '.5rem',
-      '&:hover': {
-        backgroundColor: 'purple',
-        color: 'black',
-      }
-    }} onClick={() => {navigate('/login')}}>
-      Login
-    </Button>
-
-    
-    </Container>
-
-        <Footer />
+          <Typography variant="h1" color="var(--secondary-color)">BARANGGAY 670 ZONE 72</Typography>
+          </Box>
+          <Box>
+            <img src={LogoSVG} alt="LOGO" />
+          </Box>
+        </Box>
+        
+        <Box>
+            <Button variant="outlined" style={{
+                position: 'absolute',
+                left: '16.5rem',
+                height: '3.5rem',
+                width: '18rem',
+                fontWeight: 700,
+                fontSize: '1.2rem',
+                borderRadius: '30rem',
+                border: '5px solid',
+                borderColor: 'var(--tertiary-color)'
+            }}>ABOUT US</Button>
+        </Box>
+        <Box>
+            <Box sx={{marginTop: '25rem'}}>
+              <Typography variant="h4" color="var(--secondary-color)" sx={{position: 'absolute', left:'13.5rem'}}>ANNOUNCEMENTS | EVENTS</Typography>
+            </Box>
+            <Box>
+              
+            </Box>
+        </Box>
+      </BodyContainer>
+      <Footer />
+    </ModContainer>
    </> 
   )
   
