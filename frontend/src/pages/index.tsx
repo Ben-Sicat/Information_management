@@ -7,6 +7,8 @@ import Dashboard from './Dashboard';
 import UserProfile from './UserProfile';
 import Error404 from './Error404';
 
+import Home from './Home';
+
 export {
 	Login,
 	Datagrid,
@@ -15,4 +17,5 @@ export {
 	Dashboard,
 	UserProfile,
 	Error404,
+	Home
 };

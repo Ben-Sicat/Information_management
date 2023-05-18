@@ -11,7 +11,7 @@ import {
 	TextField,
 	Typography,
 } from '@mui/material';
-import { CollectionReference, DocumentData, collection, doc, getDoc, setDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
 interface User {
@@ -179,7 +179,7 @@ const AddProfile: React.FC = () => {
 		<Navbar burger={false} updateSearchTerm={(term: string) => {}} />
 		<Container  sx={{ 
 			height: '100vh',
-			marginTop: '10%',
+			marginTop: '15%',
 			justifyContent: 'center',
 			alignItems: 'center',
 			'@media screen and (max-width: 899px)': {
@@ -250,7 +250,5 @@ const AddProfile: React.FC = () => {
 };
 
 export default AddProfile;
-function addDoc(userCollectionRef: CollectionReference<DocumentData>, editedUser: User) {
-	throw new Error('Function not implemented.');
-}
+
 

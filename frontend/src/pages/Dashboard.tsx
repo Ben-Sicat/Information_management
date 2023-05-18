@@ -54,7 +54,7 @@ const Dashboard: React.FC = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
+  margin: 190px 10px 10px 10px;
 `;
 
   return (
