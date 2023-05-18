@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navbar, Footer } from '../components/index';
-import { Typography, Container, Card, CardHeader, CardContent, CardMedia,CardActionArea, CardActions, Button, Box, Divider} from '@mui/material'
+import { Grid, Typography, Container, Card, CardHeader, CardContent, CardMedia,CardActionArea, CardActions, Button, Box, Divider} from '@mui/material'
 import LogoSVG from '../assets/LOGOBIG.svg';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/system';
@@ -54,23 +54,23 @@ const Home: React.FC = () => {
                 borderColor: 'var(--tertiary-color)'
             }}>ABOUT US</Button>
         </Box>
-        
-         <Container sx={{padding: 0, width: '150vh'}}>
-            <Box>
-                <Box sx={{marginTop: '13rem'}}>
-                <Divider sx={{mb: 15}}/>
-                  <Typography variant="h5" color="var(--secondary-color)" sx={{position: 'absolute', left:'13.5rem'}}>ANNOUNCEMENTS | EVENTS</Typography>
-                </Box>
-                <Box sx={{marginTop: '13rem', display:'flex', flexDirection:'row', justifyContent: 'center', alignItems: 'center', gap: 6}}>
-                <Box sx={{width: '70%'}}>
-                <Card sx={{ maxWidth: 1000, borderRadius: '5%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',}}>          
-                  <CardHeader subheader="May 3, 2023" />   
-                      <CardContent sx={{height:'100%', maxHeight: '480px'}}>
-                        <Typography gutterBottom variant="h5" component="div">
-                        Lorem Ipsum
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            <Container maxWidth="lg">
+                  <Box marginTop="13rem">
+                    <Divider sx={{mb:14}} />
+                    <Typography variant="h5"  color="var(--secondary-color)" sx={{mb: 5}} >
+                      ANNOUNCEMENTS | EVENTS
+                    </Typography>
+                  </Box>
+                  <Grid container spacing={6}>
+                    <Grid item xs={12} sm={6} md={8} sx={{ display: 'flex', justifyContent: 'center' }}>
+                      <Card sx={{ borderRadius: '5%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}>
+                        <CardHeader subheader="May 3, 2023" />
+                        <CardContent>
+                          <Typography gutterBottom variant="h5" component="div">
+                            Lorem Ipsum
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                         Mauris vel arcu turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
                         Suspendisse dapibus mi finibus, sollicitudin ligula ac, cursus nibh. 
                         Etiam vehicula justo velit, id sodales enim molestie vitae.
@@ -98,50 +98,47 @@ const Home: React.FC = () => {
                         Mauris vel arcu turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
                         Suspendisse dapibus mi finibus, sollicitudin ligula ac, cursus nibh. 
                         Etiam vehicula justo velit, id sodales enim molestie vitae.       
-                        </Typography>
-                      </CardContent>
-                    <CardActions>
-                      <Button size="small" color="primary">
-                        Share
-                      </Button>
-                    </CardActions>
-                </Card>
-                </Box>
-                <Box sx={{width:'30%', display: 'flex', flexDirection:'column', gap: 6}}>
-                <Card sx={{ maxWidth: 400 , height: '100%', borderRadius: '10%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',}}>
-                    <CardHeader subheader="May 3, 2023" />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                        Lorem Ipsum
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Mauris vel arcu turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                        Suspendisse dapibus mi finibus, sollicitudin ligula ac, cursus nibh. 
-                        </Typography>
-                    </CardContent>
-
-                </Card>
-
-                <Card sx={{ maxWidth: 400 , height: '100%', borderRadius: '10%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',}}>
-                    <CardHeader subheader="May 3, 2023" />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                        Lorem Ipsum
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Mauris vel arcu turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                        Suspendisse dapibus mi finibus, sollicitudin ligula ac, cursus nibh. 
-                        </Typography>
-                    </CardContent>
-
-                </Card>
-                </Box>
-                </Box>
-            </Box>
-            
-          </Container>   
+                          </Typography>
+                        </CardContent>
+                        <CardActions>
+                          <Button size="small" color="primary">
+                            Share
+                          </Button>
+                        </CardActions>
+                      </Card>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                      <Grid container direction="column" spacing={2}>
+                        <Grid item>
+                          <Card sx={{ borderRadius: '10%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}>
+                            <CardHeader subheader="May 3, 2023" />
+                            <CardContent>
+                              <Typography gutterBottom variant="h5" component="div">
+                                Lorem Ipsum
+                              </Typography>
+                              <Typography variant="body2" color="text.secondary">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                              </Typography>
+                            </CardContent>
+                          </Card>
+                        </Grid>
+                        <Grid item>
+                          <Card sx={{ borderRadius: '10%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}>
+                            <CardHeader subheader="May 3, 2023" />
+                            <CardContent>
+                              <Typography gutterBottom variant="h5" component="div">
+                                Lorem Ipsum
+                              </Typography>
+                              <Typography variant="body2" color="text.secondary">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                              </Typography>
+                            </CardContent>
+                          </Card>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+              </Container>
       </BodyContainer>
       <Footer />
     </ModContainer>
