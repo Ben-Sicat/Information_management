@@ -63,7 +63,7 @@ const Home: React.FC = () => {
                 </Box>
                 <Box sx={{marginTop: '13rem', display:'flex', flexDirection:'row', justifyContent: 'center', alignItems: 'center', gap: 6}}>
                 <Box sx={{width: '70%'}}>
-                <Card sx={{ maxWidth: 1000, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',}}>          
+                <Card sx={{ maxWidth: 1000, borderRadius: '10%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',}}>          
                   <CardHeader subheader="May 3, 2023" />   
                       <CardContent sx={{height:'100%', maxHeight: '480px'}}>
                         <Typography gutterBottom variant="h5" component="div">
@@ -108,7 +108,7 @@ const Home: React.FC = () => {
                 </Card>
                 </Box>
                 <Box sx={{width:'30%', display: 'flex', flexDirection:'column', gap: 6}}>
-                <Card sx={{ maxWidth: 400 , height: '100%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',}}>
+                <Card sx={{ maxWidth: 400 , height: '100%', borderRadius: '10%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',}}>
                     <CardHeader subheader="May 3, 2023" />
                       <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
@@ -123,7 +123,7 @@ const Home: React.FC = () => {
 
                 </Card>
 
-                <Card sx={{ maxWidth: 400 , height: '100%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',}}>
+                <Card sx={{ maxWidth: 400 , height: '100%', borderRadius: '10%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',}}>
                     <CardHeader subheader="May 3, 2023" />
                       <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
