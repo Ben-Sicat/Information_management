@@ -2,12 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {useState, useEffect}  from 'react';
 import { MenuItem, ListItemButton, ListItemIcon, ListItemText, List, Collapse, AppBar, Toolbar, Button, Drawer, Box, Divider} from "@mui/material";
-import {ExpandLess, ExpandMore, Description, Menu, Close, Wc} from "@mui/icons-material";
+import {ExpandLess, ExpandMore, Description, Menu, Close, Wc,Person,Check,Hotel,PersonOff,PinDrop,Apartment} from "@mui/icons-material";
 import { getAuth, signOut } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { config } from '../config/config';
 import LogoSVG from '../assets/Logo.svg';
 import '../styles/globalStyles.css';
+
 
 
 const firebaseApp = initializeApp(config.firebaseConfig);
@@ -47,22 +48,22 @@ const phoneNavOptions: Option[] = [
 
 
 const civilStatusOptions: Option[] = [
-  { IconDrop: Description, value: 'widow', label: 'WIDOW' },
-  { IconDrop: Description, value: 'single', label: 'SINGLE' },
-  { IconDrop: Description, value: 'married', label: 'MARRIED' },
+  { IconDrop: Person, value: 'widow', label: 'WIDOW' },
+  { IconDrop: Person, value: 'single', label: 'SINGLE' },
+  { IconDrop: Person, value: 'married', label: 'MARRIED' },
 ];
 
 const voterOptions: Option[] = [
-  { IconDrop: Description, value: 'yes', label: 'YES' },
-  { IconDrop: Description, value: 'no', label: 'NO' },
+  { IconDrop: Check, value: 'yes', label: 'YES' },
+  { IconDrop: Close, value: 'no', label: 'NO' },
 ];
 
 const statusOptions: Option[] = [
-  { IconDrop: Description, value: 'active', label: 'ACTIVE' },
-  { IconDrop: Description, value: 'inactive', label: 'INACTIVE' },
-  { IconDrop: Description, value: 'bedridden', label: 'BED RIDDEN' },
-  { IconDrop: Description, value: 'new senior', label: 'NEW SENIOR' },
-  { IconDrop: Description, value: 'transfer', label: 'TRANSFEREE' },
+  { IconDrop: Person, value: 'active', label: 'ACTIVE' },
+  { IconDrop: PersonOff, value: 'inactive', label: 'INACTIVE' },
+  { IconDrop: Hotel, value: 'bedridden', label: 'BED RIDDEN' },
+  { IconDrop: Person, value: 'new senior', label: 'NEW SENIOR' },
+  { IconDrop: Person, value: 'transfer', label: 'TRANSFEREE' },
 ];
 
 
@@ -404,7 +405,7 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
                       onClick={handleGenderClick}
                       updateSearchTerm={updateSearchTerm} />
                     <DropdownMenu
-                      IconMenu={<Description sx={{ color: 'primary.main' }} />}
+                      IconMenu={<Person sx={{ color: 'primary.main' }} />}
                       title="CIVIL STATUS"
                       options={civilStatusOptions}
                       isOpen={civilStatusDropdown}
@@ -418,21 +419,21 @@ const Navbar: React.FC<NavbarProps> = ({ burger, updateSearchTerm }) => {
                       onClick={handleVoterClick}
                       updateSearchTerm={updateSearchTerm} />
                     <DropdownMenu
-                      IconMenu={<Description sx={{ color: 'primary.main' }} />}
+                      IconMenu={<Person sx={{ color: 'primary.main' }} />}
                       title="STATUS"
                       options={statusOptions}
                       isOpen={statusDropdown}
                       onClick={handleStatusClick}
                       updateSearchTerm={updateSearchTerm} />
                     <DropdownMenu
-                      IconMenu={<Description sx={{ color: 'primary.main' }} />}
+                      IconMenu={<PinDrop sx={{ color: 'primary.main' }} />}
                       title="STREET"
                       options={streetOptions}
                       isOpen={streetDropdown}
                       onClick={handleStreetClick}
                       updateSearchTerm={updateSearchTerm} />
                     <DropdownMenu
-                      IconMenu={<Description sx={{ color: 'primary.main' }} />}
+                      IconMenu={<Apartment sx={{ color: 'primary.main' }} />}
                       title="BUILDING NO."
                       options= {buildingNoOptions}
                       isOpen={buildingNoDropdown}
