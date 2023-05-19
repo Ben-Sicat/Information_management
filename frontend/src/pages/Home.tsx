@@ -66,7 +66,15 @@ const Home: React.FC = () => {
 
   const handleAddAnnouncement = async () => {
     try {
-      await addDoc(collection(db, 'announcements'), newAnnouncement);
+      const date = new Date().toISOString();
+      const announcementWithDate = { ...newAnnouncement, date };
+      
+      // Copy the announcement to the archive collection
+      await addDoc(collection(db, 'archive'), announcementWithDate);
+
+      // Add the announcement to the announcements collection
+      await addDoc(collection(db, 'announcements'), announcementWithDate);
+
       console.log('Announcement added successfully');
       handleCloseModal();
     } catch (error) {
@@ -80,6 +88,7 @@ const Home: React.FC = () => {
       [e.target.name]: e.target.value,
     }));
   };
+  
   const handleDeleteAnnouncement = async (id: string) => {
     try {
       await deleteDoc(doc(db, 'announcements', id));
@@ -129,59 +138,59 @@ const Home: React.FC = () => {
           </Typography>
 
           <Grid container spacing={6} justifyContent="center">
-        <Grid item xs={12} md={8}>
-          {announcements.length > 0 && (
-            <Card sx={{ borderRadius: '10%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)', width: '100%' }}>
-              <CardHeader subheader={announcements[0].date} />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {announcements[0].title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {announcements[0].content}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                {isLoggedIn && (
-                  <Button size="small" color="primary" onClick={() => handleDeleteAnnouncement(announcements[0].id)}>
-                    Delete
-                  </Button>
-                )}
-                <Button size="small" color="primary">
-                  Share
-                </Button>
-              </CardActions>
-            </Card>
-          )}
-        </Grid>
-
-        <Grid item xs={12} md={8}>
-          <Grid container spacing={2}>
-            {announcements.slice(1, 6).map((announcement) => (
-              <Grid item xs={12} sm={6} key={announcement.id}>
+            <Grid item xs={12} md={8}>
+              {announcements.length > 0 && (
                 <Card sx={{ borderRadius: '10%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)', width: '100%' }}>
-                  <CardHeader subheader={announcement.date} />
+                  <CardHeader subheader={announcements[0].date} />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                      {announcement.title}
+                      {announcements[0].title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      {announcement.content}
+                      {announcements[0].content}
                     </Typography>
                   </CardContent>
                   <CardActions>
                     {isLoggedIn && (
-                      <Button size="small" color="primary" onClick={() => handleDeleteAnnouncement(announcement.id)}>
+                      <Button size="small" color="primary" onClick={() => handleDeleteAnnouncement(announcements[0].id)}>
                         Delete
                       </Button>
                     )}
+                    <Button size="small" color="primary">
+                      Share
+                    </Button>
                   </CardActions>
                 </Card>
+              )}
+            </Grid>
+
+            <Grid item xs={12} md={8}>
+              <Grid container spacing={2}>
+                {announcements.slice(1, 6).map((announcement) => (
+                  <Grid item xs={12} sm={6} key={announcement.id}>
+                    <Card sx={{ borderRadius: '10%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)', width: '100%' }}>
+                      <CardHeader subheader={announcement.date} />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {announcement.title}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {announcement.content}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        {isLoggedIn && (
+                          <Button size="small" color="primary" onClick={() => handleDeleteAnnouncement(announcement.id)}>
+                            Delete
+                          </Button>
+                        )}
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ))}
               </Grid>
-            ))}
+            </Grid>
           </Grid>
-        </Grid>
-      </Grid>
 
           <Container>
             {/* Replace with your login logic */}
