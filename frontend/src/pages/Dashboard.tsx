@@ -13,7 +13,6 @@ const db = getFirestore(firebaseApp);
 
 const barStatConfig = [
   { statusField: 'status', size: 6, title: 'Status' },
-  { statusField: 'civilstatus', size: 6, title: 'Civil Status' },
   { statusField: 'voter', size: 6, title: 'Voter' },
   { statusField: 'gender', size: 6, title: 'Gender' },
   { statusField: 'Benefits', size: 6, title: 'Benefits' },
