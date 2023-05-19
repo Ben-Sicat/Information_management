@@ -140,7 +140,7 @@ const Home: React.FC = () => {
           <Grid container spacing={6} justifyContent="center">
             <Grid item xs={12} md={8}>
               {announcements.length > 0 && (
-                <Card sx={{ borderRadius: '10%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)', width: '100%' }}>
+                <Card sx={{ borderRadius: '1rem', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)', width: '100%' }}>
                   <CardHeader subheader={announcements[0].date} />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
@@ -168,7 +168,7 @@ const Home: React.FC = () => {
               <Grid container spacing={2}>
                 {announcements.slice(1, 6).map((announcement) => (
                   <Grid item xs={12} sm={6} key={announcement.id}>
-                    <Card sx={{ borderRadius: '10%', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)', width: '100%' }}>
+                    <Card sx={{ borderRadius: '1rem', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)', width: '100%' }}>
                       <CardHeader subheader={announcement.date} />
                       <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
