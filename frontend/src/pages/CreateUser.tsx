@@ -103,7 +103,7 @@ const fields: Field[] = [
 	{
 		label: 'Status',
 		name: 'status',
-		options: ['Active', 'Inactive', 'Deceased', 'Bedridden'],
+		options: ['Active', 'Inactive', 'Transferee', 'Bedridden', 'New Senior'],
 
 	},
 	{ label: 'Email', name: 'email' },
