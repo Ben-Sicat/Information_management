@@ -1,0 +1,117 @@
+
+
+
+# Clone the repository
+
+1. Open a terminal or command prompt.
+2. Change the current working directory to the location where you want to clone the repository.
+3. Run the following command:
+
+   ```
+   git clone https://github.com/Ben-Sicat/Information_management.git
+   ```
+   
+4. This will create a local copy of the repository on your machine.
+
+# Install dependencies
+
+1. Open a terminal or command prompt.
+2. Change the current working directory to the root of the cloned repository.
+3. Run the following command to install dependencies:
+
+   ```
+   npm install
+   ```
+   
+   This command will install all the required dependencies for the project.
+
+# Run the React program
+
+1. Open a terminal or command prompt.
+2. Change the current working directory to the root of the cloned repository.
+3. Run the following command to start the React program:
+
+   ```
+   npm start
+   ```
+
+4. The program will start and open a browser window automatically at [http://localhost:3000](http://localhost:3000).
+5. You should now be able to see and use the program.
+
+That's it! You have now successfully cloned the repository and started the React program.
+
+# Contributing to SeniorCitizen Database Project
+
+Welcome to the SeniorCitizen Database Project! This document will guide you on how to contribute code to this project.
+
+
+## Contributing Code
+
+Here's the step-by-step process for contributing code to this project:
+
+1. Make sure you are on the `master` branch of the repository by running the following command:
+
+```
+git checkout master
+```
+
+2. Create a new branch for your feature by running the following command:
+
+```
+git checkout -b <feature-branch-name>
+```
+
+Replace `<feature-branch-name>` with a descriptive name for your feature branch.
+
+3. Write your code and commit your changes. Make sure you write descriptive commit messages that explain the changes you made. Here's an example:
+
+```
+git add .
+git commit -m "Added login form component"
+```
+
+4. Push your changes to the feature branch on GitHub:
+
+```
+git push origin <feature-branch-name>
+```
+
+5. Open a pull request on GitHub by navigating to the project's repository page and clicking on the "New pull request" button. Select your feature branch as the source branch and the `main` branch as the target branch.
+
+6. Wait for a project maintainer to review your code and provide feedback. Make any necessary changes based on the feedback you receive.
+
+7. Once your pull request is approved, merge your feature branch into the `main` branch by clicking on the "Merge pull request" button on GitHub.
+
+8. Finally, delete your feature branch by running the following command:
+
+```
+git branch -d <feature-branch-name>
+```
+
+And that's it! You've successfully contributed code to the SeniorCitizen Database Project.
+
+# Project Structure
+
+## src
+1. THIS IS WHERE ALL WRITTEN CODE ARE
+
+## src/components
+1. THIS IS WHERE ALL COMPONENTS ARE.
+
+
+   a. AuthRoute.tsx - This is where the authentication is being checked.
+
+
+   b. Buttons.tsx - This is where all the buttons are.
+
+
+   c. datagrid.tsx - This is where the datagrid is being created.
+
+
+   d. FilterFields.tsx - This is where we filter the data.
+
+
+   e. #index.tsx = all index files are where we export files and what we call when we want to import them.
+
+   
+   #PUTA FUCK THIS SHIT BAHALA NA KAYO HAHAHAHAH.
