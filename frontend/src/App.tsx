@@ -17,7 +17,7 @@ function App() {
   const [theme] = useState<'light' | 'dark'>('light');
 
   // just for testing copy paste lang to sa github hahahha  replace to ng endpoint sa azure api
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,9 +32,7 @@ function App() {
     fetchData();
   }, []);
 
-// const toggleTheme = () => {
-//   setTheme(theme === 'light' ? 'dark' : 'light');
-// };
+
   return (
     <>
         {/* <Button variant="contained" onClick={toggleTheme}> Theme</Button> */}
