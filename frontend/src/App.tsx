@@ -28,6 +28,11 @@ function App() {
         console.error(error);
       }
     };
+    useEffect(() => {
+      // spome code here
+    }, []);
+
+
   
     fetchData();
   }, []);
