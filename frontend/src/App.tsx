@@ -6,6 +6,7 @@ import { Home, Login, Datagrid, CreateUser, Dashboard, About, UserProfile } from
 import AuthRoute from './components/AuthRoute';
 import { CssBaseline, ThemeProvider} from '@mui/material';
 import { lightTheme, darkTheme } from './theme';
+import { useEffect } from 'react';
 import './styles/globalStyles.css';
 
 export const Firebase = initializeApp(config.firebaseConfig);
@@ -14,6 +15,22 @@ export const Firebase = initializeApp(config.firebaseConfig);
 
 function App() {
   const [theme] = useState<'light' | 'dark'>('light');
+
+  // just for testing copy paste lang to sa github hahahha  replace to ng endpoint sa azure api
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/endpoint');
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchData();
+  }, []);
 
 // const toggleTheme = () => {
 //   setTheme(theme === 'light' ? 'dark' : 'light');
