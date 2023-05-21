@@ -1,0 +1,23 @@
+.glassmorphism {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(20px);
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px;
+    gap: 20px;
+
+  }
+  .header {
+    font-size: 10030px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    background-color: blue;
+  }
+  
