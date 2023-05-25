@@ -3,7 +3,7 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-export class SeniorCitizen {
+export class ArchiveSeniorCitizen {
   @PrimaryGeneratedColumn()
   seniorId: number;
 
@@ -63,4 +63,7 @@ export class SeniorCitizen {
 
   @Column({ length: 50, nullable: true })
   phoneNumber: string;
+  @Column()
+  archivedAt: Date;
+
 }

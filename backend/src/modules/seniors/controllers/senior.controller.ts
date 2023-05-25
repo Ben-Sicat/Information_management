@@ -1,42 +1,36 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Senior } from '../entities/senior.entity';
-import { CreateSeniorDto } from '../dtos/create-senior.dto';
-import { UpdateSeniorDto } from '../dtos/update-senior.dto';
+import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import { SeniorCitizen } from '../entities/senior.entity';
+import { SeniorCitizenService } from '../services/senior.service';
 
-@Injectable()
-export class SeniorService {
-  constructor(
-    @InjectRepository(Senior)
-    private readonly seniorRepository: Repository<Senior>,
-  ) {}
+@Controller('senior-citizens')
+export class SeniorCitizenController {
+  constructor(private seniorCitizenService: SeniorCitizenService) {}
 
-  async getAllSeniors(): Promise<Senior[]> {
-    return this.seniorRepository.find();
+  @Get()
+  async findAll(): Promise<SeniorCitizen[]> {
+    return this.seniorCitizenService.findAll();
   }
 
-  async getSeniorById(id: number): Promise<Senior> {
-    const senior = await this.seniorRepository.findOne({where: { seniorId: id }});
-    if (!senior) {
-      throw new NotFoundException('Senior not found');
-    }
-    return senior;
+  @Get(':id')
+  async findById(@Param('id') id: number): Promise<SeniorCitizen> {
+    return this.seniorCitizenService.findById(id);
   }
 
-  async createSenior(createSeniorDto: CreateSeniorDto): Promise<Senior> {
-    const senior = this.seniorRepository.create(createSeniorDto);
-    return this.seniorRepository.save(senior);
+  @Post()
+  async create(@Body() seniorCitizen: SeniorCitizen): Promise<SeniorCitizen> {
+    return this.seniorCitizenService.create(seniorCitizen);
   }
 
-  async updateSenior(id: number, updateSeniorDto: UpdateSeniorDto): Promise<Senior> {
-    const senior = await this.getSeniorById(id);
-    const updatedSenior = { ...senior, ...updateSeniorDto };
-    return this.seniorRepository.save(updatedSenior);
+  @Put(':id')
+  async update(
+    @Param('id') id: number,
+    @Body() seniorCitizen: SeniorCitizen,
+  ): Promise<SeniorCitizen> {
+    return this.seniorCitizenService.update(id, seniorCitizen);
   }
 
-  async deleteSenior(id: number): Promise<void> {
-    const senior = await this.getSeniorById(id);
-    await this.seniorRepository.remove(senior);
+  @Delete(':id')
+  async delete(@Param('id') id: number): Promise<void> {
+    return this.seniorCitizenService.delete(id);
   }
 }
