@@ -3,7 +3,7 @@ import axios from 'axios';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { Box, Typography } from '@mui/material';
 
-const API_URL = 'http://your-api-url'; // Replace with your MySQL API endpoint
+const API_URL = 'http://locahost:300'; // Replace with your MySQL API endpoint
 
 interface AgeData {
   range: string;
