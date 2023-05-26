@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase-config';
+import axios from 'axios';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { Box, Typography } from '@mui/material';
 
-const citizenCollectionRef = collection(db, 'citizens');
+const API_URL = 'http://your-api-url'; // Replace with your MySQL API endpoint
 
 interface AgeData {
   range: string;
@@ -33,35 +32,39 @@ const AgeGroup: React.FC = () => {
       if (cachedAgeData.length > 0) {
         setAgeData(cachedAgeData);
       } else {
-        const querySnapshot = await getDocs(citizenCollectionRef);
-        const citizens = querySnapshot.docs.map((doc) => doc.data());
+        try {
+          const response = await axios.get(`${API_URL}/citizens`);
+          const citizens = response.data;
 
-        const ageRanges = [
-          { range: '60-70', min: 60, max: 70 },
-          { range: '70-80', min: 70, max: 80 },
-          { range: '80-90', min: 80, max: 90 },
-          { range: '90-99+', min: 90, max: 150 },
-        ];
+          const ageRanges = [
+            { range: '60-70', min: 60, max: 70 },
+            { range: '70-80', min: 70, max: 80 },
+            { range: '80-90', min: 80, max: 90 },
+            { range: '90-99+', min: 90, max: 150 },
+          ];
 
-        const ageData = ageRanges.map((ageRange) => {
-          const filteredCitizens = citizens.filter((citizen: any) => {
-            const age = citizen.age;
-            return age >= ageRange.min && age <= ageRange.max;
+          const ageData = ageRanges.map((ageRange) => {
+            const filteredCitizens = citizens.filter((citizen: any) => {
+              const age = citizen.age;
+              return age >= ageRange.min && age <= ageRange.max;
+            });
+
+            const count = filteredCitizens.length;
+            const percentage = (count / citizens.length) * 100;
+            const roundedPercentage = Math.round(percentage * 100) / 100;
+
+            return {
+              range: ageRange.range,
+              count,
+              roundedPercentage,
+            };
           });
 
-          const count = filteredCitizens.length;
-          const percentage = (count / citizens.length) * 100;
-          const roundedPercentage = Math.round(percentage * 100) / 100;
-
-          return {
-            range: ageRange.range,
-            count,
-            roundedPercentage,
-          };
-        });
-
-        setAgeData(ageData);
-        setCachedAgeData(ageData);
+          setAgeData(ageData);
+          setCachedAgeData(ageData);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
       }
     };
 
